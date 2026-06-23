@@ -151,7 +151,15 @@ ul { list-style: none; }
 .topbar-social svg { width: 14px; height: 14px; fill: #fff; }
 
 /* ═══ HEADER ═══ */
-.site-header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,.06); }
+.site-header { position: sticky; top: 0; z-index: 100; background: transparent; box-shadow: none; transition: background .3s ease, box-shadow .3s ease; }
+.site-header .brand { color: #fff; }
+.site-header .nav-links > li > a { color: #fff; }
+.site-header .hamburger span { background: #fff; }
+.site-header.scrolled { background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,.06); }
+.site-header.scrolled .brand { color: var(--ink); }
+.site-header.scrolled .nav-links > li > a { color: var(--ink); }
+.site-header.scrolled .hamburger span { background: var(--ink); }
+.nav-links .nav-right { margin-left: auto; }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.5rem; max-width: 1170px; margin: 0 auto; }
 .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.3rem; color: var(--ink); }
 .brand .mark {
@@ -218,7 +226,7 @@ ul { list-style: none; }
 .hero {
   position: relative; color: #fff; text-align: left;
   background: linear-gradient(115deg, rgba(19,78,137,0.94), rgba(25,101,177,0.82)), var(--blue-dark);
-  padding: 6rem 0 7rem;
+  margin-top: -68px; padding: calc(6rem + 68px) 0 7rem;
 }
 .hero-inner { max-width: 640px; }
 .hero .eyebrow { color: #cfe0f4; }
@@ -329,8 +337,11 @@ ul { list-style: none; }
 @media (max-width: 768px) {
   .nav-links { position: fixed; inset: 0 0 0 30%; background: #fff; flex-direction: column; padding: 5rem 2rem; gap: 1.5rem; transform: translateX(100%); transition: transform .3s; box-shadow: var(--shadow-lg); }
   .nav-links.open { transform: translateX(0); }
+  .site-header .nav-links > li > a { color: var(--ink); }
+  .nav-links .nav-right { margin-left: 0; }
   .mega-menu { display: none !important; }
   .hamburger { display: flex; }
+  .hamburger.open span { background: var(--ink) !important; }
   .nav-phone { display: none; }
   .topbar { display: none; }
   .hero h1 { font-size: 2.2rem; }
@@ -412,9 +423,9 @@ ul { list-style: none; }
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li class="has-dropdown"><a href="#services">Services <span class="caret">▼</span></a><div class="mega-menu" id="megaMenu"></div></li>
-        <li><a href="#why">Why Us</a></li>
         <li class="has-dropdown areas"><a href="#areas">Service Areas <span class="caret">▼</span></a><div class="mega-menu counties" id="countiesMenu"></div></li>
         <li><a href="#contact">Contact</a></li>
+        <li class="nav-right"><a href="#why">Why Us</a></li>
       </ul>
       <a href="tel:+14077580682" class="nav-phone">(407) 758-0682</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -842,6 +853,12 @@ navLinks.querySelectorAll('a').forEach(link => {
     hamburger.classList.remove('open');
   });
 });
+
+// Transparent header turns solid on scroll
+var siteHeader = document.querySelector('.site-header');
+function updateHeader(){ if(siteHeader) siteHeader.classList.toggle('scrolled', window.scrollY > 40); }
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
 
 // Animated stat counters
 const stats = document.querySelectorAll('.stat .num');
