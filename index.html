@@ -125,14 +125,18 @@ ul { list-style: none; }
 /* Services mega-menu dropdown */
 .has-dropdown { position: relative; }
 .has-dropdown > a .caret { font-size: .7em; margin-left: .15rem; }
+.has-dropdown > a { padding-bottom: 14px; margin-bottom: -14px; }
 .mega-menu {
-  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(12px);
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
   background: #fff; box-shadow: var(--shadow-lg); border-radius: 14px; padding: 0.85rem;
   display: grid; grid-template-columns: repeat(3, minmax(178px, 1fr)); gap: 0.15rem;
-  width: 600px; opacity: 0; visibility: hidden; transition: opacity .22s, transform .22s; z-index: 200;
+  width: 600px; opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility 0s linear .25s; z-index: 200;
 }
-.has-dropdown:hover .mega-menu, .has-dropdown:focus-within .mega-menu {
-  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(8px);
+.mega-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -16px; height: 18px; }
+.has-dropdown:hover .mega-menu, .has-dropdown:focus-within .mega-menu, .has-dropdown.open .mega-menu {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(4px);
+  transition: opacity .2s ease, transform .2s ease, visibility 0s;
 }
 .mega-menu a { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.55rem; border-radius: 8px; font-weight: 600; font-size: 0.84rem; color: var(--ink); line-height: 1.25; }
 .mega-menu a::after { display: none; }
@@ -140,8 +144,8 @@ ul { list-style: none; }
 .mega-menu .mm-icon { width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; }
 .mega-menu .mm-icon svg { width: 17px; height: 17px; stroke: var(--blue); fill: none; }
 /* Service Areas counties dropdown */
-.has-dropdown.areas .mega-menu { left: auto; right: 0; transform: translateX(0) translateY(12px); width: 680px; grid-template-columns: repeat(4, minmax(150px, 1fr)); max-height: 72vh; overflow-y: auto; }
-.has-dropdown.areas:hover .mega-menu, .has-dropdown.areas:focus-within .mega-menu { transform: translateX(0) translateY(8px); }
+.has-dropdown.areas .mega-menu { left: auto; right: 0; transform: translateX(0) translateY(10px); width: 680px; grid-template-columns: repeat(4, minmax(150px, 1fr)); max-height: 72vh; overflow-y: auto; }
+.has-dropdown.areas:hover .mega-menu, .has-dropdown.areas:focus-within .mega-menu, .has-dropdown.areas.open .mega-menu { transform: translateX(0) translateY(4px); }
 .mega-menu.counties a { font-size: 0.82rem; padding: 0.38rem 0.5rem; }
 .mega-menu.counties .mm-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
 .nav-phone { background: var(--red); color: #fff; padding: 0.7rem 1.4rem; border-radius: 50px; font-weight: 700; white-space: nowrap; }
@@ -644,6 +648,13 @@ if (mm) { mm.innerHTML = SERVICES.map(function(x){return '<a href="#service/'+x[
 var COUNTIES = ["Alachua","Baker","Bay","Bradford","Brevard","Broward","Calhoun","Charlotte","Citrus","Clay","Collier","Columbia","DeSoto","Dixie","Duval","Escambia","Flagler","Franklin","Gadsden","Gilchrist","Glades","Gulf","Hamilton","Hardee","Hendry","Hernando","Highlands","Hillsborough","Holmes","Indian River","Jackson","Jefferson","Lafayette","Lake","Lee","Leon","Levy","Liberty","Madison","Manatee","Marion","Martin","Miami-Dade","Monroe","Nassau","Okaloosa","Okeechobee","Orange","Osceola","Palm Beach","Pasco","Pinellas","Polk","Putnam","Santa Rosa","Sarasota","Seminole","St. Johns","St. Lucie","Sumter","Suwannee","Taylor","Union","Volusia","Wakulla","Walton","Washington"];
 var cm = document.getElementById('countiesMenu');
 if (cm) { cm.innerHTML = COUNTIES.map(function(c){return '<a href="#areas"><span class="mm-dot"></span>'+c+' County</a>';}).join(''); }
+// Keep dropdowns open with a grace period so the menu doesn't vanish before you can reach it
+Array.prototype.forEach.call(document.querySelectorAll('.has-dropdown'), function(dd){
+  var t;
+  dd.addEventListener('mouseenter', function(){ clearTimeout(t); dd.classList.add('open'); });
+  dd.addEventListener('mouseleave', function(){ clearTimeout(t); t = setTimeout(function(){ dd.classList.remove('open'); }, 400); });
+  dd.addEventListener('click', function(){ clearTimeout(t); dd.classList.remove('open'); });
+});
 var home = document.getElementById('homeMain');
 var page = document.getElementById('servicePage');
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
