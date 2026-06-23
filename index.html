@@ -194,8 +194,8 @@ ul { list-style: none; }
 .mega-menu .mm-icon { width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; }
 .mega-menu .mm-icon svg { width: 17px; height: 17px; stroke: var(--blue); fill: none; }
 /* Service Areas counties dropdown */
-.has-dropdown.areas .mega-menu { left: auto; right: 0; transform: translateX(0) translateY(10px); width: 680px; grid-template-columns: repeat(4, minmax(150px, 1fr)); max-height: 72vh; overflow-y: auto; }
-.has-dropdown.areas:hover .mega-menu, .has-dropdown.areas:focus-within .mega-menu, .has-dropdown.areas.open .mega-menu { transform: translateX(0) translateY(4px); }
+.has-dropdown.areas-dd .mega-menu { left: auto; right: 0; transform: translateX(0) translateY(10px); width: 680px; grid-template-columns: repeat(4, minmax(150px, 1fr)); max-height: 72vh; overflow-y: auto; }
+.has-dropdown.areas-dd:hover .mega-menu, .has-dropdown.areas-dd:focus-within .mega-menu, .has-dropdown.areas-dd.open .mega-menu { transform: translateX(0) translateY(4px); }
 .mega-menu.counties a { font-size: 0.82rem; padding: 0.38rem 0.5rem; }
 .mega-menu.counties .mm-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
 /* County page service grid */
@@ -423,7 +423,7 @@ ul { list-style: none; }
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li class="has-dropdown"><a href="#services">Services <span class="caret">▼</span></a><div class="mega-menu" id="megaMenu"></div></li>
-        <li class="has-dropdown areas"><a href="#areas">Service Areas <span class="caret">▼</span></a><div class="mega-menu counties" id="countiesMenu"></div></li>
+        <li class="has-dropdown areas-dd"><a href="#areas">Service Areas <span class="caret">▼</span></a><div class="mega-menu counties" id="countiesMenu"></div></li>
         <li><a href="#contact">Contact</a></li>
         <li class="nav-right"><a href="#why">Why Us</a></li>
       </ul>
