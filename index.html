@@ -148,6 +148,13 @@ ul { list-style: none; }
 .has-dropdown.areas:hover .mega-menu, .has-dropdown.areas:focus-within .mega-menu, .has-dropdown.areas.open .mega-menu { transform: translateX(0) translateY(4px); }
 .mega-menu.counties a { font-size: 0.82rem; padding: 0.38rem 0.5rem; }
 .mega-menu.counties .mm-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+/* County page service grid */
+.county-svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; margin: 1rem 0 1.75rem; }
+.county-svc-grid a { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.65rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; color: var(--ink); border: 1px solid var(--border); }
+.county-svc-grid a:hover { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+.county-svc-grid .mm-icon { width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; }
+.county-svc-grid .mm-icon svg { width: 17px; height: 17px; stroke: var(--blue); fill: none; }
+@media (max-width: 640px) { .county-svc-grid { grid-template-columns: 1fr; } }
 .nav-phone { background: var(--red); color: #fff; padding: 0.7rem 1.4rem; border-radius: 50px; font-weight: 700; white-space: nowrap; }
 .nav-phone:hover { background: var(--red-dark); color: #fff; }
 .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 6px; }
@@ -646,8 +653,10 @@ document.getElementById('servicesGrid').innerHTML = SERVICES.map(function(x){ret
 var mm = document.getElementById('megaMenu');
 if (mm) { mm.innerHTML = SERVICES.map(function(x){return '<a href="#service/'+x[1]+'"><span class="mm-icon">'+svcIcon(x[1])+'</span>'+x[0]+'</a>';}).join(''); }
 var COUNTIES = ["Alachua","Baker","Bay","Bradford","Brevard","Broward","Calhoun","Charlotte","Citrus","Clay","Collier","Columbia","DeSoto","Dixie","Duval","Escambia","Flagler","Franklin","Gadsden","Gilchrist","Glades","Gulf","Hamilton","Hardee","Hendry","Hernando","Highlands","Hillsborough","Holmes","Indian River","Jackson","Jefferson","Lafayette","Lake","Lee","Leon","Levy","Liberty","Madison","Manatee","Marion","Martin","Miami-Dade","Monroe","Nassau","Okaloosa","Okeechobee","Orange","Osceola","Palm Beach","Pasco","Pinellas","Polk","Putnam","Santa Rosa","Sarasota","Seminole","St. Johns","St. Lucie","Sumter","Suwannee","Taylor","Union","Volusia","Wakulla","Walton","Washington"];
+function countySlug(c){return c.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
+function countyName(slug){for(var i=0;i<COUNTIES.length;i++){if(countySlug(COUNTIES[i])===slug)return COUNTIES[i];}return null;}
 var cm = document.getElementById('countiesMenu');
-if (cm) { cm.innerHTML = COUNTIES.map(function(c){return '<a href="#areas"><span class="mm-dot"></span>'+c+' County</a>';}).join(''); }
+if (cm) { cm.innerHTML = COUNTIES.map(function(c){return '<a href="#county/'+countySlug(c)+'"><span class="mm-dot"></span>'+c+' County</a>';}).join(''); }
 // Keep dropdowns open with a grace period so the menu doesn't vanish before you can reach it
 Array.prototype.forEach.call(document.querySelectorAll('.has-dropdown'), function(dd){
   var t;
@@ -685,9 +694,40 @@ function renderService(slug){
   '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Services</p>'+
   '<h2 class="section-title">We Also Help With</h2><div class="svc-other-grid">'+others+'</div></div></section>';
 }
+function renderCounty(slug){
+  var name = countyName(slug); if(!name){ location.hash=''; return; }
+  var svcLinks = SERVICES.map(function(x){return '<a href="#service/'+x[1]+'"><span class="mm-icon">'+svcIcon(x[1])+'</span>'+x[0]+'</a>';}).join('');
+  var others = COUNTIES.filter(function(c){return c!==name;}).slice(0,12).map(function(c){return '<a class="svc-pill" href="#county/'+countySlug(c)+'">'+c+' County</a>';}).join('');
+  page.innerHTML =
+  '<section class="page-hero"><div class="container"><p class="eyebrow">Service Areas</p><h1>Biohazard &amp; Crime Scene Cleanup in '+esc(name)+' County</h1>'+
+  '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">24/7 certified trauma, biohazard, and crime scene cleanup throughout '+esc(name)+' County and all of Florida.</p>'+
+  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a></div></section>'+
+  '<section class="section"><div class="container">'+
+  '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / '+esc(name)+' County</p>'+
+  '<div class="svc-layout"><div class="svc-body">'+
+  '<p>Peak Bio Clean provides compassionate, professional biohazard and crime scene cleanup to families, property owners, and businesses across '+esc(name)+' County. We are available 24 hours a day, 7 days a week, and a real person answers every call.</p>'+
+  '<p>When the unexpected happens, you should not have to face the cleanup alone. Our certified technicians respond quickly and discreetly, restoring your property safely and in full compliance with OSHA and state regulations — anywhere in '+esc(name)+' County.</p>'+
+  '<h2>Our Services in '+esc(name)+' County</h2><div class="county-svc-grid">'+svcLinks+'</div>'+
+  '<h2>Our Process</h2><ol class="svc-steps">'+
+  '<li>Call us 24/7 for an immediate, confidential response.</li>'+
+  '<li>We assess the scene and explain every step — no surprises.</li>'+
+  '<li>We contain, remove, and decontaminate all affected materials.</li>'+
+  '<li>We disinfect, deodorize, and verify the area is safe.</li>'+
+  '<li>We coordinate with your insurance to minimize your cost.</li></ol>'+
+  '<h2>Insurance &amp; Cost</h2><p>Most of our services are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost to you. We work directly with your provider and handle the paperwork so you can focus on what matters.</p>'+
+  '</div><aside class="svc-aside"><h3>Need Help in '+esc(name)+' County?</h3><p>Available 24/7. A real person answers.</p>'+
+  '<a href="tel:+14077580682" class="big-phone">(407) 758-0682</a>'+
+  '<a href="tel:+14077580682" class="btn btn-red btn-full">Call Peak Bio Clean</a>'+
+  '<p style="margin-top:1rem;font-size:.85rem;color:var(--gray);">Licensed, Insured &amp; Bondable · OSHA Trained · EPA Compliant</p></aside>'+
+  '</div></div></section>'+
+  '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Service Areas</p>'+
+  '<h2 class="section-title">We Also Serve</h2><div class="svc-other-grid">'+others+'</div></div></section>';
+}
 function route(){
-  var m = location.hash.match(/^#service\/(.+)$/);
-  if(m){ home.style.display='none'; page.style.display='block'; renderService(m[1]); window.scrollTo(0,0); }
+  var ms = location.hash.match(/^#service\/(.+)$/);
+  var mc = location.hash.match(/^#county\/(.+)$/);
+  if(ms){ home.style.display='none'; page.style.display='block'; renderService(ms[1]); window.scrollTo(0,0); }
+  else if(mc){ home.style.display='none'; page.style.display='block'; renderCounty(mc[1]); window.scrollTo(0,0); }
   else { page.style.display='none'; page.innerHTML=''; home.style.display='block'; }
 }
 window.addEventListener('hashchange', route);
