@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peak Bio Clean | Biohazard, Crime Scene & Trauma Cleanup — Central Florida</title>
+  <meta name="description" content="Peak Bio Clean provides certified crime scene, trauma & biohazard cleanup across Central Florida. Available 24/7, compassionate & discreet. We work with your insurance. Call (407) 758-0682." />
+  <meta name="keywords" content="biohazard cleanup Orlando, crime scene cleanup Central Florida, trauma cleanup, unattended death cleanup, hoarding cleanup, suicide cleanup Florida" />
+  <link rel="canonical" href="https://www.peakbioclean.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Peak Bio Clean | Compassionate, Professional & Trusted Biohazard Cleanup" />
+  <meta property="og:description" content="Certified crime scene, trauma & biohazard cleanup in Central Florida. Available 24/7. Call (407) 758-0682." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.peakbioclean.com/" />
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Peak Bio Clean",
+    "telephone": "(407) 758-0682",
+    "url": "https://www.peakbioclean.com",
+    "description": "Certified crime scene, trauma, and biohazard cleanup. Available 24/7 across Central Florida. Compassionate, professional, and trusted.",
+    "areaServed": ["Orlando", "Central Florida"],
+    "priceRange": "$$",
+    "address": { "@type": "PostalAddress", "addressRegion": "FL", "addressCountry": "US" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+/* ═══════════════════════════════════════
+   Peak Bio Clean — Stylesheet
+   Inspired by The BioClean Team layout
+   Colors: Blue #1965B1 | Deep #134E89 | Red #ED4858
+   ═══════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:       #1965B1;
+  --blue-dark:  #134E89;
+  --blue-light: #E9EFF9;
+  --red:        #ED4858;
+  --red-dark:   #D4313F;
+  --ink:        #1B2733;
+  --text:       #333333;
+  --gray:       #6B7280;
+  --gray-light: #F4F7FB;
+  --border:     #E0E0E0;
+  --white:      #FFFFFF;
+  --shadow:     0 6px 24px rgba(25,101,177,0.12);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.12);
+  --radius:     14px;
+  --font:       'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--text); background: #fff; line-height: 1.6; font-size: 16px; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.container { max-width: 1170px; margin: 0 auto; padding: 0 1.5rem; }
+.section { padding: 5rem 0; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
+  padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem;
+  text-transform: uppercase; letter-spacing: 0.03em; cursor: pointer; border: 3px solid transparent;
+  transition: transform .15s, box-shadow .15s, background .2s, color .2s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.btn-red { background: var(--red); color: #fff; }
+.btn-red:hover { background: var(--red-dark); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-blue:hover { background: var(--blue-dark); color: #fff; }
+.btn-outline { background: transparent; color: #fff; border-color: #fff; }
+.btn-outline:hover { background: #fff; color: var(--blue); }
+.btn-full { width: 100%; }
+
+/* ── Section labels ── */
+.eyebrow {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.55em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 0.85rem;
+}
+.section-title { font-size: 2.2rem; font-weight: 800; color: var(--ink); line-height: 1.15; margin-bottom: 1rem; }
+.section-sub { color: var(--gray); max-width: 720px; margin: 0 auto 2.5rem; }
+.text-center { text-align: center; }
+
+/* ═══ TOP BAR ═══ */
+.topbar { background: var(--blue-light); font-size: 0.9rem; }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.5rem 1.5rem; max-width: 1170px; margin: 0 auto; }
+.topbar-info { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.topbar-info a { font-weight: 700; color: var(--ink); }
+.topbar-info a:hover { color: var(--red); }
+.topbar-social { display: flex; gap: 0.4rem; }
+.topbar-social a {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--blue);
+  display: flex; align-items: center; justify-content: center; color: #fff; transition: background .2s;
+}
+.topbar-social a:hover { background: var(--red); }
+.topbar-social svg { width: 14px; height: 14px; fill: #fff; }
+
+/* ═══ HEADER ═══ */
+.site-header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,.06); }
+.nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.5rem; max-width: 1170px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.3rem; color: var(--ink); }
+.brand .mark {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--blue);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.brand .mark svg { width: 24px; height: 24px; fill: #fff; }
+.brand span b { color: var(--blue); }
+.nav-links { display: flex; gap: 1.6rem; align-items: center; }
+.nav-links a { font-weight: 600; color: var(--ink); position: relative; }
+.nav-links a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 100%; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: right; transition: transform .35s; }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav-phone { background: var(--red); color: #fff; padding: 0.7rem 1.4rem; border-radius: 50px; font-weight: 700; white-space: nowrap; }
+.nav-phone:hover { background: var(--red-dark); color: #fff; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 6px; }
+.hamburger span { width: 26px; height: 3px; background: var(--ink); border-radius: 3px; transition: .3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative; color: #fff; text-align: left;
+  background: linear-gradient(115deg, rgba(19,78,137,0.94), rgba(25,101,177,0.82)), var(--blue-dark);
+  padding: 6rem 0 7rem;
+}
+.hero-inner { max-width: 640px; }
+.hero .eyebrow { color: #cfe0f4; }
+.hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; text-transform: capitalize; margin-bottom: 1rem; }
+.hero p.lead { font-size: 1.2rem; margin-bottom: 2rem; color: #eaf1fb; }
+
+/* Trust circles */
+.trust-circles { display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: center; margin-top: -4.5rem; position: relative; z-index: 5; }
+.trust-circle {
+  width: 200px; height: 200px; border-radius: 50%; background: #fff; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  padding: 1.5rem; font-weight: 700; color: var(--blue); line-height: 1.25;
+}
+.trust-circle svg { width: 54px; height: 54px; margin-bottom: 0.75rem; stroke: var(--ink); }
+
+/* Credentials row */
+.creds { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; align-items: center; justify-content: center; padding: 2.5rem 1rem 0; }
+.cred-badge { font-weight: 700; color: var(--gray); font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
+.cred-badge::before { content: "✓"; color: var(--blue); font-weight: 800; }
+
+/* ═══ INTRO / PERSON ═══ */
+.intro-grid { display: grid; grid-template-columns: 320px 1fr; gap: 3rem; align-items: center; }
+.intro-photo { width: 100%; aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg,var(--blue),var(--blue-dark)); box-shadow: var(--shadow); }
+.intro .eyebrow { color: var(--red); }
+.intro h2 { font-size: 2rem; color: var(--ink); margin-bottom: 1rem; }
+
+/* ═══ SERVICES ═══ */
+.services { background: var(--gray-light); }
+.services-note { background: #fff; border-left: 4px solid var(--blue); padding: 1rem 1.5rem; border-radius: 8px; max-width: 760px; margin: 0 auto 3rem; color: var(--ink); box-shadow: var(--shadow); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.25rem; }
+.service-card {
+  background: #fff; border-radius: var(--radius); padding: 1.75rem 1.25rem; text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,.07); transition: transform .2s, box-shadow .2s; border-bottom: 4px solid transparent;
+}
+.service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--red); }
+.service-icon { width: 64px; height: 64px; margin: 0 auto 1rem; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; }
+.service-icon svg { width: 34px; height: 34px; stroke: var(--blue); fill: none; }
+.service-card h3 { font-size: 1.05rem; color: var(--ink); font-weight: 700; }
+
+/* ═══ WHY / STATS ═══ */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.why h2 { font-size: 2rem; color: var(--ink); margin-bottom: 1rem; }
+.why p { margin-bottom: 1rem; }
+.why-visual { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-radius: var(--radius); min-height: 340px; display: flex; align-items: center; justify-content: center; color: #fff; padding: 2rem; }
+.why-visual svg { width: 140px; height: 140px; fill: rgba(255,255,255,.92); }
+.stats { background: var(--blue-light); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
+.stat .num { font-size: 2.8rem; font-weight: 800; color: var(--blue); line-height: 1; }
+.stat .label { color: var(--ink); font-weight: 600; margin-top: 0.5rem; }
+
+/* ═══ CTA band ═══ */
+.cta-band { background: var(--red); color: #fff; text-align: center; padding: 3rem 1.5rem; }
+.cta-band h2 { font-size: 1.9rem; margin-bottom: 0.5rem; }
+.cta-band .cta-phone { font-size: 2.4rem; font-weight: 800; color: #fff; display: inline-block; margin-top: 0.5rem; }
+
+/* ═══ TESTIMONIAL ═══ */
+.testimonial { text-align: center; }
+.testimonial blockquote { font-size: 1.35rem; color: var(--ink); max-width: 820px; margin: 0 auto 1.25rem; font-style: italic; line-height: 1.55; }
+.testimonial .stars { color: #F4BE28; font-size: 1.3rem; letter-spacing: 3px; margin-bottom: 1rem; }
+.testimonial cite { font-weight: 700; color: var(--blue); font-style: normal; }
+
+/* ═══ SERVICE AREAS ═══ */
+.areas { background: var(--gray-light); }
+.areas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+.area-card { background: #fff; border-radius: var(--radius); padding: 1.75rem; box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+.area-card h3 { color: var(--blue); margin-bottom: 0.75rem; }
+.area-card li { padding: 0.3rem 0; color: var(--text); border-bottom: 1px solid var(--border); }
+.area-card li:last-child { border: 0; }
+
+/* ═══ CONTACT FORM ═══ */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.contact-info h2 { font-size: 2rem; color: var(--ink); margin-bottom: 1rem; }
+.contact-info .big-phone { font-size: 2.4rem; font-weight: 800; color: var(--red); display: inline-block; margin: 1rem 0; }
+.contact-info ul li { padding: 0.4rem 0; display: flex; gap: 0.6rem; align-items: center; }
+.lead-form { background: #fff; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.35rem; color: var(--ink); }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 1rem;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--blue); }
+.form-note { font-size: 0.85rem; color: var(--gray); margin-top: 0.75rem; text-align: center; }
+
+/* ═══ FOOTER ═══ */
+.site-footer { background: var(--ink); color: #cdd6e0; padding: 4rem 0 0; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2.5rem; }
+.footer-brand .brand { color: #fff; margin-bottom: 1rem; }
+.footer-brand p { color: #9aa7b5; margin-bottom: 1rem; }
+.footer-phone { color: #fff; font-size: 1.4rem; font-weight: 800; }
+.site-footer h4 { color: #fff; margin-bottom: 1rem; font-size: 1rem; }
+.site-footer li { padding: 0.3rem 0; }
+.site-footer li a:hover { color: var(--red); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.1); margin-top: 3rem; padding: 1.5rem 0; text-align: center; font-size: 0.85rem; color: #8593a3; }
+
+/* ═══ STICKY MOBILE CALL BAR ═══ */
+.mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--red); color: #fff; text-align: center; padding: 0.9rem; font-weight: 700; box-shadow: 0 -4px 16px rgba(0,0,0,.2); }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .intro-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; }
+  .intro-photo { max-width: 260px; margin: 0 auto; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .why-visual { min-height: 220px; }
+}
+@media (max-width: 768px) {
+  .nav-links { position: fixed; inset: 0 0 0 30%; background: #fff; flex-direction: column; padding: 5rem 2rem; gap: 1.5rem; transform: translateX(100%); transition: transform .3s; box-shadow: var(--shadow-lg); }
+  .nav-links.open { transform: translateX(0); }
+  .hamburger { display: flex; }
+  .nav-phone { display: none; }
+  .topbar { display: none; }
+  .hero h1 { font-size: 2.2rem; }
+  .section-title { font-size: 1.7rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .mobile-cta { display: block; }
+  body { padding-bottom: 3.5rem; }
+}
+@media (max-width: 520px) {
+  .footer-grid, .stats-grid { grid-template-columns: 1fr; }
+  .trust-circle { width: 150px; height: 150px; font-size: 0.85rem; }
+}
+
+/* ═══ CERTIFICATION BADGES ═══ */
+.certs { background: #fff; }
+.cert-strip { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: center; }
+.cert-badge-logo {
+  width: 120px; height: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  filter: grayscale(100%); opacity: .6; transition: filter .25s, opacity .25s, transform .2s;
+}
+.cert-badge-logo:hover { filter: none; opacity: 1; transform: translateY(-3px); }
+.cert-badge-logo svg { width: 100%; height: 100%; }
+
+/* ═══ SERVICE PAGE ═══ */
+.page-hero {
+  background: linear-gradient(115deg, rgba(19,78,137,.95), rgba(25,101,177,.85)), var(--blue-dark);
+  color: #fff; padding: 4rem 0; text-align: center;
+}
+.page-hero .eyebrow { color: #cfe0f4; }
+.page-hero h1 { font-size: 2.6rem; font-weight: 800; }
+.breadcrumb { font-size: .85rem; color: var(--gray); margin-bottom: 2rem; }
+.breadcrumb a:hover { color: var(--red); }
+.svc-layout { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
+.svc-body h2 { font-size: 1.6rem; color: var(--ink); margin: 2rem 0 1rem; }
+.svc-body p { margin-bottom: 1rem; }
+.svc-body ul { margin: 0 0 1.5rem; }
+.svc-body ul li { position: relative; padding: .35rem 0 .35rem 1.75rem; }
+.svc-body ul li::before { content: "✓"; position: absolute; left: 0; color: var(--blue); font-weight: 800; }
+.svc-steps { counter-reset: step; margin: 0 0 1.5rem; }
+.svc-steps li { position: relative; padding: .35rem 0 .35rem 2.5rem; list-style: none; margin-bottom: .5rem; }
+.svc-steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: .3rem; width: 1.7rem; height: 1.7rem; background: var(--blue); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
+.svc-aside { background: var(--blue-light); border-radius: var(--radius); padding: 2rem; position: sticky; top: 90px; }
+.svc-aside h3 { color: var(--ink); margin-bottom: .75rem; }
+.svc-aside .big-phone { font-size: 1.9rem; font-weight: 800; color: var(--red); display: block; margin: .5rem 0 1rem; }
+.svc-other { background: var(--gray-light); }
+.svc-other-grid { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+.svc-pill { background: #fff; border: 1px solid var(--border); border-radius: 50px; padding: .5rem 1.1rem; font-weight: 600; font-size: .9rem; color: var(--ink); transition: .2s; }
+.svc-pill:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+@media (max-width: 900px) { .svc-layout { grid-template-columns: 1fr; } .svc-aside { position: static; } }
+
+</style>
+</head>
+<body id="top">
+<div id="homeMain">
+
+  <!-- ═══ TOP BAR ═══ -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-info">
+        <a href="tel:+14077580682">📞 (407) 758-0682</a>
+        <a href="mailto:info@peakbioclean.com">✉ info@peakbioclean.com</a>
+        <span>Your Local Biohazard Cleanup Team — 24/7</span>
+      </div>
+      <div class="topbar-social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.9.07s-3.63 0-4.9-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.43-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header">
+    <nav class="nav">
+      <a href="#top" class="brand">
+        <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
+        <span>Peak <b>Bio Clean</b></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#areas">Service Areas</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="tel:+14077580682" class="nav-phone">📞 (407) 758-0682</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Compassionate &amp; Professional</p>
+      <h1>Crime Scene, Trauma &amp; Biohazard Cleanup</h1>
+      <p class="lead">Peak Bio Clean is here to help — 24/7. Discreet, certified, and respectful service when you need it most.</p>
+      <a href="tel:+14077580682" class="btn btn-red">📞 Call Now — (407) 758-0682</a>
+    </div>
+  </section>
+
+  <!-- ═══ TRUST CIRCLES ═══ -->
+  <div class="container">
+    <div class="trust-circles">
+      <div class="trust-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        Certified Biohazard Restoration
+      </div>
+      <div class="trust-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        We Bill Your Insurance
+      </div>
+      <div class="trust-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Available 24 / 7
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CERTIFICATIONS ═══ -->
+  <section class="section certs">
+    <div class="container text-center">
+      <p class="eyebrow">Trained &amp; Certified</p>
+      <h2 class="section-title">Our Certifications &amp; Compliance</h2>
+      <p class="section-sub">Biohazard remediation is regulated work. Our team is trained and equipped to meet the standards that keep you and your property safe.</p>
+      <div class="cert-strip">
+        <div class="cert-badge-logo" title="OSHA — Occupational Safety and Health Administration">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="none" stroke="#1965B1" stroke-width="4"/><text x="60" y="56" text-anchor="middle" font-family="Inter,sans-serif" font-size="30" font-weight="800" fill="#1965B1">OSHA</text><text x="60" y="78" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#333">TRAINED</text></svg>
+        </div>
+        <div class="cert-badge-logo" title="EPA — Environmental Protection Agency compliant">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="none" stroke="#1965B1" stroke-width="4"/><text x="60" y="56" text-anchor="middle" font-family="Inter,sans-serif" font-size="32" font-weight="800" fill="#1965B1">EPA</text><text x="60" y="78" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#333">COMPLIANT</text></svg>
+        </div>
+        <div class="cert-badge-logo" title="HAZWOPER — Hazardous Waste Operations certified">
+          <svg viewBox="0 0 120 120"><rect x="8" y="8" width="104" height="104" rx="12" fill="none" stroke="#ED4858" stroke-width="4"/><text x="60" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#ED4858">HAZ</text><text x="60" y="76" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#ED4858">WOPER</text></svg>
+        </div>
+        <div class="cert-badge-logo" title="IICRC — Institute of Inspection, Cleaning and Restoration Certification">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="none" stroke="#1965B1" stroke-width="4"/><text x="60" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="26" font-weight="800" fill="#1965B1">IICRC</text><text x="60" y="78" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="#333">CERTIFIED</text></svg>
+        </div>
+        <div class="cert-badge-logo" title="Bloodborne Pathogens certified">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="none" stroke="#ED4858" stroke-width="4"/><path d="M60 32c8 12 16 20 16 30a16 16 0 01-32 0c0-10 8-18 16-30z" fill="#ED4858"/><text x="60" y="98" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="#333">BLOODBORNE</text></svg>
+        </div>
+        <div class="cert-badge-logo" title="Registered Nurse on staff">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="none" stroke="#1965B1" stroke-width="4"/><path d="M60 30v60M30 60h60" stroke="#ED4858" stroke-width="8" stroke-linecap="round"/><circle cx="60" cy="60" r="14" fill="#fff"/><text x="60" y="66" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="800" fill="#1965B1">RN</text></svg>
+        </div>
+        <div class="cert-badge-logo" title="Fully Licensed, Insured &amp; Bondable">
+          <svg viewBox="0 0 120 120"><path d="M60 10l44 16v26c0 26-18 44-44 52-26-8-44-26-44-52V26z" fill="none" stroke="#1965B1" stroke-width="4"/><path d="M44 60l12 12 22-24" fill="none" stroke="#1965B1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <p class="form-note" style="margin-top:1.5rem;">Tell us which certifications you'd like featured and we'll display the official badges.</p>
+    </div>
+  </section>
+
+  <!-- ═══ INTRO ═══ -->
+  <section class="section intro" id="about">
+    <div class="container intro-grid">
+      <div class="intro-photo" aria-hidden="true"></div>
+      <div>
+        <p class="eyebrow">A Passion to Help</p>
+        <h2>Here for You During Life's Hardest Moments</h2>
+        <p>When you call Peak Bio Clean, it may be during one of the hardest times in your life. We understand that — and we're here to help. Our trained, compassionate technicians guide you through every step of the process and take the burden off your shoulders.</p>
+        <p>We handle the cleanup safely, legally, and discreetly, so you and your family can focus on healing. From crime scenes to trauma cleanup to hoarding situations, no job is too difficult and no family is left without support.</p>
+        <a href="tel:+14077580682" class="btn btn-blue">📞 Call (407) 758-0682</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="text-center">
+        <p class="eyebrow">Our Services</p>
+        <h2 class="section-title">Complete Biohazard &amp; Cleanup Services</h2>
+      </div>
+      <p class="services-note">Most of our services <strong>ARE COVERED</strong> by your insurance. We work directly with your homeowners, renters, or auto insurance — with little to <strong>NO out-of-pocket cost</strong> to you.</p>
+      <div class="services-grid" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══ WHY US ═══ -->
+  <section class="section why" id="why">
+    <div class="container why-grid">
+      <div>
+        <p class="eyebrow">Why Choose Us</p>
+        <h2>Why Choose Peak Bio Clean?</h2>
+        <p>Peak Bio Clean is Central Florida's trusted team for crime scene cleanup, large-scale clean-outs such as hoarding, decomposition cleanup, odor remediation, and hazardous waste removal. We take everything — safely and legally — reducing the headache and hassle for you.</p>
+        <p>Our technicians are OSHA certified to handle biohazardous waste cleanup. Infectious waste is unsafe to handle without proper training, equipment, and disposal protocols — that's exactly what we bring to every job.</p>
+        <a href="tel:+14077580682" class="btn btn-red">📞 Call Now</a>
+      </div>
+      <div class="why-visual">
+        <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z" opacity=".25"/><path d="M12 4.3L6 6.8v5.2c0 3.8 2.6 6.3 6 7.9 3.4-1.6 6-4.1 6-7.9V6.8z"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="section stats">
+    <div class="container stats-grid">
+      <div class="stat"><div class="num" data-value="200" data-suffix="+">0</div><div class="label">Families Helped</div></div>
+      <div class="stat"><div class="num" data-value="8000" data-suffix="+">0</div><div class="label">Tons of Waste Disposed</div></div>
+      <div class="stat"><div class="num" data-value="24" data-suffix="/7">0</div><div class="label">Emergency Response</div></div>
+      <div class="stat"><div class="num" data-value="30" data-suffix="+">0</div><div class="label">Certificates &amp; Licenses</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA BAND ═══ -->
+  <section class="cta-band">
+    <h2>We can help you. Call us 24/7!</h2>
+    <a href="tel:+14077580682" class="cta-phone">(407) 758-0682</a>
+  </section>
+
+  <!-- ═══ TESTIMONIAL ═══ -->
+  <section class="section testimonial">
+    <div class="container">
+      <p class="eyebrow text-center">What Our Clients Say</p>
+      <div class="stars">★★★★★</div>
+      <blockquote>"Peak Bio Clean provided a rapid, caring response under very delicate circumstances. There was consistent communication and follow-up every step of the way. We are extremely satisfied with the work and all the guidance — they took a huge load off our shoulders."</blockquote>
+      <cite>— Satisfied Client, Central Florida</cite>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICE AREAS ═══ -->
+  <section class="section areas" id="areas">
+    <div class="container">
+      <div class="text-center">
+        <p class="eyebrow">Where We Work</p>
+        <h2 class="section-title">Serving All of Central Florida</h2>
+        <p class="section-sub">Fast, 24/7 response across Orlando and the surrounding counties.</p>
+      </div>
+      <div class="areas-grid">
+        <div class="area-card">
+          <h3>Orange County</h3>
+          <ul><li>Orlando</li><li>Winter Park</li><li>Apopka</li><li>Ocoee</li><li>Winter Garden</li></ul>
+        </div>
+        <div class="area-card">
+          <h3>Seminole County</h3>
+          <ul><li>Sanford</li><li>Altamonte Springs</li><li>Lake Mary</li><li>Oviedo</li><li>Winter Springs</li></ul>
+        </div>
+        <div class="area-card">
+          <h3>Osceola County</h3>
+          <ul><li>Kissimmee</li><li>St. Cloud</li><li>Celebration</li><li>Poinciana</li></ul>
+        </div>
+        <div class="area-card">
+          <h3>Lake &amp; Volusia</h3>
+          <ul><li>Clermont</li><li>Mount Dora</li><li>Deltona</li><li>DeLand</li><li>Daytona Beach</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <p class="eyebrow">Get Help Now</p>
+        <h2>Contact Peak Bio Clean</h2>
+        <p>Available 24 hours a day, 7 days a week. A real person answers — call or request a free, confidential assessment and we'll respond right away.</p>
+        <a href="tel:+14077580682" class="big-phone">(407) 758-0682</a>
+        <ul>
+          <li>✉ <a href="mailto:info@peakbioclean.com">info@peakbioclean.com</a></li>
+          <li>📍 Serving Orlando &amp; all of Central Florida</li>
+          <li>🕐 Open 24/7 — including holidays</li>
+          <li>🛡 Fully Licensed, Insured &amp; Bondable</li>
+        </ul>
+      </div>
+      <form class="lead-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+        <input type="hidden" name="form-name" value="contact" />
+        <p style="display:none;"><input name="bot-field" /></p>
+        <div class="form-row">
+          <div class="form-group"><label for="name">Full Name *</label><input id="name" name="name" required placeholder="Jane Doe" /></div>
+          <div class="form-group"><label for="phone">Phone *</label><input id="phone" name="phone" type="tel" required placeholder="(407) 555-0000" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@email.com" /></div>
+          <div class="form-group">
+            <label for="service">Service Needed</label>
+            <select id="service" name="service">
+              <option value="">Select a service…</option>
+              <option>Crime Scene Cleanup</option>
+              <option>Trauma Cleanup</option>
+              <option>Unattended Death Cleanup</option>
+              <option>Suicide Cleanup</option>
+              <option>Hoarding Cleanup</option>
+              <option>Biohazard Waste Disposal</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group full"><label for="message">How Can We Help?</label><textarea id="message" name="message" rows="4" placeholder="Briefly describe the situation. Everything is kept confidential."></textarea></div>
+        <button type="submit" class="btn btn-red btn-full">Request Confidential Assessment</button>
+        <p class="form-note">Your information is always kept private. We typically respond within minutes.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#top" class="brand">
+            <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
+            <span>Peak Bio Clean</span>
+          </a>
+          <p>Compassionate, professional, and trusted biohazard, crime scene, and trauma cleanup. Fully licensed, insured &amp; bondable. Available 24/7 across Central Florida.</p>
+          <a href="tel:+14077580682" class="footer-phone">(407) 758-0682</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Crime Scene Cleanup</a></li>
+            <li><a href="#services">Trauma Cleanup</a></li>
+            <li><a href="#services">Unattended Death</a></li>
+            <li><a href="#services">Hoarding Cleanup</a></li>
+            <li><a href="#services">Biohazard Disposal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#why">Why Choose Us</a></li>
+            <li><a href="#areas">Service Areas</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Service Areas</h4>
+          <ul>
+            <li><a href="#areas">Orlando</a></li>
+            <li><a href="#areas">Kissimmee</a></li>
+            <li><a href="#areas">Sanford</a></li>
+            <li><a href="#areas">Clermont</a></li>
+            <li><a href="#areas">All of Central Florida</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Peak Bio Clean. All Rights Reserved. | Licensed, Insured &amp; Bondable in Florida | Available 24/7</p>
+    </div>
+  </footer>
+
+  <a href="tel:+14077580682" class="mobile-cta">📞 Call 24/7 — (407) 758-0682</a>
+
+  
+</div>
+<div id="servicePage"></div>
+<script>
+const SERVICES = [["Unattended Death Cleanup", "unattended-death-cleanup"], ["Crime Scene Cleanup", "crime-scene-cleanup"], ["Biohazard Waste Disposal", "biohazard-waste-disposal"], ["Trauma Cleanup", "trauma-cleanup"], ["Compassionate & Discreet Suicide Cleanup", "suicide-cleanup"], ["Decomposition Cleanup", "decomposition-cleanup"], ["Blood Cleanup", "blood-cleanup"], ["Hoarding Cleanup", "hoarding-cleanup"], ["Rodent Waste Removal", "rodent-waste-removal"], ["Sewage Cleanup", "sewage-cleanup"], ["Urine & Feces Cleanup", "urine-and-feces-cleanup"], ["Homeless Camp Cleanup", "homeless-camp-cleanup"], ["Gross Filth Cleanup", "gross-filth-cleanup"], ["Infectious Disease Cleanup", "infectious-disease-cleanup"], ["Medical Waste Cleanup", "medical-waste-cleanup"], ["Smoke Damage Cleanup", "smoke-damage-cleanup"], ["Private & Emergency Vehicle Cleanup", "vehicle-cleanup"], ["COVID-19 Cleanup", "covid-19-cleanup"]];
+const SVC = {"unattended-death-cleanup": {"title": "Unattended Death Cleanup", "sub": "Discreet, compassionate cleanup and decontamination after an unattended death.", "intros": ["When a death goes undiscovered for hours, days, or longer, the affected area requires professional biohazard remediation \u2014 not ordinary cleaning. Bodily fluids and decomposition byproducts can penetrate flooring, subfloor, and structural materials and pose real health risks.", "Peak Bio Clean responds quickly and quietly, treating both the property and your family with the dignity the situation deserves. We handle the entire process so loved ones never have to."], "incl": ["Full assessment of affected porous and non-porous materials", "Safe removal and disposal of contaminated items", "Hospital-grade disinfection and decontamination", "Odor neutralization at the molecular level", "Discreet, unmarked vehicles and uniforms"]}, "crime-scene-cleanup": {"title": "Crime Scene Cleanup", "sub": "Certified remediation of crime scenes once authorities have released the property.", "intros": ["After law enforcement completes their work, the cleanup is left to the property owner or family. Peak Bio Clean steps in to restore the scene safely, removing blood, bodily fluids, and other biohazards in full compliance with OSHA and state regulations.", "Our technicians are trained to work methodically and respectfully, returning the space to a safe, sanitary condition."], "incl": ["Blood and bodily-fluid removal", "Fingerprint powder and chemical residue cleanup", "Structural decontamination and disposal", "Regulated medical-waste transport", "Coordination with insurance"]}, "biohazard-waste-disposal": {"title": "Biohazard Waste Disposal", "sub": "Licensed pickup, transport, and disposal of regulated biohazardous waste.", "intros": ["Biohazardous and infectious waste cannot be thrown away with ordinary trash \u2014 it must be handled, transported, and destroyed under strict federal and state rules. Peak Bio Clean is equipped and certified to do exactly that.", "From a single contaminated cleanup to large-scale waste removal, we take everything safely and legally, sparing you the liability and the hassle."], "incl": ["Certified hazardous-waste hauling", "Sealed, compliant containment", "Manifested chain-of-custody documentation", "EPA-compliant final disposal", "Service for homes and businesses"]}, "trauma-cleanup": {"title": "Trauma Cleanup", "sub": "Professional cleanup and restoration after a traumatic incident.", "intros": ["Traumatic events \u2014 accidents, medical emergencies, and violent incidents \u2014 can leave behind blood and biohazards that require specialized handling. Peak Bio Clean restores the affected area so you don't have to face it alone.", "We arrive 24/7, work with compassion and discretion, and coordinate directly with your insurance whenever possible."], "incl": ["Rapid 24/7 emergency response", "Containment and biohazard removal", "Deep disinfection and sanitizing", "Odor and stain remediation", "Insurance coordination"]}, "suicide-cleanup": {"title": "Compassionate & Discreet Suicide Cleanup", "sub": "Respectful, confidential cleanup so families can begin to heal.", "intros": ["Few situations are more painful than the loss of a loved one to suicide. Peak Bio Clean handles the cleanup with the utmost compassion and discretion, allowing your family the space to grieve.", "Our trained technicians remove all biohazards, fully decontaminate the area, and restore the space \u2014 quietly and respectfully."], "incl": ["Confidential, judgment-free service", "Complete biohazard decontamination", "Removal of affected materials", "Odor neutralization", "Grief-sensitive coordination"]}, "decomposition-cleanup": {"title": "Decomposition Cleanup", "sub": "Thorough decontamination and odor removal after human or animal decomposition.", "intros": ["Decomposition releases fluids, bacteria, and powerful odors that soak into porous materials and spread through a structure. Surface cleaning is never enough. Peak Bio Clean performs complete remediation down to the source.", "We identify every affected material, remove what cannot be saved, and treat the area until it is safe and odor-free."], "incl": ["Source-level contamination removal", "Subfloor and structural treatment", "Industrial odor neutralization", "Antimicrobial application", "Air-quality restoration"]}, "blood-cleanup": {"title": "Blood Cleanup", "sub": "Safe, OSHA-compliant blood and bodily-fluid cleanup.", "intros": ["Blood is a potential carrier of bloodborne pathogens such as HIV and hepatitis, and it must be handled with proper training and protective equipment. Peak Bio Clean removes and disinfects blood safely and completely.", "Whether from an accident, injury, or medical event, we restore the area to a sanitary condition."], "incl": ["Bloodborne-pathogen-safe handling", "Complete removal and disinfection", "Disposal as regulated medical waste", "Surface and subsurface treatment", "Verification of decontamination"]}, "hoarding-cleanup": {"title": "Hoarding Cleanup", "sub": "Compassionate, organized clean-outs that restore safe, livable spaces.", "intros": ["Hoarding situations often involve biohazards, structural concerns, and deeply personal belongings. Peak Bio Clean approaches every clean-out with patience, respect, and zero judgment.", "We work alongside families and individuals to sort, remove, sanitize, and restore the home to a safe and livable condition."], "incl": ["Compassionate, judgment-free approach", "Sorting and removal of clutter and waste", "Biohazard and waste decontamination", "Deep cleaning and deodorizing", "Coordination with families and case managers"]}, "rodent-waste-removal": {"title": "Rodent Waste Removal", "sub": "Cleanup and decontamination of rodent droppings, nesting, and contamination.", "intros": ["Rodent droppings and urine can carry serious diseases such as hantavirus and salmonella, and disturbing them improperly can release airborne contaminants. Peak Bio Clean removes and decontaminates rodent waste safely.", "We clean affected areas, sanitize surfaces, and help prevent the spread of contamination."], "incl": ["Safe droppings and nesting removal", "Disease-aware containment", "Surface and air decontamination", "Odor elimination", "Sanitizing of affected areas"]}, "sewage-cleanup": {"title": "Sewage Cleanup", "sub": "Fast extraction and decontamination of sewage backups and spills.", "intros": ["A sewage backup is more than a mess \u2014 it's a biohazard. Raw sewage carries bacteria, viruses, and parasites that demand professional remediation. Peak Bio Clean responds quickly to extract, sanitize, and dry the affected area.", "We mitigate damage fast to protect your property and your health."], "incl": ["Rapid sewage extraction", "Contaminated-material removal", "Disinfection and sanitizing", "Structural drying", "Odor and mold prevention"]}, "urine-and-feces-cleanup": {"title": "Urine & Feces Cleanup", "sub": "Decontamination of urine and feces from homes, properties, and vehicles.", "intros": ["Accumulated urine and feces \u2014 whether from animals, neglect, or hoarding situations \u2014 pose genuine health hazards and stubborn odors. Peak Bio Clean fully decontaminates and deodorizes the affected space.", "We treat the contamination at the source so the area is truly safe again."], "incl": ["Complete waste removal", "Deep disinfection", "Source-level odor treatment", "Porous-material assessment", "Sanitizing and restoration"]}, "homeless-camp-cleanup": {"title": "Homeless Camp Cleanup", "sub": "Safe, respectful cleanup and biohazard removal at encampment sites.", "intros": ["Encampment sites often contain biohazards, sharps, and hazardous waste that require trained handling. Peak Bio Clean cleans and decontaminates these areas for property owners and managers.", "We work safely and respectfully, restoring the property to a usable condition."], "incl": ["Sharps and needle removal", "Biohazard and waste cleanup", "Debris and property removal", "Disinfection of affected areas", "Disposal in compliance with regulations"]}, "gross-filth-cleanup": {"title": "Gross Filth Cleanup", "sub": "Restoration of severely neglected or unsanitary properties.", "intros": ["When a property has fallen into severe disrepair and unsanitary conditions, it requires far more than standard cleaning. Peak Bio Clean handles gross-filth situations with the right equipment, training, and care.", "We remove waste and contamination, sanitize thoroughly, and restore the space to a safe, livable standard."], "incl": ["Heavy waste and debris removal", "Biohazard decontamination", "Deep cleaning and sanitizing", "Odor remediation", "Full property restoration"]}, "infectious-disease-cleanup": {"title": "Infectious Disease Cleanup", "sub": "Disinfection and decontamination to control infectious-disease exposure.", "intros": ["Infectious diseases can linger on surfaces and spread quickly without proper disinfection. Peak Bio Clean uses hospital-grade products and EPA-approved protocols to decontaminate affected spaces.", "We help homes, businesses, and facilities reduce the risk of exposure and return to safe operation."], "incl": ["EPA-approved disinfectants", "Hospital-grade decontamination", "High-touch surface treatment", "Air and surface sanitizing", "Documentation of completed work"]}, "medical-waste-cleanup": {"title": "Medical Waste Cleanup", "sub": "Compliant handling and disposal of regulated medical waste.", "intros": ["Medical waste \u2014 sharps, contaminated supplies, and infectious materials \u2014 is governed by strict regulations. Peak Bio Clean collects, transports, and disposes of it in full compliance.", "We serve clinics, facilities, and residences that need safe, documented medical-waste handling."], "incl": ["Sharps and biohazard collection", "Regulated transport", "Manifested disposal", "Facility and residential service", "Compliance documentation"]}, "smoke-damage-cleanup": {"title": "Smoke Damage Cleanup", "sub": "Cleanup, deodorizing, and restoration after smoke and soot damage.", "intros": ["Smoke and soot leave behind corrosive residue and persistent odor that spread far beyond the burn area. Peak Bio Clean cleans, deodorizes, and restores smoke-damaged spaces.", "We address residue at the source and neutralize odor so your property feels whole again."], "incl": ["Soot and residue removal", "Surface and content cleaning", "Deep deodorizing", "Air-quality treatment", "Restoration support"]}, "vehicle-cleanup": {"title": "Private & Emergency Vehicle Cleanup", "sub": "Biohazard decontamination of personal and emergency vehicles.", "intros": ["Vehicles can be the site of accidents, medical events, or biohazard exposure. Peak Bio Clean decontaminates cars, trucks, and emergency vehicles safely and thoroughly.", "We restore the interior to a clean, sanitary, and safe condition."], "incl": ["Blood and biohazard removal", "Interior decontamination", "Disinfection and sanitizing", "Odor neutralization", "Service for fleets and individuals"]}, "covid-19-cleanup": {"title": "COVID-19 Cleanup", "sub": "Disinfection of homes and businesses for COVID-19 and other viruses.", "intros": ["Viral contamination requires proper disinfection to reduce the risk of spread. Peak Bio Clean uses EPA-approved products and proven protocols to sanitize homes and workplaces.", "We help you reopen and return to daily life with confidence."], "incl": ["EPA-approved viral disinfectants", "High-touch surface focus", "Whole-area sanitizing", "Fast turnaround", "Service for homes and businesses"]}};
+const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 9V3M9.4 13.5L4.2 16.5M14.6 13.5l5.2 3"/><path d="M12 2a10 10 0 100 20 10 10 0 000-20z" opacity=".2"/></svg>';
+document.getElementById('servicesGrid').innerHTML = SERVICES.map(function(x){return '<a class="service-card" href="#service/'+x[1]+'"><div class="service-icon">'+ICON+'</div><h3>'+x[0]+'</h3></a>';}).join('');
+var home = document.getElementById('homeMain');
+var page = document.getElementById('servicePage');
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function renderService(slug){
+  var d = SVC[slug]; if(!d){location.hash=''; return;}
+  var others = SERVICES.filter(function(x){return x[1]!==slug;}).slice(0,8).map(function(x){return '<a class="svc-pill" href="#service/'+x[1]+'">'+x[0]+'</a>';}).join('');
+  page.innerHTML =
+  '<section class="page-hero"><div class="container"><p class="eyebrow">Our Services</p><h1>'+esc(d.title)+'</h1>'+
+  '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">'+esc(d.sub)+'</p>'+
+  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">📞 Call Now — (407) 758-0682</a></div></section>'+
+  '<section class="section"><div class="container">'+
+  '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / '+esc(d.title)+'</p>'+
+  '<div class="svc-layout"><div class="svc-body">'+
+  d.intros.map(function(p){return '<p>'+esc(p)+'</p>';}).join('')+
+  '<h2>What\'s Included</h2><ul>'+d.incl.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>'+
+  '<h2>Our Process</h2><ol class="svc-steps">'+
+  '<li>Call us 24/7 for an immediate, confidential response.</li>'+
+  '<li>We assess the scene and explain every step — no surprises.</li>'+
+  '<li>We contain, remove, and decontaminate all affected materials.</li>'+
+  '<li>We disinfect, deodorize, and verify the area is safe.</li>'+
+  '<li>We coordinate with your insurance to minimize your cost.</li></ol>'+
+  '<h2>Insurance &amp; Cost</h2><p>Most of our services are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost to you. We work directly with your provider and handle the paperwork so you can focus on what matters.</p>'+
+  '</div><aside class="svc-aside"><h3>Need Help Now?</h3><p>Available 24/7. A real person answers.</p>'+
+  '<a href="tel:+14077580682" class="big-phone">(407) 758-0682</a>'+
+  '<a href="tel:+14077580682" class="btn btn-red btn-full">Call Peak Bio Clean</a>'+
+  '<p style="margin-top:1rem;font-size:.85rem;color:var(--gray);">Licensed, Insured &amp; Bondable · OSHA Trained · EPA Compliant</p></aside>'+
+  '</div></div></section>'+
+  '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Services</p>'+
+  '<h2 class="section-title">We Also Help With</h2><div class="svc-other-grid">'+others+'</div></div></section>';
+}
+function route(){
+  var m = location.hash.match(/^#service\/(.+)$/);
+  if(m){ home.style.display='none'; page.style.display='block'; renderService(m[1]); window.scrollTo(0,0); }
+  else { page.style.display='none'; page.innerHTML=''; home.style.display='block'; }
+}
+window.addEventListener('hashchange', route);
+route();
+// Peak Bio Clean — Main JS
+
+// Year in footer
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Mobile nav toggle
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  hamburger.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+  });
+});
+
+// Animated stat counters
+const stats = document.querySelectorAll('.stat .num');
+const animate = (el) => {
+  const target = +el.dataset.value;
+  const suffix = el.dataset.suffix || '';
+  let cur = 0;
+  const step = Math.max(1, Math.ceil(target / 60));
+  const tick = () => {
+    cur += step;
+    if (cur >= target) { el.textContent = target.toLocaleString() + suffix; return; }
+    el.textContent = cur.toLocaleString() + suffix;
+    requestAnimationFrame(tick);
+  };
+  tick();
+};
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.4 });
+stats.forEach(s => obs.observe(s));
+
+// Smooth scroll with sticky-header offset
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const top = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+</script>
+</body>
+</html>
