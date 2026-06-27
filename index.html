@@ -276,7 +276,8 @@ ul { list-style: none; }
 
 /* ═══ INTRO / PERSON ═══ */
 .intro-grid { display: grid; grid-template-columns: 320px 1fr; gap: 3rem; align-items: center; }
-.intro-photo { width: 100%; aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg,var(--blue),var(--blue-dark)); box-shadow: var(--shadow); }
+.intro-photo { width: 100%; aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg,var(--blue),var(--blue-dark)); box-shadow: var(--shadow); overflow: hidden; }
+.intro-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .intro .eyebrow { color: var(--red); }
 .intro h2 { font-size: 2rem; color: var(--ink); margin-bottom: 1rem; }
 
@@ -297,8 +298,8 @@ ul { list-style: none; }
 .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
 .why h2 { font-size: 2rem; color: var(--ink); margin-bottom: 1rem; }
 .why p { margin-bottom: 1rem; }
-.why-visual { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-radius: var(--radius); min-height: 340px; display: flex; align-items: center; justify-content: center; color: #fff; padding: 2rem; }
-.why-visual svg { width: 140px; height: 140px; fill: rgba(255,255,255,.92); }
+.why-visual { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border-radius: var(--radius); min-height: 340px; overflow: hidden; }
+.why-visual img { width: 100%; height: 100%; min-height: 340px; object-fit: cover; display: block; }
 .stats { background: var(--blue-light); }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; text-align: center; }
 .stat .num { font-size: 2.8rem; font-weight: 800; color: var(--blue); line-height: 1; }
@@ -526,7 +527,7 @@ ul { list-style: none; }
   <!-- ═══ INTRO ═══ -->
   <section class="section intro" id="about">
     <div class="container intro-grid">
-      <div class="intro-photo" aria-hidden="true"></div>
+      <div class="intro-photo"><img src="assets/photos/cleanup-room.webp" alt="Peak Bio-Clean technicians performing a biohazard and crime scene cleanup" /></div>
       <div>
         <p class="eyebrow">A Passion to Help</p>
         <h2>Here for You During Life's Hardest Moments</h2>
@@ -566,7 +567,7 @@ ul { list-style: none; }
         </div>
       </div>
       <div class="why-visual">
-        <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z" opacity=".25"/><path d="M12 4.3L6 6.8v5.2c0 3.8 2.6 6.3 6 7.9 3.4-1.6 6-4.1 6-7.9V6.8z"/></svg>
+        <img src="assets/photos/cleanup-respirator.jpg" alt="Peak Bio-Clean technician in protective gear during a biohazard cleanup" />
       </div>
     </div>
   </section>
