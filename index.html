@@ -285,6 +285,19 @@ ul { list-style: none; }
 .services { background: var(--gray-light); }
 .services-note { background: #fff; border-left: 4px solid var(--blue); padding: 1rem 1.5rem; border-radius: 8px; max-width: 760px; margin: 0 auto 3rem; color: var(--ink); box-shadow: var(--shadow); }
 .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.25rem; }
+/* Auto-scrolling services marquee */
+.svc-marquee { overflow: hidden; padding: 1rem 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.svc-track { display: flex; gap: 2rem; width: max-content; animation: svcScroll 70s linear infinite; }
+.svc-marquee:hover .svc-track { animation-play-state: paused; }
+@keyframes svcScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.svc-orb { flex: 0 0 auto; width: 130px; display: flex; flex-direction: column; align-items: center; gap: 0.65rem; text-align: center; color: var(--ink); }
+.svc-orb .orb { width: 94px; height: 94px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; transition: transform .2s, background .2s; }
+.svc-orb:hover .orb { background: var(--blue); transform: translateY(-4px); }
+.svc-orb .orb svg { width: 44px; height: 44px; stroke: var(--blue); fill: none; transition: stroke .2s; }
+.svc-orb:hover .orb svg { stroke: #fff; }
+.svc-orb .label { font-size: 0.82rem; font-weight: 600; line-height: 1.25; }
+.service-card .svc-card-sub { font-size: 0.8rem; color: var(--gray); font-weight: 400; margin-top: 0.5rem; line-height: 1.4; }
+@media (prefers-reduced-motion: reduce) { .svc-track { animation: none; flex-wrap: wrap; justify-content: center; width: 100%; } }
 .service-card {
   background: #fff; border-radius: var(--radius); padding: 1.75rem 1.25rem; text-align: center;
   box-shadow: 0 4px 16px rgba(0,0,0,.07); transition: transform .2s, box-shadow .2s; border-bottom: 4px solid transparent;
@@ -549,7 +562,8 @@ ul { list-style: none; }
         <h2 class="section-title">Complete Biohazard &amp; Cleanup Services</h2>
       </div>
       <p class="services-note">Most of our services <strong>ARE COVERED</strong> by your insurance. We work directly with your homeowners, renters, or auto insurance — with little to <strong>NO out-of-pocket cost</strong> to you.</p>
-      <div class="services-grid" id="servicesGrid"></div>
+      <div class="svc-marquee"><div class="svc-track" id="servicesTrack"></div></div>
+      <div class="text-center" style="margin-top:2rem;"><a href="#services-all" class="btn btn-red">All Services</a></div>
     </div>
   </section>
 
@@ -792,7 +806,11 @@ var ICONS={
 "covid-19-cleanup":_S+'<circle cx="12" cy="12" r="4.5"/><path d="M12 7.5V4.5M12 16.5V19.5M7.5 12H4.5M16.5 12H19.5M8.8 8.8L6.7 6.7M17.3 17.3l-2.1-2.1M15.2 8.8l2.1-2.1M6.7 17.3l2.1-2.1"/>'+_E
 };
 function svcIcon(slug){return ICONS[slug]||ICON;}
-document.getElementById('servicesGrid').innerHTML = SERVICES.map(function(x){return '<a class="service-card" href="#service/'+x[1]+'"><div class="service-icon">'+svcIcon(x[1])+'</div><h3>'+x[0]+'</h3></a>';}).join('');
+var servicesTrack = document.getElementById('servicesTrack');
+if (servicesTrack) {
+  var orbs = SERVICES.map(function(x){return '<a class="svc-orb" href="#service/'+x[1]+'"><span class="orb">'+svcIcon(x[1])+'</span><span class="label">'+x[0]+'</span></a>';}).join('');
+  servicesTrack.innerHTML = orbs + orbs;
+}
 var mm = document.getElementById('megaMenu');
 if (mm) { mm.innerHTML = SERVICES.map(function(x){return '<a href="#service/'+x[1]+'"><span class="mm-icon">'+svcIcon(x[1])+'</span>'+x[0]+'</a>';}).join(''); }
 var COUNTIES = ["Alachua","Baker","Bay","Bradford","Brevard","Broward","Calhoun","Charlotte","Citrus","Clay","Collier","Columbia","DeSoto","Dixie","Duval","Escambia","Flagler","Franklin","Gadsden","Gilchrist","Glades","Gulf","Hamilton","Hardee","Hendry","Hernando","Highlands","Hillsborough","Holmes","Indian River","Jackson","Jefferson","Lafayette","Lake","Lee","Leon","Levy","Liberty","Madison","Manatee","Marion","Martin","Miami-Dade","Monroe","Nassau","Okaloosa","Okeechobee","Orange","Osceola","Palm Beach","Pasco","Pinellas","Polk","Putnam","Santa Rosa","Sarasota","Seminole","St. Johns","St. Lucie","Sumter","Suwannee","Taylor","Union","Volusia","Wakulla","Walton","Washington"];
@@ -879,10 +897,22 @@ function renderCounty(slug){
   '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Service Areas</p>'+
   '<h2 class="section-title">We Also Serve</h2><div class="svc-other-grid">'+others+'</div></div></section>';
 }
+function renderAllServices(){
+  setSEO('All Biohazard & Cleanup Services in Florida | Peak Bio-Clean', 'Explore all of Peak Bio-Clean’s biohazard, crime scene, trauma, and cleanup services across Florida. Available 24/7. Call (407) 758-0682.');
+  var cards = SERVICES.map(function(x){return '<a class="service-card" href="#service/'+x[1]+'"><div class="service-icon">'+svcIcon(x[1])+'</div><h3>'+x[0]+'</h3>'+(SVC[x[1]]?'<p class="svc-card-sub">'+esc(SVC[x[1]].sub)+'</p>':'')+'</a>';}).join('');
+  page.innerHTML =
+  '<section class="page-hero"><div class="container"><p class="eyebrow">Our Services</p><h1>All Services</h1>'+
+  '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">Complete biohazard, crime scene, and trauma cleanup — available 24/7 across all of Florida.</p>'+
+  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a> <a href="#contact" class="btn btn-outline" style="margin-top:1rem;">Request Cleanup Assistance</a></div></section>'+
+  '<section class="section"><div class="container">'+
+  '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / All Services</p>'+
+  '<div class="services-grid">'+cards+'</div></div></section>';
+}
 function route(){
   var ms = location.hash.match(/^#service\/(.+)$/);
   var mc = location.hash.match(/^#county\/(.+)$/);
-  if(ms){ home.style.display='none'; page.style.display='block'; renderService(ms[1]); window.scrollTo(0,0); }
+  if(location.hash==='#services-all'){ home.style.display='none'; page.style.display='block'; renderAllServices(); window.scrollTo(0,0); }
+  else if(ms){ home.style.display='none'; page.style.display='block'; renderService(ms[1]); window.scrollTo(0,0); }
   else if(mc){ home.style.display='none'; page.style.display='block'; renderCounty(mc[1]); window.scrollTo(0,0); }
   else {
     page.style.display='none'; page.innerHTML=''; home.style.display='block'; setSEO(HOME_TITLE, HOME_DESC);
