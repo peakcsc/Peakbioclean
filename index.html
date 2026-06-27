@@ -247,6 +247,8 @@ ul { list-style: none; }
 .hero h1 { font-size: 3.15rem; font-weight: 800; line-height: 1.08; text-transform: capitalize; margin-bottom: 1rem; text-shadow: 0 2px 18px rgba(0,0,0,0.35); }
 .hero p.lead { font-size: 1.2rem; margin-bottom: 2rem; color: #eef4fc; text-shadow: 0 1px 10px rgba(0,0,0,0.3); max-width: 540px; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+.cta-band .cta-row { justify-content: center; margin-top: 1.25rem; }
 /* Scroll-down cue */
 .scroll-cue { position: absolute; left: 50%; bottom: 1.6rem; transform: translateX(-50%); z-index: 2; width: 26px; height: 42px; border: 2px solid rgba(255,255,255,0.65); border-radius: 14px; display: flex; justify-content: center; }
 .scroll-cue span { width: 4px; height: 8px; background: #fff; border-radius: 4px; margin-top: 7px; animation: scrollDot 1.6s ease-in-out infinite; }
@@ -531,7 +533,10 @@ ul { list-style: none; }
         <h2>Here for You During Life's Hardest Moments</h2>
         <p>When you call Peak Bio-Clean, it may be during one of the hardest times in your life. We understand that — and we're here to help. Our trained, compassionate technicians guide you through every step of the process and take the burden off your shoulders.</p>
         <p>We handle the cleanup safely, legally, and discreetly, so you and your family can focus on healing. From crime scenes to trauma cleanup to hoarding situations, no job is too difficult and no family is left without support.</p>
-        <a href="tel:+14077580682" class="btn btn-blue">Call (407) 758-0682</a>
+        <div class="cta-row">
+          <a href="tel:+14077580682" class="btn btn-blue">Call (407) 758-0682</a>
+          <a href="#contact" class="btn btn-red">Request Cleanup Assistance</a>
+        </div>
       </div>
     </div>
   </section>
@@ -556,7 +561,10 @@ ul { list-style: none; }
         <h2>Why Choose Peak Bio-Clean?</h2>
         <p>Peak Bio-Clean is Florida's trusted team for crime scene cleanup, large-scale clean-outs such as hoarding, decomposition cleanup, odor remediation, and hazardous waste removal. We take everything — safely and legally — reducing the headache and hassle for you.</p>
         <p>Our technicians are OSHA certified to handle biohazardous waste cleanup. Infectious waste is unsafe to handle without proper training, equipment, and disposal protocols — that's exactly what we bring to every job.</p>
-        <a href="tel:+14077580682" class="btn btn-red">Call Now</a>
+        <div class="cta-row">
+          <a href="tel:+14077580682" class="btn btn-red">Call Now</a>
+          <a href="#contact" class="btn btn-blue">Request Cleanup Assistance</a>
+        </div>
       </div>
       <div class="why-visual">
         <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z" opacity=".25"/><path d="M12 4.3L6 6.8v5.2c0 3.8 2.6 6.3 6 7.9 3.4-1.6 6-4.1 6-7.9V6.8z"/></svg>
@@ -578,6 +586,9 @@ ul { list-style: none; }
   <section class="cta-band">
     <h2>We can help you. Call us 24/7!</h2>
     <a href="tel:+14077580682" class="cta-phone">(407) 758-0682</a>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-outline">Request Cleanup Assistance</a>
+    </div>
   </section>
 
   <!-- ═══ TESTIMONIAL ═══ -->
@@ -806,7 +817,7 @@ function renderService(slug){
   page.innerHTML =
   '<section class="page-hero"><div class="container"><p class="eyebrow">Our Services</p><h1>'+esc(d.title)+'</h1>'+
   '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">'+esc(d.sub)+'</p>'+
-  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a></div></section>'+
+  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a> <a href="#contact" class="btn btn-outline" style="margin-top:1rem;">Request Cleanup Assistance</a></div></section>'+
   '<section class="section"><div class="container">'+
   '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / '+esc(d.title)+'</p>'+
   '<div class="svc-layout"><div class="svc-body">'+
@@ -822,6 +833,7 @@ function renderService(slug){
   '</div><aside class="svc-aside"><h3>Need Help Now?</h3><p>Available 24/7. A real person answers.</p>'+
   '<a href="tel:+14077580682" class="big-phone">(407) 758-0682</a>'+
   '<a href="tel:+14077580682" class="btn btn-red btn-full">Call Peak Bio-Clean</a>'+
+  '<a href="#contact" class="btn btn-blue btn-full" style="margin-top:.6rem;">Request Cleanup Assistance</a>'+
   '<p style="margin-top:1rem;font-size:.85rem;color:var(--gray);">Licensed, Insured &amp; Bondable · OSHA Trained · EPA Compliant</p></aside>'+
   '</div></div></section>'+
   '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Services</p>'+
@@ -835,7 +847,7 @@ function renderCounty(slug){
   page.innerHTML =
   '<section class="page-hero"><div class="container"><p class="eyebrow">Service Areas</p><h1>Biohazard &amp; Crime Scene Cleanup in '+esc(name)+' County</h1>'+
   '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">24/7 certified trauma, biohazard, and crime scene cleanup throughout '+esc(name)+' County and all of Florida.</p>'+
-  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a></div></section>'+
+  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a> <a href="#contact" class="btn btn-outline" style="margin-top:1rem;">Request Cleanup Assistance</a></div></section>'+
   '<section class="section"><div class="container">'+
   '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / '+esc(name)+' County</p>'+
   '<div class="svc-layout"><div class="svc-body">'+
@@ -852,6 +864,7 @@ function renderCounty(slug){
   '</div><aside class="svc-aside"><h3>Need Help in '+esc(name)+' County?</h3><p>Available 24/7. A real person answers.</p>'+
   '<a href="tel:+14077580682" class="big-phone">(407) 758-0682</a>'+
   '<a href="tel:+14077580682" class="btn btn-red btn-full">Call Peak Bio-Clean</a>'+
+  '<a href="#contact" class="btn btn-blue btn-full" style="margin-top:.6rem;">Request Cleanup Assistance</a>'+
   '<p style="margin-top:1rem;font-size:.85rem;color:var(--gray);">Licensed, Insured &amp; Bondable · OSHA Trained · EPA Compliant</p></aside>'+
   '</div></div></section>'+
   '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Service Areas</p>'+
@@ -862,7 +875,10 @@ function route(){
   var mc = location.hash.match(/^#county\/(.+)$/);
   if(ms){ home.style.display='none'; page.style.display='block'; renderService(ms[1]); window.scrollTo(0,0); }
   else if(mc){ home.style.display='none'; page.style.display='block'; renderCounty(mc[1]); window.scrollTo(0,0); }
-  else { page.style.display='none'; page.innerHTML=''; home.style.display='block'; setSEO(HOME_TITLE, HOME_DESC); }
+  else {
+    page.style.display='none'; page.innerHTML=''; home.style.display='block'; setSEO(HOME_TITLE, HOME_DESC);
+    if(location.hash.length>1){ var el=document.querySelector(location.hash); if(el){ setTimeout(function(){ el.scrollIntoView({behavior:'smooth'}); }, 30); } }
+  }
 }
 window.addEventListener('hashchange', route);
 route();
