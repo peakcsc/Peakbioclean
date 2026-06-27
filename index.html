@@ -10,6 +10,9 @@
   <meta name="author" content="Peak Bio Clean" />
   <meta name="theme-color" content="#1965B1" />
   <link rel="canonical" href="https://www.peakbioclean.com/" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/logo/favicon-64.png" />
+  <link rel="apple-touch-icon" href="assets/logo/favicon-180.png" />
 
   <!-- Geo targeting -->
   <meta name="geo.region" content="US-FL" />
@@ -160,6 +163,10 @@ ul { list-style: none; }
 .site-header.scrolled .nav-links > li > a { color: var(--ink); }
 .site-header.scrolled .hamburger span { background: var(--ink); }
 .nav-links .nav-right { margin-left: auto; }
+.brand-logo { height: 46px; width: auto; display: block; }
+.brand-logo--color { display: none; }
+.site-header.scrolled .brand-logo--white { display: none; }
+.site-header.scrolled .brand-logo--color { display: block; }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.5rem; max-width: 1170px; margin: 0 auto; }
 .brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.3rem; color: var(--ink); }
 .brand .mark {
@@ -331,6 +338,8 @@ ul { list-style: none; }
 .site-footer { background: var(--ink); color: #cdd6e0; padding: 4rem 0 0; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2.5rem; }
 .footer-brand .brand { color: #fff; margin-bottom: 1rem; }
+.footer-logo { display: inline-block; margin-bottom: 1.1rem; }
+.footer-logo img { height: 58px; width: auto; display: block; }
 .footer-brand p { color: #9aa7b5; margin-bottom: 1rem; }
 .footer-phone { color: #fff; font-size: 1.4rem; font-weight: 800; }
 .site-footer h4 { color: #fff; margin-bottom: 1rem; font-size: 1rem; }
@@ -431,9 +440,9 @@ ul { list-style: none; }
   <!-- ═══ HEADER ═══ -->
   <header class="site-header">
     <nav class="nav">
-      <a href="#top" class="brand">
-        <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
-        <span>Peak <b>Bio Clean</b></span>
+      <a href="#top" class="brand" aria-label="Peak Biohazard Cleanup & Restoration — Home">
+        <img class="brand-logo brand-logo--white" src="assets/logo/logo-white.png" alt="Peak Biohazard Cleanup &amp; Restoration" />
+        <img class="brand-logo brand-logo--color" src="assets/logo/logo-color.png" alt="Peak Biohazard Cleanup &amp; Restoration" />
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
@@ -687,9 +696,8 @@ ul { list-style: none; }
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#top" class="brand">
-            <span class="mark"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
-            <span>Peak Bio Clean</span>
+          <a href="#top" class="footer-logo" aria-label="Peak Biohazard Cleanup & Restoration — Home">
+            <img src="assets/logo/logo-white.png" alt="Peak Biohazard Cleanup &amp; Restoration" />
           </a>
           <p>Compassionate, professional, and trusted biohazard, crime scene, and trauma cleanup. Fully licensed, insured &amp; bondable. Available 24/7 across Florida.</p>
           <a href="tel:+14077580682" class="footer-phone">(407) 758-0682</a>
