@@ -387,16 +387,13 @@ ul { list-style: none; }
 
 /* ═══ CERTIFICATION BADGES ═══ */
 .certs { background: #fff; }
-.cert-strip { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: center; }
-.cert-badge-logo {
-  width: 120px; height: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  filter: grayscale(100%); opacity: .6; transition: filter .25s, opacity .25s, transform .2s;
+.cert-strip { display: flex; flex-wrap: wrap; gap: 1.75rem; align-items: center; justify-content: center; }
+.cert-badge-logo, .cert-badge-img {
+  width: 150px; height: 84px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  padding: 4px; filter: grayscale(100%); opacity: .6; transition: filter .25s, opacity .25s, transform .2s;
 }
-.cert-badge-logo:hover { filter: none; opacity: 1; transform: translateY(-3px); }
-.cert-badge-logo svg { width: 100%; height: 100%; }
-.cert-badge-img { height: 110px; display: flex; align-items: center; justify-content: center; padding: 0 0.5rem; filter: grayscale(100%); opacity: .65; transition: filter .25s, opacity .25s, transform .2s; }
-.cert-badge-img:hover { filter: none; opacity: 1; transform: translateY(-3px); }
-.cert-badge-img img { max-height: 92px; width: auto; }
+.cert-badge-logo:hover, .cert-badge-img:hover { filter: none; opacity: 1; transform: translateY(-3px); }
+.cert-badge-logo svg, .cert-badge-img img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
 
 /* ═══ SERVICE PAGE ═══ */
 .page-hero {
