@@ -66,14 +66,21 @@ backdrop the film actually blends against.
 
 `site.js` measures the offset and scale once per resize as `--fx` / `--fk`;
 the scroll handler writes only `--h` (0 to 1), and CSS derives `--e`, the
-expansion, finishing at `--h` 0.55. The track is 145vh and `--h` reaches 1
-exactly as the pin releases, so there is no dead scroll at the end.
+expansion, finishing at `--h` 0.5. The track is 130vh, giving 30vh of pinned
+travel, and the film is gone by `--h` 0.95 so the pin releases into the next
+section rather than holding an empty screen. Measured at 1440x900: the film
+is effectively gone at 350px of scroll and the trigger strip is in view by
+450px, leaving about 100px (11vh) of ink between them.
 
 ## The standing wordmark
 
 `Master Signs & Prints` sits behind every page as a fixed background layer.
 On the home page it rises as the hero film fades (`--brand-in`, driven from
 `--h`); elsewhere it is simply present.
+
+It is sized at `min(9.5vw, 10rem)` with no clamp floor -- a hard minimum was
+what pushed it off the edge on small screens -- so it sits at roughly 72% of
+the viewport with real margin at every width from 320 to 2560.
 
 It is two fixed layers, not one: `.brandmark--paper` multiplies (so it reads
 on the light sections) and `.brandmark--ink` screens (so it reads on the dark

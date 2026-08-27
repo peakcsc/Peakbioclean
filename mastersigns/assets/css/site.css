@@ -82,6 +82,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .eyebrow::before{content:"";width:26px;height:2px;background:var(--signal);flex:none}
 .on-ink .eyebrow{color:var(--steel-soft)}
 
+/* the address is long; break at the <wbr> after the @, never mid-domain */
+.h-sub--mail{font-size:clamp(.98rem,1.5vw,1.18rem);overflow-wrap:break-word;line-height:1.25}
 .lede{font-size:clamp(1.06rem,1.55vw,1.24rem);line-height:1.6;color:var(--text-mute);max-width:60ch}
 .on-ink .lede{color:var(--text-onink-mute)}
 .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute)}
@@ -275,20 +277,21 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media (min-width:1200px){
   /* overflow:hidden on .hero would make it the scroll container and stop
      .hero__pin from ever sticking; the clipping lives on the pin instead */
-  .hero--scroll{height:145vh;min-height:0;display:block;overflow:visible}
+  .hero--scroll{height:130vh;min-height:0;display:block;overflow:visible}
   .hero--scroll .hero__pin{position:sticky;top:0;height:100vh;overflow:hidden;
     display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%;
     background:var(--ink)}
 
   /* --e is the expansion, finished by 55% of the track */
   .hero--scroll .hero__film{
-    --e:clamp(0, calc(var(--h) / .55), 1);
+    --e:clamp(0, calc(var(--h) / .5), 1);
     transform-origin:center center;will-change:transform,opacity;
     transform:translate(calc(var(--fx,0px) * var(--e)), -50%)
               scale(calc(1 + (var(--fk,1) - 1) * var(--e)))
               rotateY(calc((1 - var(--e)) * -8deg));
-    /* fades out over the last quarter, finishing exactly as the pin releases */
-    opacity:clamp(0, calc((1 - var(--h)) * 3.6), 1)}
+    /* gone by 95% of the track, so the pin releases into the next section
+       instead of holding an empty screen */
+    opacity:clamp(0, calc((.95 - var(--h)) * 3), 1)}
 
   .hero--scroll .hero__copy{will-change:transform,opacity;
     opacity:clamp(0, calc(1 - var(--h) * 3.4), 1);
@@ -313,7 +316,10 @@ ul,ol{margin:0;padding:0;list-style:none}
   display:grid;place-items:center;opacity:var(--brand-in,1)}
 .brandmark span{font-family:var(--display);font-weight:800;font-stretch:125%;
   text-transform:uppercase;text-align:center;white-space:nowrap;
-  line-height:.84;letter-spacing:-.025em;font-size:clamp(3.5rem,13vw,13rem)}
+  line-height:.84;letter-spacing:-.025em;
+  /* sized to sit at ~72% of the viewport with real margin. No clamp floor:
+     a hard minimum is what pushed it off the edge on small screens. */
+  font-size:min(9.5vw,10rem)}
 .brandmark--paper{mix-blend-mode:multiply;color:#EDECE8}
 .brandmark--ink{mix-blend-mode:screen;color:#15112C}
 
