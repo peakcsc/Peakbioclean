@@ -255,6 +255,37 @@ ul,ol{margin:0;padding:0;list-style:none}
   .hero__film .poster{display:block}
 }
 
+/* ---------- 7b. Hero scroll expansion ----------
+   Scrolling off the hero pulls the sign film forward and out: it turns to
+   face you, scales up from its docked square on the right, and ends filling
+   the viewport, while the copy and the ink scrim fade off. Driven by --h
+   (0..1) from site.js. Everything is transform and opacity, so it stays on
+   the compositor -- no width/height animation, no per-frame layout.
+
+   --h defaults to 0 (the docked hero), and the tall pinned track only
+   exists once the .hero--scroll class is added by script, so without JS
+   the hero stays exactly one screen tall and behaves normally. */
+.hero{--h:0}
+
+@media (min-width:1200px){
+  /* overflow:hidden on .hero would make it the scroll container and stop
+     .hero__pin from ever sticking; the clipping lives on the pin instead */
+  .hero--scroll{height:200vh;min-height:0;display:block;overflow:visible}
+  .hero--scroll .hero__pin{position:sticky;top:0;height:100vh;overflow:hidden;
+    display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%}
+  .hero--scroll .hero__film{
+    transform-origin:center center;will-change:transform;
+    transform:translate(calc(var(--fx,0px) * var(--h)), -50%)
+              scale(calc(1 + (var(--fk,1) - 1) * var(--h)))
+              rotateY(calc((1 - var(--h)) * -8deg))}
+  .hero--scroll .hero__veil{opacity:clamp(0, calc(1 - var(--h) * 1.5), 1)}
+  .hero--scroll .hero__copy{will-change:transform,opacity;
+    opacity:clamp(0, calc(1 - var(--h) * 2.6), 1);
+    transform:translateY(calc(var(--h) * -64px))}
+  /* once the copy has faded it must stop being clickable or focusable */
+  .hero--scroll.is-past .hero__over{visibility:hidden;pointer-events:none}
+}
+
 /* ---------- 8. Trigger strip ---------- */
 .triggers{border-top:var(--rule);border-bottom:var(--rule);margin-top:clamp(3rem,7vw,5rem)}
 .triggers__in{display:grid;gap:0;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}

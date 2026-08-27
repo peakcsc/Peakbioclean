@@ -49,6 +49,69 @@
     }
   }
 
+  /* ---- hero scroll expansion ----
+     Pulls the film forward and out to fill the screen while the copy fades.
+     The scale and offset needed to go from the docked square to a full
+     viewport are measured once per resize and handed to CSS as custom
+     properties; the scroll handler then only writes --h. Gated to the width
+     where the film is actually docked beside the copy, and skipped entirely
+     under reduced motion -- in both cases the hero stays one screen tall. */
+  var heroEl = document.querySelector('.hero');
+  var heroFilm = heroEl && heroEl.querySelector('.hero__film');
+  var heroWide = window.matchMedia('(min-width: 1200px)');
+
+  if (heroEl && heroFilm && !reduced && heroWide.matches) {
+    heroEl.classList.add('hero--scroll');
+
+    var hQueued = false;
+    var wasPast = false;
+
+    var measure = function () {
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var side = heroFilm.offsetWidth;          /* layout width, transforms excluded */
+      if (!side) { return; }
+      /* docked centre sits at (vw - side/2, vh/2); bring it to the middle */
+      heroEl.style.setProperty('--fx', (side / 2 - vw / 2).toFixed(2) + 'px');
+      /* square must cover the longest viewport edge, with a little margin */
+      heroEl.style.setProperty('--fk', ((Math.max(vw, vh) / side) * 1.06).toFixed(4));
+    };
+
+    var drawHero = function () {
+      hQueued = false;
+      var r = heroEl.getBoundingClientRect();
+      var vh = window.innerHeight;
+      /* Reach full screen at 78% of the pinned travel, then hold there while
+         the rest scrolls by, so the full-bleed state is a beat rather than a
+         single frame before the section releases. The 0.78 also absorbs the
+         sticky header's offset, which otherwise left --h short of 1. */
+      var span = (r.height - vh) * 0.78;
+      var h = span > 0 ? -r.top / span : 0;
+      h = h < 0 ? 0 : (h > 1 ? 1 : h);
+      heroEl.style.setProperty('--h', h.toFixed(4));
+      var past = h > 0.42;   /* copy has fully faded by here */
+      if (past !== wasPast) { heroEl.classList.toggle('is-past', past); wasPast = past; }
+    };
+
+    var requestHero = function () {
+      if (!hQueued) { hQueued = true; window.requestAnimationFrame(drawHero); }
+    };
+
+    var syncHero = function () {
+      if (heroWide.matches) { measure(); requestHero(); }
+      else {
+        heroEl.classList.remove('hero--scroll', 'is-past');
+        heroEl.style.removeProperty('--h');
+        wasPast = false;
+      }
+    };
+
+    window.addEventListener('scroll', function () {
+      if (heroEl.classList.contains('hero--scroll')) { requestHero(); }
+    }, { passive: true });
+    window.addEventListener('resize', syncHero);
+    syncHero();
+  }
+
   /* ---- scroll build ----
      Drives --p (0..1) across the section while it is on screen. CSS does
      the rest. Left alone under reduced motion, where the stylesheet's
