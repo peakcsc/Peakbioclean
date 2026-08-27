@@ -84,12 +84,16 @@
       var vh = window.innerHeight;
       /* --h runs out over 85% of the pinned travel, leaving the tail fully
          faded before the section releases. CSS finishes the expansion at
-         --h 0.62, so the sign opens quickly, holds, then dissolves. */
-      var span = (r.height - vh) * 0.85;
+         --h 0.55, so the sign opens quickly, holds, then dissolves. */
+      var span = r.height - vh;   /* --h hits 1 exactly as the pin releases */
       var h = span > 0 ? -r.top / span : 0;
       h = h < 0 ? 0 : (h > 1 ? 1 : h);
       heroEl.style.setProperty('--h', h.toFixed(4));
-      var past = h > 0.27;   /* copy has fully faded by here */
+      /* the standing wordmark comes up as the film goes down */
+      var bin = (h - 0.55) / 0.4;
+      bin = bin < 0 ? 0 : (bin > 1 ? 1 : bin);
+      document.documentElement.style.setProperty('--brand-in', bin.toFixed(3));
+      var past = h > 0.30;   /* copy has fully faded by here */
       if (past !== wasPast) { heroEl.classList.toggle('is-past', past); wasPast = past; }
     };
 
@@ -102,6 +106,7 @@
       else {
         heroEl.classList.remove('hero--scroll', 'is-past');
         heroEl.style.removeProperty('--h');
+        document.documentElement.style.removeProperty('--brand-in');
         wasPast = false;
       }
     };

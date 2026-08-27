@@ -46,29 +46,48 @@ endless loop) and `hero-still.jpg` is shown instead; that same still is the
 `poster`, so a browser that refuses autoplay shows the composed opening
 frame rather than a freeze.
 
-Scrolling off the hero pulls the film forward: the sign turns to face you and
-grows, its edges feathering away with a radial mask so it never reads as a
-square photo being scaled, it fills the view and holds a beat, then dissolves
-into the ink ground -- lettering and all -- so the page carries on downward
-with no rim and no cut.
+Scrolling off the hero opens the sign out: it turns to face you and grows,
+holds, then fades, handing straight over to the next section.
 
-`site.js` measures the offset and scale once per resize and hands them to CSS
-as `--fx` / `--fk`; the scroll handler then only writes `--h` (0 to 1), and
-CSS derives `--e`, the expansion, which completes at `--h` 0.62. Everything is
-transform, opacity and mask, so it stays on the compositor. The film is sized
-off the viewport height rather than its longest edge -- because it feathers
-and then dissolves it never has to cover corner to corner, which is what kept
-it from blowing up past the frame. The track is 165vh, so the whole move is
-quick; `--h` runs out at 85% of the pinned travel, leaving the tail fully
-faded before the section releases into the trigger strip.
+There is no square edge because the film is not boxed -- the clip is graded
+(`colorlevels` black point lifted to 0.33) so its ground sits below the page
+ink, and the film carries `mix-blend-mode: lighten`, which replaces every
+dark pixel with the page colour and keeps only the lit sign. A narrow 7%
+feather on each side catches the last of the residual haze. Measured across
+the film's boundary on a rendered page, the colour step is 8 and 2 -- an
+obvious hard edge measures 30+.
 
-Note that `.hero` carries `overflow:hidden`, which would make it the scroll
-container and stop `.hero__pin` from ever sticking -- `.hero--scroll`
-overrides it to `visible` and the clipping lives on the pin instead. The tall
-pinned track, the mask and the fade all live inside `.hero--scroll`, which
-script adds, so with no JavaScript the hero is one screen tall with a plain
-docked film; the effect is also gated to 1200px and up and skipped under
-`prefers-reduced-motion`.
+Two stacking-context traps are worth knowing about here, because both
+silently produce a flat, unblended rectangle. The blend has to sit on
+`.hero__film`, not on the `<video>`: the film makes its own stacking context
+(z-index, then a transform), which isolates any blend applied inside it.
+And `.hero__pin` needs an ink background of its own, because that is the
+backdrop the film actually blends against.
+
+`site.js` measures the offset and scale once per resize as `--fx` / `--fk`;
+the scroll handler writes only `--h` (0 to 1), and CSS derives `--e`, the
+expansion, finishing at `--h` 0.55. The track is 145vh and `--h` reaches 1
+exactly as the pin releases, so there is no dead scroll at the end.
+
+## The standing wordmark
+
+`Master Signs & Prints` sits behind every page as a fixed background layer.
+On the home page it rises as the hero film fades (`--brand-in`, driven from
+`--h`); elsewhere it is simply present.
+
+It is two fixed layers, not one: `.brandmark--paper` multiplies (so it reads
+on the light sections) and `.brandmark--ink` screens (so it reads on the dark
+ones), each near enough a no-op against the ground it is not meant for. The
+blend sits on each fixed layer itself for the same stacking-context reason as
+the hero film. `z-index: 1` rather than 0, because the sections are
+`position:relative` and would otherwise paint straight over it; it stays
+under the header (60) and the call bar (70).
+
+Because it overlays copy, its strength is set by contrast rather than by eye.
+At full strength the worst cases are: body text on paper 14.3:1, muted text
+on paper-2 5.13:1, body text on ink 11.64:1, muted on ink 6.22:1, and
+steel-soft on ink 4.82:1. All clear WCAG AA. The ink layer is `#15112C`
+specifically because `#1B1733` pushed steel-soft to 4.46:1, just under.
 
 The seven checkpoints on the home page are a scroll-driven build. A sign is
 fabricated in CSS 3D beside the copy as you read down: the setting-out

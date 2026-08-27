@@ -212,12 +212,23 @@ ul,ol{margin:0;padding:0;list-style:none}
 .hero{position:relative;background:var(--ink);color:var(--text-onink);
   overflow:hidden;isolation:isolate}
 .hero__film{position:relative;width:100%;max-width:560px;margin-inline:auto;
-  aspect-ratio:1;overflow:hidden;z-index:0;background:#242325}
+  aspect-ratio:1;overflow:hidden;background:transparent;
+  /* The clip is graded so its ground sits below the ink; `lighten` then
+     replaces every dark pixel with the page colour and keeps only the lit
+     sign, so there is no rectangle left to see at any size and no mask is
+     needed. The blend must sit on the film, not the video: the film makes
+     its own stacking context (z-index, later a transform), which would
+     isolate a blend applied inside it. */
+  mix-blend-mode:lighten;
+  /* a narrow feather on all four sides so the faint residual haze has no
+     straight line to end on; the middle 86% is untouched */
+  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
+                     linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
+             linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-composite:intersect}
 .hero__film video,.hero__film .poster{width:100%;height:100%;object-fit:cover;display:block}
-.hero__veil{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,
-    rgba(20,16,46,.16) 0%, rgba(20,16,46,.06) 34%,
-    rgba(20,16,46,.68) 82%, var(--ink) 100%)}
 .hero__over{position:relative;z-index:2;padding:clamp(2rem,7vw,3rem) var(--gut) clamp(2.5rem,8vw,4rem)}
 .hero__copy{max-width:60ch}
 .hero h1{margin-bottom:1.4rem}
@@ -236,11 +247,6 @@ ul,ol{margin:0;padding:0;list-style:none}
   .hero{min-height:min(78vh,760px);display:flex;align-items:center}
   .hero__film{position:absolute;top:50%;right:0;left:auto;transform:translateY(-50%);
     width:min(50vw,700px);height:auto;max-width:none;margin:0;aspect-ratio:1}
-  .hero__veil{background:
-    linear-gradient(90deg, var(--ink) 0%, rgba(20,16,46,.9) 11%,
-      rgba(20,16,46,.36) 38%, rgba(20,16,46,.12) 70%, rgba(20,16,46,.28) 100%),
-    linear-gradient(180deg, var(--ink) 0%, rgba(20,16,46,0) 15%,
-      rgba(20,16,46,0) 85%, var(--ink) 100%)}
   .hero__over{width:100%;max-width:var(--max);margin-inline:auto;
     padding-inline:var(--gut);padding-block:clamp(3rem,6vw,4.5rem)}
   .hero__copy{max-width:min(46%,580px)}
@@ -256,12 +262,11 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 
 /* ---------- 7b. Hero scroll expansion ----------
-   Scrolling off the hero pulls the sign film forward: it turns to face you
-   and grows, its edges feathering away so it never reads as a square photo
-   being scaled. It fills the view, holds a beat, then dissolves into the ink
-   ground -- lettering and all -- so the page carries on downward with no
-   hard edge and no cut. Driven by --h (0..1) from site.js; everything is
-   transform, opacity and mask, so it stays on the compositor.
+   Scrolling off the hero opens the sign out: it turns to face you and grows,
+   holds briefly, then fades, handing straight over to the next section with
+   no empty stretch. Because the film is blended rather than boxed there is no
+   edge to feather -- it is simply lit sign over page colour throughout.
+   Driven by --h (0..1) from site.js; transform and opacity only.
 
    --h defaults to 0 and the tall pinned track only exists once script adds
    .hero--scroll, so without JS the hero is one screen tall and normal. */
@@ -270,32 +275,47 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media (min-width:1200px){
   /* overflow:hidden on .hero would make it the scroll container and stop
      .hero__pin from ever sticking; the clipping lives on the pin instead */
-  .hero--scroll{height:165vh;min-height:0;display:block;overflow:visible}
+  .hero--scroll{height:145vh;min-height:0;display:block;overflow:visible}
   .hero--scroll .hero__pin{position:sticky;top:0;height:100vh;overflow:hidden;
-    display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%}
+    display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%;
+    background:var(--ink)}
 
-  /* --e is the expansion, done by 62% of the track; the rest holds and fades */
+  /* --e is the expansion, finished by 55% of the track */
   .hero--scroll .hero__film{
-    --e:clamp(0, calc(var(--h) / .62), 1);
+    --e:clamp(0, calc(var(--h) / .55), 1);
     transform-origin:center center;will-change:transform,opacity;
     transform:translate(calc(var(--fx,0px) * var(--e)), -50%)
               scale(calc(1 + (var(--fk,1) - 1) * var(--e)))
               rotateY(calc((1 - var(--e)) * -8deg));
-    /* edges melt into the ground as it opens out, so there is no square rim */
-    --m1:calc(46% + (1 - var(--e)) * 34%);
-    --m2:calc(76% + (1 - var(--e)) * 24%);
-    -webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 50%, #000 var(--m1), transparent var(--m2));
-    mask-image:radial-gradient(ellipse 74% 74% at 50% 50%, #000 var(--m1), transparent var(--m2));
-    /* then it blends away entirely into the ink */
-    opacity:clamp(0, calc((1 - var(--h)) * 4.4), 1)}
+    /* fades out over the last quarter, finishing exactly as the pin releases */
+    opacity:clamp(0, calc((1 - var(--h)) * 3.6), 1)}
 
-  .hero--scroll .hero__veil{opacity:clamp(0, calc(1 - var(--e, 0) * 1.6), 1)}
   .hero--scroll .hero__copy{will-change:transform,opacity;
-    opacity:clamp(0, calc(1 - var(--h) * 4), 1);
+    opacity:clamp(0, calc(1 - var(--h) * 3.4), 1);
     transform:translateY(calc(var(--h) * -70px))}
   /* once the copy has faded it must stop being clickable or focusable */
   .hero--scroll.is-past .hero__over{visibility:hidden;pointer-events:none}
 }
+
+/* ---------- 7c. Standing wordmark ----------
+   The name stays behind the site once the hero film has gone, on every page.
+   Two fixed layers: one darkens on the paper sections, one lightens on the
+   ink ones, and each is near enough a no-op against the ground it is not
+   meant for -- so a single mark reads the whole way down.
+
+   The blend has to sit on the fixed layer itself, not on a child: the layer
+   makes its own stacking context, which would isolate a nested blend and
+   paint it flat. z-index 1 rather than 0 because the sections are
+   position:relative and would otherwise cover it; it stays under the header
+   (60) and the call bar (70). Held at a whisper so copy over it is
+   unaffected -- see the contrast check in the build notes. */
+.brandmark{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+  display:grid;place-items:center;opacity:var(--brand-in,1)}
+.brandmark span{font-family:var(--display);font-weight:800;font-stretch:125%;
+  text-transform:uppercase;text-align:center;white-space:nowrap;
+  line-height:.84;letter-spacing:-.025em;font-size:clamp(3.5rem,13vw,13rem)}
+.brandmark--paper{mix-blend-mode:multiply;color:#EDECE8}
+.brandmark--ink{mix-blend-mode:screen;color:#15112C}
 
 /* ---------- 8. Trigger strip ---------- */
 .triggers{border-top:var(--rule);border-bottom:var(--rule);margin-top:clamp(3rem,7vw,5rem)}
