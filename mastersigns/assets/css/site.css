@@ -315,13 +315,13 @@ ul,ol{margin:0;padding:0;list-style:none}
    bar (70). Strengths are set by contrast measurement, not by eye. */
 .sitefilm{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;
   display:grid;place-items:center}
-.sitefilm video{width:min(72vw,74vh);aspect-ratio:1;height:auto;object-fit:cover}
-.sitefilm--paper{mix-blend-mode:multiply;opacity:calc(var(--brand-in,1) * .20)}
+.sitefilm video{width:min(84vw,86vh);aspect-ratio:1;height:auto;object-fit:cover}
+.sitefilm--paper{mix-blend-mode:multiply;opacity:calc(var(--brand-in,1) * .19)}
 /* inverting flips the hue too - the red sphere goes cyan, the green script
    goes pink - so the paper layer is desaturated to a neutral grey ghost.
    The ink layer keeps its colour, where it is the actual brand palette. */
 .sitefilm--paper video{filter:invert(1) grayscale(1)}
-.sitefilm--ink{mix-blend-mode:screen;opacity:calc(var(--brand-in,1) * .16)}
+.sitefilm--ink{mix-blend-mode:screen;opacity:calc(var(--brand-in,1) * .15)}
 
 /* it is decoration: never run it for a viewer who asked for stillness */
 @media (prefers-reduced-motion:reduce){

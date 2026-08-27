@@ -78,7 +78,7 @@ The looping sign sits behind every page as a fixed background. On the home
 page it comes up as the hero film fades (`--brand-in`, driven from `--h`);
 elsewhere it is simply there.
 
-It uses `site-bg.mp4` — a separate 600x600 / 224 KB encode of the same
+It uses `site-bg.mp4` — a separate 600x600 / 341 KB encode of the same
 ping-pong loop, not the 1 MB hero file — because it renders small and faint.
 `site-bg-still.jpg` is its poster, so a browser that refuses autoplay falls
 back to a frame of the same grade rather than a brighter one.
@@ -97,13 +97,24 @@ layer itself, not the `<video>`, and `z-index: 1` clears the
 `steel-soft` on ink, which is only 5.96:1 unaided, so any lift breaks it
 fast: at the original grade even 16% opacity failed at 3.83:1. The fix was
 to cap the background clip's highlights in the encode (`colorlevels`
-`romax=0.50`, measured peak 148) so the blend cannot lift the ink far, and
-then set opacity under the measured ceiling — paper 0.20 against a 0.22
-ceiling, ink 0.16 against 0.18. Worst cases, with text sitting on the sign's
-brightest core: body on ink 12.26:1, muted on ink 6.06:1, steel-soft on ink
-4.7:1, body on paper 12.99:1, muted on paper 5.18:1, muted on paper-2
-4.66:1. All clear AA. Raising either opacity breaks that, so change the
-encode's highlight cap first if more presence is wanted.
+`romax=0.50`) so the blend cannot lift the ink far, then set opacity under
+the measured ceiling.
+
+Presence is bought in the encode rather than the opacity, since opacity is
+pinned by that ceiling. The grade applies a pinned-toe curve
+(`curves=all='0/0 0.12/0.01 0.35/0.58 0.65/0.93 1/1'`) between the black
+crush and the highlight cap: it lifts the sign's midtones about 44% while
+leaving the frame edge at ~5/255, so the square stays invisible, and the
+peak stays capped so the contrast maths is unchanged. A plain gamma lift
+does not work here — it raises the frame edge to ~33/255 and the rectangle
+reappears.
+
+At the encoded peak of 166 the ceilings are paper 0.20 and ink 0.16, so the
+shipped values are 0.19 and 0.15. Worst cases, with text sitting on the
+sign's brightest core: body on ink 12.1:1, muted on ink 5.98:1, steel-soft
+on ink 4.63:1, body on paper 12.76:1, muted on paper 5.09:1, muted on
+paper-2 4.57:1. All clear AA. To make it read stronger still, raise the
+curve's midpoint — not the opacity.
 
 Under `prefers-reduced-motion` the `<video>` elements are removed outright,
 stopping the download and the decode rather than just hiding them.
