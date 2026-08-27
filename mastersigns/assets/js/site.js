@@ -91,6 +91,11 @@
 
     var drawHero = function () {
       hQueued = false;
+      /* Nothing to drive if the hero is not on screen at all. Guards the
+         single-file preview, where the pages share one document and a
+         hidden hero would otherwise keep forcing --brand-in back to 0 and
+         hide the standing film on every other page. */
+      if (heroEl.offsetParent === null) { return; }
       var r = heroEl.getBoundingClientRect();
       var vh = window.innerHeight;
       /* --h runs out over 85% of the pinned travel, leaving the tail fully
