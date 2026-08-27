@@ -49,6 +49,58 @@
     }
   }
 
+  /* ---- scroll build ----
+     Drives --p (0..1) across the section while it is on screen. CSS does
+     the rest. Left alone under reduced motion, where the stylesheet's
+     default of 1 already shows the finished, lit sign. */
+  var build = document.querySelector('.build');
+  /* Only scrub where the stage is actually pinned beside the steps. Narrower
+     than that it is not sticky, so scrubbing would animate it off-screen —
+     there it just stays at the stylesheet default: finished and lit. */
+  var wide = window.matchMedia('(min-width: 1000px)');
+  if (build && !reduced && wide.matches) {
+    var phaseEl = build.querySelector('.build__phase');
+    var PHASES = [
+      [0.00, 'Layout'],
+      [0.14, 'Returns'],
+      [0.44, 'Faces'],
+      [0.54, 'Mounted'],
+      [0.82, 'Powered']
+    ];
+    var queued = false;
+    var lastPhase = '';
+
+    var draw = function () {
+      queued = false;
+      var steps = build.querySelector('.build__steps');
+      var r = (steps || build).getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      /* progress across exactly the stretch where the stage is pinned */
+      var span = r.height - vh * 0.55;
+      var p = span > 0 ? (vh * 0.35 - r.top) / span : 1;
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+      build.style.setProperty('--p', p.toFixed(4));
+
+      var name = PHASES[0][1];
+      for (var i = 0; i < PHASES.length; i++) {
+        if (p >= PHASES[i][0]) name = PHASES[i][1];
+      }
+      if (phaseEl && name !== lastPhase) { phaseEl.textContent = name; lastPhase = name; }
+    };
+
+    var request = function () {
+      if (!queued) { queued = true; window.requestAnimationFrame(draw); }
+    };
+
+    var sync = function () {
+      if (wide.matches) { request(); }
+      else { build.style.removeProperty('--p'); lastPhase = ''; }
+    };
+    window.addEventListener('scroll', function () { if (wide.matches) request(); }, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  }
+
   /* ---- project brief form ---- */
   var form = document.getElementById('briefForm');
   if (!form) return;

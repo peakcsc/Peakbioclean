@@ -304,6 +304,66 @@ ul,ol{margin:0;padding:0;list-style:none}
   .steps p{grid-column:3}
 }
 
+/* ---------- 11b. Scroll build ----------
+   The seven checkpoints read down the right; beside them a sign is
+   fabricated in CSS 3D as you scroll: layout drawn, returns extruded,
+   faces fitted, mounted, then powered. --p is the section's scroll
+   progress, 0 to 1, set by site.js. It defaults to 1, so with no JS --
+   or under prefers-reduced-motion -- the sign simply renders finished
+   and lit rather than blank. */
+.build{--p:1}
+.build__grid{display:grid;gap:clamp(2rem,5vw,3.5rem)}
+.build__stage{display:grid;gap:.9rem}
+.build__cap{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:.6rem}
+.build__cap::before{content:"";width:22px;height:2px;background:var(--signal);flex:none}
+
+.stage{perspective:1100px;perspective-origin:50% 46%}
+.scene{position:relative;aspect-ratio:4/3;transform-style:preserve-3d;
+  transform:rotateX(calc(8deg - var(--p) * 5deg)) rotateY(calc(-30deg + var(--p) * 14deg))}
+.lyr{position:absolute;inset:0;transform-style:preserve-3d}
+
+.wall{border:1px solid rgba(20,16,46,.3);
+  box-shadow:0 40px 70px -34px rgba(20,16,46,.6), inset 0 1px 0 rgba(255,255,255,.5)}
+
+/* shop drawing: present while it is being set out, gone once it is built */
+.draw{transform:translateZ(2px);
+  opacity:calc(clamp(0, .5 + var(--p) * 6, 1) * clamp(0, (.86 - var(--p)) * 7, 1))}
+
+/* the raceway the letters mount to */
+.raceway{transform:translateZ(9px);display:grid;place-items:center}
+.raceway::before{content:"";width:70%;height:5.2%;background:linear-gradient(180deg,#9a9ca1,#63656a);
+  border:1px solid rgba(20,16,46,.5);
+  transform:scaleX(clamp(0, (var(--p) - .52) * 5, 1));transform-origin:left center}
+
+/* LEDs behind the faces — the payoff at the end of the scroll */
+.glow{transform:translateZ(5px);
+  background:radial-gradient(ellipse 40% 21% at 50% 50%, rgba(0,224,28,.58), rgba(0,224,28,0) 72%);
+  filter:blur(14px);opacity:clamp(0, (var(--p) - .8) * 6, 1)}
+
+/* channel letters: stacked copies form the returns, one bright face on top */
+.letters{display:grid;place-items:center;
+  --depth:calc(clamp(0, (var(--p) - .12) * 3.1, 1) * 66px)}
+.letters span{position:absolute;font-family:var(--display);font-weight:800;font-stretch:125%;
+  font-size:clamp(1.7rem,6.2vw,3.6rem);letter-spacing:.06em;line-height:1;white-space:nowrap;
+  opacity:clamp(0, (var(--p) - .1) * 6, 1)}
+.letters .ext{color:#2b3350;transform:translateZ(calc(var(--i) * var(--depth) / 18))}
+.letters .ext:nth-child(n+15){color:#55618c}   /* return edge catches the light */
+.letters .ext:nth-child(18){color:#7c88b4}
+.letters .face{color:#E8E7E2;transform:translateZ(var(--depth));
+  text-shadow:0 1px 0 rgba(255,255,255,.6);
+  opacity:clamp(0, (var(--p) - .42) * 5, 1)}
+
+@media (min-width:1000px){
+  .build__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:stretch;gap:clamp(2.5rem,5vw,4.5rem)}
+  .build__stage{position:sticky;top:104px}
+  .build__steps li:first-child{border-top:0;padding-top:0}
+}
+@media (min-width:1000px) and (max-width:1199px){
+  .letters span{font-size:clamp(1.6rem,3.4vw,2.6rem)}
+}
+
 /* ---------- 12. Cards / service groups ---------- */
 .cards{display:grid;gap:1px;background:rgba(20,16,46,.14);border:var(--rule)}
 .cards--3{grid-template-columns:1fr}

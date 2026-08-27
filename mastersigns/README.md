@@ -46,6 +46,22 @@ endless loop) and `hero-still.jpg` is shown instead; that same still is the
 `poster`, so a browser that refuses autoplay shows the composed opening
 frame rather than a freeze.
 
+The seven checkpoints on the home page are a scroll-driven build. A sign is
+fabricated in CSS 3D beside the copy as you read down: the setting-out
+drawing, the letter returns extruding off the wall in eighteen stacked
+layers, the faces fitted, the raceway mounted, then the LEDs igniting --
+while the whole scene rotates from a raking view toward front-on. It is one
+orchestrated sequence rather than scattered scroll effects, and it is the
+"assemble the sign on scroll" idea from the project brain.
+
+`site.js` sets a single custom property, `--p` (0 to 1), from the scroll
+position of the steps column; every layer derives its depth, opacity and
+angle from that in CSS. `--p` defaults to **1** in the stylesheet, so with
+no JavaScript the sign simply renders finished and lit rather than blank.
+The scrub only runs at 1000px and up, where the stage is actually sticky
+beside the steps -- narrower than that it would animate off-screen, so it
+holds the finished state instead. `prefers-reduced-motion` does the same.
+
 ## Before this goes live
 
 The copy was written against the project brain's claim ledger, so it avoids
