@@ -15,6 +15,7 @@ contact.html    Phone, email, shop, and what to have ready before calling
 assets/css/site.css
 assets/js/site.js
 assets/logo/    Generated from FINAL_COMPLETE_LOGO.pdf
+assets/video/   Hero film, re-encoded from the supplied 3D sign clip
 ```
 
 ## Design notes
@@ -24,8 +25,20 @@ lettering, `#C4C4C4` concrete disc, `#00E01C` script green. Type is Archivo
 (expanded, 800) for display, IBM Plex Sans for body, IBM Plex Mono for labels
 and dimensions. The structural vocabulary — registration crosshairs, dimension
 lines with end ticks, concrete surfaces — comes from sign shop drawings and
-press registration sheets. The only animation is the hero sign switching on,
-once, on load; it is disabled under `prefers-reduced-motion`.
+press registration sheets.
+
+The home hero is the 3D sign film. It plays once on load and holds — no
+loop, because the clip does not cut back to its own first frame cleanly.
+The source pushes the camera in and ends with the sign filling almost its
+whole square, which is a poor state to leave a hero sitting in and collides
+with the copy; it is therefore played **reversed**, so the camera pulls back
+and settles on the roomiest framing. The film is sized off the viewport
+width rather than the hero height, so a long copy column can never inflate
+the square into the text — clearance is positive at every width from 1200
+to 1920, measured at the clip's most crowded frame. Below 1200px the film
+stacks above the copy. Under `prefers-reduced-motion` the video element is
+removed outright (stopping the download and decode) and `hero-still.jpg`
+is shown instead.
 
 ## Before this goes live
 
@@ -52,7 +65,12 @@ still need Ricky's confirmation:
 7. **Photography** — `work.html` currently uses drawn line diagrams. Each
    `.work__shot` has a comment showing the `<img>` swap once approved photos
    and releases are in hand.
-8. **Turnaround language** — the site says replies are aimed at one business
+8. **Hero film** — 14.7 MB source re-encoded to a 707 KB muted MP4 at
+   1200x1200, audio stripped. If Ricky prefers the original push-in
+   direction over the reversed pull-back, re-encode without the `reverse`
+   filter and regenerate the two stills; the layout already clears the
+   copy at the crowded end of the clip either way.
+9. **Turnaround language** — the site says replies are aimed at one business
    day "where we can" and never promises next-day production. If Ricky wants a
    firm SLA, it can be stated; it should not be invented here.
 

@@ -29,9 +29,16 @@
     });
   }
 
-  /* ---- the sign switches on, once, on load ---- */
-  var hero = document.querySelector('.hero');
-  if (hero) { requestAnimationFrame(function () { hero.classList.add('lit'); }); }
+  /* ---- hero film ----
+     It autoplays from the markup so it still works without JS. When the
+     viewer has asked for reduced motion we drop the element entirely, which
+     stops the decode and the download; CSS shows the still frame instead. */
+  var film = document.querySelector('.hero__film video');
+  if (film && reduced) {
+    film.pause();
+    film.removeAttribute('autoplay');
+    film.remove();
+  }
 
   /* ---- project brief form ---- */
   var form = document.getElementById('briefForm');
