@@ -38,6 +38,15 @@
     film.pause();
     film.removeAttribute('autoplay');
     film.remove();
+  } else if (film) {
+    var played = film.play();
+    if (played && typeof played.catch === 'function') {
+      played.catch(function () {
+        /* autoplay refused — show the settled frame instead of freezing
+           on the opening one, which is the clip's most crowded */
+        film.closest('.hero__film').classList.add('is-still');
+      });
+    }
   }
 
   /* ---- project brief form ---- */

@@ -248,6 +248,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 /* The film is decoration. If the viewer asked for stillness they get the
    frame instead — declared before the query so the query actually wins. */
 .hero__film .poster{display:none}
+.hero__film.is-still video{display:none}
+.hero__film.is-still .poster{display:block}
 @media (prefers-reduced-motion:reduce){
   .hero__film video{display:none}
   .hero__film .poster{display:block}
