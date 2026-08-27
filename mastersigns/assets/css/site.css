@@ -256,32 +256,43 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 
 /* ---------- 7b. Hero scroll expansion ----------
-   Scrolling off the hero pulls the sign film forward and out: it turns to
-   face you, scales up from its docked square on the right, and ends filling
-   the viewport, while the copy and the ink scrim fade off. Driven by --h
-   (0..1) from site.js. Everything is transform and opacity, so it stays on
-   the compositor -- no width/height animation, no per-frame layout.
+   Scrolling off the hero pulls the sign film forward: it turns to face you
+   and grows, its edges feathering away so it never reads as a square photo
+   being scaled. It fills the view, holds a beat, then dissolves into the ink
+   ground -- lettering and all -- so the page carries on downward with no
+   hard edge and no cut. Driven by --h (0..1) from site.js; everything is
+   transform, opacity and mask, so it stays on the compositor.
 
-   --h defaults to 0 (the docked hero), and the tall pinned track only
-   exists once the .hero--scroll class is added by script, so without JS
-   the hero stays exactly one screen tall and behaves normally. */
+   --h defaults to 0 and the tall pinned track only exists once script adds
+   .hero--scroll, so without JS the hero is one screen tall and normal. */
 .hero{--h:0}
 
 @media (min-width:1200px){
   /* overflow:hidden on .hero would make it the scroll container and stop
      .hero__pin from ever sticking; the clipping lives on the pin instead */
-  .hero--scroll{height:200vh;min-height:0;display:block;overflow:visible}
+  .hero--scroll{height:165vh;min-height:0;display:block;overflow:visible}
   .hero--scroll .hero__pin{position:sticky;top:0;height:100vh;overflow:hidden;
     display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%}
+
+  /* --e is the expansion, done by 62% of the track; the rest holds and fades */
   .hero--scroll .hero__film{
-    transform-origin:center center;will-change:transform;
-    transform:translate(calc(var(--fx,0px) * var(--h)), -50%)
-              scale(calc(1 + (var(--fk,1) - 1) * var(--h)))
-              rotateY(calc((1 - var(--h)) * -8deg))}
-  .hero--scroll .hero__veil{opacity:clamp(0, calc(1 - var(--h) * 1.5), 1)}
+    --e:clamp(0, calc(var(--h) / .62), 1);
+    transform-origin:center center;will-change:transform,opacity;
+    transform:translate(calc(var(--fx,0px) * var(--e)), -50%)
+              scale(calc(1 + (var(--fk,1) - 1) * var(--e)))
+              rotateY(calc((1 - var(--e)) * -8deg));
+    /* edges melt into the ground as it opens out, so there is no square rim */
+    --m1:calc(46% + (1 - var(--e)) * 34%);
+    --m2:calc(76% + (1 - var(--e)) * 24%);
+    -webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 50%, #000 var(--m1), transparent var(--m2));
+    mask-image:radial-gradient(ellipse 74% 74% at 50% 50%, #000 var(--m1), transparent var(--m2));
+    /* then it blends away entirely into the ink */
+    opacity:clamp(0, calc((1 - var(--h)) * 4.4), 1)}
+
+  .hero--scroll .hero__veil{opacity:clamp(0, calc(1 - var(--e, 0) * 1.6), 1)}
   .hero--scroll .hero__copy{will-change:transform,opacity;
-    opacity:clamp(0, calc(1 - var(--h) * 2.6), 1);
-    transform:translateY(calc(var(--h) * -64px))}
+    opacity:clamp(0, calc(1 - var(--h) * 4), 1);
+    transform:translateY(calc(var(--h) * -70px))}
   /* once the copy has faded it must stop being clickable or focusable */
   .hero--scroll.is-past .hero__over{visibility:hidden;pointer-events:none}
 }

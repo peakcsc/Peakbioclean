@@ -46,23 +46,29 @@ endless loop) and `hero-still.jpg` is shown instead; that same still is the
 `poster`, so a browser that refuses autoplay shows the composed opening
 frame rather than a freeze.
 
-Scrolling off the hero pulls the film forward: the sign turns to face you,
-scales up out of its docked square on the right and ends filling the
-viewport, while the copy and the ink scrim fade away. `site.js` measures the
-scale and offset needed to get from the docked square to full-bleed once per
-resize, hands them to CSS as `--fx` / `--fk`, and the scroll handler then
-only writes `--h` (0 to 1) -- so every frame is transform and opacity on the
-compositor, with no width/height animation and no layout work. Full-screen
-is reached at 78% of the pinned travel and held for the rest, so the
-full-bleed state is a beat rather than a single frame. Coverage is verified
-at 1200x800 through 2560x1440.
+Scrolling off the hero pulls the film forward: the sign turns to face you and
+grows, its edges feathering away with a radial mask so it never reads as a
+square photo being scaled, it fills the view and holds a beat, then dissolves
+into the ink ground -- lettering and all -- so the page carries on downward
+with no rim and no cut.
+
+`site.js` measures the offset and scale once per resize and hands them to CSS
+as `--fx` / `--fk`; the scroll handler then only writes `--h` (0 to 1), and
+CSS derives `--e`, the expansion, which completes at `--h` 0.62. Everything is
+transform, opacity and mask, so it stays on the compositor. The film is sized
+off the viewport height rather than its longest edge -- because it feathers
+and then dissolves it never has to cover corner to corner, which is what kept
+it from blowing up past the frame. The track is 165vh, so the whole move is
+quick; `--h` runs out at 85% of the pinned travel, leaving the tail fully
+faded before the section releases into the trigger strip.
 
 Note that `.hero` carries `overflow:hidden`, which would make it the scroll
 container and stop `.hero__pin` from ever sticking -- `.hero--scroll`
-overrides it to `visible` and the clipping lives on the pin instead. The
-tall pinned track only exists once script adds `.hero--scroll`, so with no
-JavaScript the hero stays one screen tall and behaves normally; the effect
-is also gated to 1200px and up and skipped under `prefers-reduced-motion`.
+overrides it to `visible` and the clipping lives on the pin instead. The tall
+pinned track, the mask and the fade all live inside `.hero--scroll`, which
+script adds, so with no JavaScript the hero is one screen tall with a plain
+docked film; the effect is also gated to 1200px and up and skipped under
+`prefers-reduced-motion`.
 
 The seven checkpoints on the home page are a scroll-driven build. A sign is
 fabricated in CSS 3D beside the copy as you read down: the setting-out

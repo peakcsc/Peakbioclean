@@ -72,23 +72,24 @@
       if (!side) { return; }
       /* docked centre sits at (vw - side/2, vh/2); bring it to the middle */
       heroEl.style.setProperty('--fx', (side / 2 - vw / 2).toFixed(2) + 'px');
-      /* square must cover the longest viewport edge, with a little margin */
-      heroEl.style.setProperty('--fk', ((Math.max(vw, vh) / side) * 1.06).toFixed(4));
+      /* Sized off the viewport height rather than its longest edge. The film
+         feathers out and then dissolves, so it no longer has to cover corner
+         to corner -- which kept the sign from blowing up past the frame. */
+      heroEl.style.setProperty('--fk', (Math.max(vh * 1.12, vw * 0.66) / side).toFixed(4));
     };
 
     var drawHero = function () {
       hQueued = false;
       var r = heroEl.getBoundingClientRect();
       var vh = window.innerHeight;
-      /* Reach full screen at 78% of the pinned travel, then hold there while
-         the rest scrolls by, so the full-bleed state is a beat rather than a
-         single frame before the section releases. The 0.78 also absorbs the
-         sticky header's offset, which otherwise left --h short of 1. */
-      var span = (r.height - vh) * 0.78;
+      /* --h runs out over 85% of the pinned travel, leaving the tail fully
+         faded before the section releases. CSS finishes the expansion at
+         --h 0.62, so the sign opens quickly, holds, then dissolves. */
+      var span = (r.height - vh) * 0.85;
       var h = span > 0 ? -r.top / span : 0;
       h = h < 0 ? 0 : (h > 1 ? 1 : h);
       heroEl.style.setProperty('--h', h.toFixed(4));
-      var past = h > 0.42;   /* copy has fully faded by here */
+      var past = h > 0.27;   /* copy has fully faded by here */
       if (past !== wasPast) { heroEl.classList.toggle('is-past', past); wasPast = past; }
     };
 
