@@ -27,18 +27,24 @@ and dimensions. The structural vocabulary — registration crosshairs, dimension
 lines with end ticks, concrete surfaces — comes from sign shop drawings and
 press registration sheets.
 
-The home hero is the 3D sign film. It plays once on load and holds — no
-loop, because the clip does not cut back to its own first frame cleanly.
-The source pushes the camera in and ends with the sign filling almost its
-whole square, which is a poor state to leave a hero sitting in and collides
-with the copy; it is therefore played **reversed**, so the camera pulls back
-and settles on the roomiest framing. The film is sized off the viewport
-width rather than the hero height, so a long copy column can never inflate
-the square into the text — clearance is positive at every width from 1200
-to 1920, measured at the clip's most crowded frame. Below 1200px the film
-stacks above the copy. Under `prefers-reduced-motion` the video element is
-removed outright (stopping the download and decode) and `hero-still.jpg`
-is shown instead.
+The home hero is the 3D sign film, on a continuous loop. The source pushes
+the camera in and its first and last frames are very different -- the sign
+starts roomy and ends filling almost the whole square -- so a plain `loop`
+would hard-cut every six seconds. The shipped clip is therefore a
+ping-pong: the source forward, then reversed, with the duplicate frame
+removed at both the mid-point and the wrap. Measured on the encoded file,
+both joins move *less* than a typical frame-to-frame step (wrap 1.58,
+mid-point 0.17, against a median of 3.44), so neither reads as a cut.
+
+The film is sized off the viewport width rather than the hero height, so a
+long copy column can never inflate the square into the text -- clearance is
+positive at every width from 1200 to 1920, measured at the clip's most
+crowded frame, which the loop now reaches on every pass. Below 1200px the
+film stacks above the copy. Under `prefers-reduced-motion` the video
+element is removed outright (stopping the download, the decode, and the
+endless loop) and `hero-still.jpg` is shown instead; that same still is the
+`poster`, so a browser that refuses autoplay shows the composed opening
+frame rather than a freeze.
 
 ## Before this goes live
 
@@ -65,11 +71,10 @@ still need Ricky's confirmation:
 7. **Photography** — `work.html` currently uses drawn line diagrams. Each
    `.work__shot` has a comment showing the `<img>` swap once approved photos
    and releases are in hand.
-8. **Hero film** — 14.7 MB source re-encoded to a 707 KB muted MP4 at
-   1200x1200, audio stripped. If Ricky prefers the original push-in
-   direction over the reversed pull-back, re-encode without the `reverse`
-   filter and regenerate the two stills; the layout already clears the
-   copy at the crowded end of the clip either way.
+8. **Hero film** — 14.7 MB source re-encoded to a 990 KB muted MP4, 1200x1200,
+   CRF 33, audio stripped, 11.96 s ping-pong loop. If a single play is
+   preferred over the loop, drop the `loop` attribute and re-encode the
+   source without the split/reverse/concat filter chain.
 9. **Turnaround language** — the site says replies are aimed at one business
    day "where we can" and never promises next-day production. If Ricky wants a
    firm SLA, it can be stated; it should not be invented here.
