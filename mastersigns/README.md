@@ -72,29 +72,41 @@ section rather than holding an empty screen. Measured at 1440x900: the film
 is effectively gone at 350px of scroll and the trigger strip is in view by
 450px, leaving about 100px (11vh) of ink between them.
 
-## The standing wordmark
+## The standing film
 
-`Master Signs & Prints` sits behind every page as a fixed background layer.
-On the home page it rises as the hero film fades (`--brand-in`, driven from
-`--h`); elsewhere it is simply present.
+The looping sign sits behind every page as a fixed background. On the home
+page it comes up as the hero film fades (`--brand-in`, driven from `--h`);
+elsewhere it is simply there.
 
-It is sized at `min(9.5vw, 10rem)` with no clamp floor -- a hard minimum was
-what pushed it off the edge on small screens -- so it sits at roughly 72% of
-the viewport with real margin at every width from 320 to 2560.
+It uses `site-bg.mp4` — a separate 600x600 / 224 KB encode of the same
+ping-pong loop, not the 1 MB hero file — because it renders small and faint.
+`site-bg-still.jpg` is its poster, so a browser that refuses autoplay falls
+back to a frame of the same grade rather than a brighter one.
 
-It is two fixed layers, not one: `.brandmark--paper` multiplies (so it reads
-on the light sections) and `.brandmark--ink` screens (so it reads on the dark
-ones), each near enough a no-op against the ground it is not meant for. The
-blend sits on each fixed layer itself for the same stacking-context reason as
-the hero film. `z-index: 1` rather than 0, because the sections are
-`position:relative` and would otherwise paint straight over it; it stays
-under the header (60) and the call bar (70).
+It is two fixed layers, because one cannot read on both grounds.
+`.sitefilm--ink` screens: its dark scene is a no-op on paper, its lit sign
+glows on ink. `.sitefilm--paper` is inverted and multiplied: its now-white
+ground is a no-op on paper, its sign reads as a grey ghost. The paper layer
+is also desaturated — inverting flips hue, turning the red sphere cyan and
+the green script pink — while the ink layer keeps its colour, where that is
+the real brand palette. As with the hero film, the blend sits on each fixed
+layer itself, not the `<video>`, and `z-index: 1` clears the
+`position:relative` sections while staying under the header and call bar.
 
-Because it overlays copy, its strength is set by contrast rather than by eye.
-At full strength the worst cases are: body text on paper 14.3:1, muted text
-on paper-2 5.13:1, body text on ink 11.64:1, muted on ink 6.22:1, and
-steel-soft on ink 4.82:1. All clear WCAG AA. The ink layer is `#15112C`
-specifically because `#1B1733` pushed steel-soft to 4.46:1, just under.
+**The strengths come from contrast maths, not taste.** The binding case is
+`steel-soft` on ink, which is only 5.96:1 unaided, so any lift breaks it
+fast: at the original grade even 16% opacity failed at 3.83:1. The fix was
+to cap the background clip's highlights in the encode (`colorlevels`
+`romax=0.50`, measured peak 148) so the blend cannot lift the ink far, and
+then set opacity under the measured ceiling — paper 0.20 against a 0.22
+ceiling, ink 0.16 against 0.18. Worst cases, with text sitting on the sign's
+brightest core: body on ink 12.26:1, muted on ink 6.06:1, steel-soft on ink
+4.7:1, body on paper 12.99:1, muted on paper 5.18:1, muted on paper-2
+4.66:1. All clear AA. Raising either opacity breaks that, so change the
+encode's highlight cap first if more presence is wanted.
+
+Under `prefers-reduced-motion` the `<video>` elements are removed outright,
+stopping the download and the decode rather than just hiding them.
 
 The seven checkpoints on the home page are a scroll-driven build. A sign is
 fabricated in CSS 3D beside the copy as you read down: the setting-out

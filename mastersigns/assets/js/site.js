@@ -49,6 +49,17 @@
     }
   }
 
+  /* ---- standing background film ----
+     Two low-opacity loops sit behind every page. They are pure decoration,
+     so under reduced motion the elements are removed entirely: that stops
+     the download and the decode rather than just hiding them. */
+  if (reduced) {
+    Array.prototype.forEach.call(document.querySelectorAll('.sitefilm video'), function (v) {
+      v.pause();
+      v.remove();
+    });
+  }
+
   /* ---- hero scroll expansion ----
      Pulls the film forward and out to fill the screen while the copy fades.
      The scale and offset needed to go from the docked square to a full

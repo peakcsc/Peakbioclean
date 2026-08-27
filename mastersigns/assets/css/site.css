@@ -300,28 +300,33 @@ ul,ol{margin:0;padding:0;list-style:none}
   .hero--scroll.is-past .hero__over{visibility:hidden;pointer-events:none}
 }
 
-/* ---------- 7c. Standing wordmark ----------
-   The name stays behind the site once the hero film has gone, on every page.
-   Two fixed layers: one darkens on the paper sections, one lightens on the
-   ink ones, and each is near enough a no-op against the ground it is not
-   meant for -- so a single mark reads the whole way down.
+/* ---------- 7c. Standing film ----------
+   The looping sign sits behind every page. Two fixed layers, because one
+   cannot read on both grounds: the ink layer screens (its dark scene is a
+   no-op on paper, its lit sign glows on ink), and the paper layer is
+   inverted and multiplied (its now-white ground is a no-op on paper, its
+   sign reads as a soft grey ghost). Each is near enough invisible against
+   the ground it is not meant for.
 
-   The blend has to sit on the fixed layer itself, not on a child: the layer
-   makes its own stacking context, which would isolate a nested blend and
-   paint it flat. z-index 1 rather than 0 because the sections are
-   position:relative and would otherwise cover it; it stays under the header
-   (60) and the call bar (70). Held at a whisper so copy over it is
-   unaffected -- see the contrast check in the build notes. */
-.brandmark{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;
-  display:grid;place-items:center;opacity:var(--brand-in,1)}
-.brandmark span{font-family:var(--display);font-weight:800;font-stretch:125%;
-  text-transform:uppercase;text-align:center;white-space:nowrap;
-  line-height:.84;letter-spacing:-.025em;
-  /* sized to sit at ~72% of the viewport with real margin. No clamp floor:
-     a hard minimum is what pushed it off the edge on small screens. */
-  font-size:min(9.5vw,10rem)}
-.brandmark--paper{mix-blend-mode:multiply;color:#EDECE8}
-.brandmark--ink{mix-blend-mode:screen;color:#15112C}
+   The blend sits on the fixed layer itself, not the <video>: the layer makes
+   its own stacking context, which would isolate a nested blend and paint it
+   flat. z-index 1 rather than 0 because the sections are position:relative
+   and would otherwise cover it; it stays under the header (60) and the call
+   bar (70). Strengths are set by contrast measurement, not by eye. */
+.sitefilm{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+  display:grid;place-items:center}
+.sitefilm video{width:min(72vw,74vh);aspect-ratio:1;height:auto;object-fit:cover}
+.sitefilm--paper{mix-blend-mode:multiply;opacity:calc(var(--brand-in,1) * .20)}
+/* inverting flips the hue too - the red sphere goes cyan, the green script
+   goes pink - so the paper layer is desaturated to a neutral grey ghost.
+   The ink layer keeps its colour, where it is the actual brand palette. */
+.sitefilm--paper video{filter:invert(1) grayscale(1)}
+.sitefilm--ink{mix-blend-mode:screen;opacity:calc(var(--brand-in,1) * .16)}
+
+/* it is decoration: never run it for a viewer who asked for stillness */
+@media (prefers-reduced-motion:reduce){
+  .sitefilm video{display:none}
+}
 
 /* ---------- 8. Trigger strip ---------- */
 .triggers{border-top:var(--rule);border-bottom:var(--rule);margin-top:clamp(3rem,7vw,5rem)}
