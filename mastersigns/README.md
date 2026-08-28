@@ -81,6 +81,43 @@ the scroll handler writes only `--h` (0 to 1), and CSS derives `--e`, the
 expansion, finishing at `--h` 0.5. The track is 130vh, giving 30vh of pinned
 travel.
 
+The expansion runs in two phases so the sign is never hidden behind the
+wording and never appears twice.
+
+**Phase 1** (`--p1`, first half of the track): the sign turns to face you and
+grows into the clear space beside the copy, measured per resize. It does not
+cross the copy, so the whole mark is visible while it is at full strength.
+There is real room for this from 1440 up and a lot at 1920 and beyond; at
+1280 the docked sign already fills the space, so it barely grows there.
+
+**Phase 2** (`--p2`, last quarter): it moves to the exact centre and square
+of the standing background film and fades out as that fades in. Both end
+identical — verified pixel-exact at 1280x800, 1440x900, 1920x1080 and
+2560x1440, offset 0 in x, y and width — so the handover reads as one object
+settling into the page rather than two signs overlapping. `--brand-in` is
+driven over the same window; keep the two in step if either is retimed, and
+keep `t2` in `measure()` matching `.sitefilm video`'s width.
+
+There is no point at which the sign is absent: sampled every 25px through
+the hero, the weakest moment is hero film 0.09 plus background 0.82.
+
+The wording and the calls to action do not fade. They stay at full opacity,
+clickable and focusable, for the whole hero scroll. Because the film grows
+across the copy column, an ink scrim rises behind the copy in step with the
+expansion (`--e`, not `--h`: the film reaches the copy before a scroll-timed
+ramp would be up). The scrim is the page colour, so it is invisible once the
+film has faded — it only does work where the sign would otherwise sit under
+the text. Verified by hiding the copy, sampling the brightest ground it
+actually sits on, and computing contrast for the weakest of its colours
+across 21 scroll positions at 1200, 1280, 1440, 1920 and 2560: worst 5.91:1,
+clear of AA. Re-measured after the film stopped fading, since it now sits at
+full strength behind the copy at the end of the scroll.
+
+`site.js` measures the offset and scale once per resize as `--fx` / `--fk`;
+the scroll handler writes only `--h` (0 to 1), and CSS derives `--e`, the
+expansion, finishing at `--h` 0.5. The track is 130vh, giving 30vh of pinned
+travel.
+
 The film does not fade out. It stays at full opacity and on screen right up
 to the moment the pinned section releases and the next one scrolls over it.
 It used to fade, back when the copy faded with it; once the copy started

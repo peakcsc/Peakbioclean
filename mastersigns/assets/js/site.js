@@ -80,12 +80,27 @@
       var vw = window.innerWidth, vh = window.innerHeight;
       var side = heroFilm.offsetWidth;          /* layout width, transforms excluded */
       if (!side) { return; }
-      /* docked centre sits at (vw - side/2, vh/2); bring it to the middle */
-      heroEl.style.setProperty('--fx', (side / 2 - vw / 2).toFixed(2) + 'px');
-      /* Sized off the viewport height rather than its longest edge. The film
-         feathers out and then dissolves, so it no longer has to cover corner
-         to corner -- which kept the sign from blowing up past the frame. */
-      heroEl.style.setProperty('--fk', (Math.max(vh * 1.12, vw * 0.66) / side).toFixed(4));
+      var copy = heroEl.querySelector('.hero__copy');
+      if (!copy) { return; }
+      var dockedCentre = vw - side / 2;         /* it is flush to the right edge */
+      var gap = 36;
+
+      /* Phase 1: as large as fits in the clear space beside the copy, so the
+         whole mark is visible while it is at full strength. Never smaller
+         than it already is. */
+      var free = vw - copy.getBoundingClientRect().right - gap * 2;
+      var t1 = Math.max(side, Math.min(free, vh * 0.88));
+      var cx1 = Math.min(copy.getBoundingClientRect().right + gap + t1 / 2, vw - t1 / 2 - 8);
+
+      /* Phase 2: exactly the standing background film's square and centre, so
+         the two coincide and the handover is invisible. Keep in step with
+         .sitefilm video's width in the stylesheet. */
+      var t2 = Math.min(vw * 0.84, vh * 0.86);
+
+      heroEl.style.setProperty('--fk1', (t1 / side).toFixed(4));
+      heroEl.style.setProperty('--fx1', (cx1 - dockedCentre).toFixed(2) + 'px');
+      heroEl.style.setProperty('--fk2', (t2 / side).toFixed(4));
+      heroEl.style.setProperty('--fx2', (vw / 2 - dockedCentre).toFixed(2) + 'px');
     };
 
     var drawHero = function () {
@@ -104,9 +119,10 @@
       var h = span > 0 ? -r.top / span : 0;
       h = h < 0 ? 0 : (h > 1 ? 1 : h);
       heroEl.style.setProperty('--h', h.toFixed(4));
-      /* The hero film now stays to the end, so the standing background film
-         arrives at the handoff rather than cross-fading with it. */
-      var bin = (h - 0.82) / 0.18;
+      /* The standing background film rises over the same window in which the
+         hero film fades and lands on its geometry, so the two read as one
+         object rather than two overlapping signs. Keep in step with --p2. */
+      var bin = (h - 0.72) / 0.25;
       bin = bin < 0 ? 0 : (bin > 1 ? 1 : bin);
       document.documentElement.style.setProperty('--brand-in', bin.toFixed(3));
     };

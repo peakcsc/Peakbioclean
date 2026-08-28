@@ -264,49 +264,56 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 
 /* ---------- 7b. Hero scroll expansion ----------
-   Scrolling off the hero opens the sign out: it turns to face you, grows and
-   then stays, right up to the moment the pinned section releases and the
-   next one scrolls over it. It deliberately does not fade: the copy no
-   longer fades either, so fading the film only produced a stretch of empty
-   hero to scroll past. Because the film is blended rather than boxed there is no
-   edge to feather -- it is simply lit sign over page colour throughout.
-   Driven by --h (0..1) from site.js; transform and opacity only.
+   Two phases, so the sign is never hidden behind the wording and never
+   appears twice.
 
-   --h defaults to 0 and the tall pinned track only exists once script adds
-   .hero--scroll, so without JS the hero is one screen tall and normal. */
+   Phase 1 (--p1, over the first half of the track): the sign turns to face
+   you and grows into the clear space beside the copy. It does not cross the
+   copy, so the whole mark is visible while it is at full strength.
+
+   Phase 2 (--p2, the last quarter): it moves to the exact position and size
+   of the standing background film and fades out as that fades in. Because
+   both end up identical -- same centre, same square, same clip -- the
+   handover reads as one object settling into the page rather than two signs
+   overlapping. An ink scrim rises with this phase only, since this is the
+   only point at which the sign passes over the copy.
+
+   Geometry for both phases is measured once per resize by site.js and handed
+   over as --fx1/--fk1 and --fx2/--fk2. Transform and opacity only. */
 .hero{--h:0}
 
 @media (min-width:1200px){
   /* overflow:hidden on .hero would make it the scroll container and stop
      .hero__pin from ever sticking; the clipping lives on the pin instead */
-  /* --e is the expansion, finished by 50% of the track. Declared on the
-     section so both the film and the pin's scrim can read it. */
   .hero--scroll{height:130vh;min-height:0;display:block;overflow:visible;
-    --e:clamp(0, calc(var(--h) / .5), 1)}
+    --p1:clamp(0, calc(var(--h) / .5), 1);
+    --p2:clamp(0, calc((var(--h) - .72) / .25), 1)}
   .hero--scroll .hero__pin{position:sticky;top:0;height:100vh;overflow:hidden;
     display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%;
     background:var(--ink)}
 
-  /* --e is the expansion, finished by 55% of the track */
   .hero--scroll .hero__film{
     transform-origin:center center;will-change:transform,opacity;
-    transform:translate(calc(var(--fx,0px) * var(--e)), -50%)
-              scale(calc(1 + (var(--fk,1) - 1) * var(--e)))
-              rotateY(calc((1 - var(--e)) * -8deg))}
+    transform:translate(calc(var(--fx1,0px) * var(--p1)
+                             + (var(--fx2,0px) - var(--fx1,0px)) * var(--p2)), -50%)
+              scale(calc(1 + (var(--fk1,1) - 1) * var(--p1)
+                           + (var(--fk2,1) - var(--fk1,1)) * var(--p2)))
+              rotateY(calc((1 - var(--p1)) * -8deg));
+    opacity:clamp(0, calc(1 - var(--p2) * 1.1), 1)}
 
   /* The wording and the calls to action stay put and stay readable for the
-     whole hero scroll -- they do not fade and are never hidden, so the
-     buttons remain clickable and focusable throughout. Because the film
-     grows across the copy column, an ink scrim rises behind the copy as it
-     expands. It is the page colour, so once the film has faded it is
-     invisible; it only does work where the sign would otherwise be under
-     the text. Sits above the film, below the copy. */
+     whole hero scroll -- they never fade and are never hidden, so the
+     buttons remain clickable and focusable throughout. The scrim only rises
+     in phase 2, when the sign crosses the copy on its way to becoming the
+     background; in phase 1 there is nothing to protect against, so the mark
+     is seen whole. It is the page colour, so it is invisible once the film
+     has gone. Sits above the film, below the copy. */
   .hero--scroll .hero__pin::before{
     content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,
       var(--ink) 0%, var(--ink) 48%, rgba(20,16,46,.62) 62%,
       rgba(20,16,46,.18) 72%, rgba(20,16,46,0) 82%);
-    opacity:clamp(0, calc(var(--e) * 8), 1)}
+    opacity:clamp(0, calc(var(--p2) * 2.2), 1)}
 }
 
 /* ---------- 7c. Standing film ----------
