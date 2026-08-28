@@ -75,7 +75,6 @@
     heroEl.classList.add('hero--scroll');
 
     var hQueued = false;
-    var wasPast = false;
 
     var measure = function () {
       var vw = window.innerWidth, vh = window.innerHeight;
@@ -109,8 +108,6 @@
       var bin = (h - 0.45) / 0.35;
       bin = bin < 0 ? 0 : (bin > 1 ? 1 : bin);
       document.documentElement.style.setProperty('--brand-in', bin.toFixed(3));
-      var past = h > 0.30;   /* copy has fully faded by here */
-      if (past !== wasPast) { heroEl.classList.toggle('is-past', past); wasPast = past; }
     };
 
     var requestHero = function () {
@@ -120,10 +117,9 @@
     var syncHero = function () {
       if (heroWide.matches) { measure(); requestHero(); }
       else {
-        heroEl.classList.remove('hero--scroll', 'is-past');
+        heroEl.classList.remove('hero--scroll');
         heroEl.style.removeProperty('--h');
         document.documentElement.style.removeProperty('--brand-in');
-        wasPast = false;
       }
     };
 

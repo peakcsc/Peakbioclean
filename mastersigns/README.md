@@ -64,6 +64,17 @@ silently produce a flat, unblended rectangle. The blend has to sit on
 And `.hero__pin` needs an ink background of its own, because that is the
 backdrop the film actually blends against.
 
+The wording and the calls to action do not fade. They stay at full opacity,
+clickable and focusable, for the whole hero scroll. Because the film grows
+across the copy column, an ink scrim rises behind the copy in step with the
+expansion (`--e`, not `--h`: the film reaches the copy before a scroll-timed
+ramp would be up). The scrim is the page colour, so it is invisible once the
+film has faded — it only does work where the sign would otherwise sit under
+the text. Verified by hiding the copy, sampling the brightest ground it
+actually sits on, and computing contrast for the weakest of its colours
+across 21 scroll positions at 1200, 1280, 1440, 1920 and 2560: worst 4.85:1,
+clear of AA.
+
 `site.js` measures the offset and scale once per resize as `--fx` / `--fk`;
 the scroll handler writes only `--h` (0 to 1), and CSS derives `--e`, the
 expansion, finishing at `--h` 0.5. The track is 130vh, giving 30vh of pinned

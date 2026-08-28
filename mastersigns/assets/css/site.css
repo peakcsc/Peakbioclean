@@ -277,14 +277,16 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media (min-width:1200px){
   /* overflow:hidden on .hero would make it the scroll container and stop
      .hero__pin from ever sticking; the clipping lives on the pin instead */
-  .hero--scroll{height:130vh;min-height:0;display:block;overflow:visible}
+  /* --e is the expansion, finished by 50% of the track. Declared on the
+     section so both the film and the pin's scrim can read it. */
+  .hero--scroll{height:130vh;min-height:0;display:block;overflow:visible;
+    --e:clamp(0, calc(var(--h) / .5), 1)}
   .hero--scroll .hero__pin{position:sticky;top:0;height:100vh;overflow:hidden;
     display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%;
     background:var(--ink)}
 
   /* --e is the expansion, finished by 55% of the track */
   .hero--scroll .hero__film{
-    --e:clamp(0, calc(var(--h) / .5), 1);
     transform-origin:center center;will-change:transform,opacity;
     transform:translate(calc(var(--fx,0px) * var(--e)), -50%)
               scale(calc(1 + (var(--fk,1) - 1) * var(--e)))
@@ -293,11 +295,19 @@ ul,ol{margin:0;padding:0;list-style:none}
        instead of holding an empty screen */
     opacity:clamp(0, calc((.95 - var(--h)) * 3), 1)}
 
-  .hero--scroll .hero__copy{will-change:transform,opacity;
-    opacity:clamp(0, calc(1 - var(--h) * 3.4), 1);
-    transform:translateY(calc(var(--h) * -70px))}
-  /* once the copy has faded it must stop being clickable or focusable */
-  .hero--scroll.is-past .hero__over{visibility:hidden;pointer-events:none}
+  /* The wording and the calls to action stay put and stay readable for the
+     whole hero scroll -- they do not fade and are never hidden, so the
+     buttons remain clickable and focusable throughout. Because the film
+     grows across the copy column, an ink scrim rises behind the copy as it
+     expands. It is the page colour, so once the film has faded it is
+     invisible; it only does work where the sign would otherwise be under
+     the text. Sits above the film, below the copy. */
+  .hero--scroll .hero__pin::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(90deg,
+      var(--ink) 0%, var(--ink) 48%, rgba(20,16,46,.62) 62%,
+      rgba(20,16,46,.18) 72%, rgba(20,16,46,0) 82%);
+    opacity:clamp(0, calc(var(--e) * 8), 1)}
 }
 
 /* ---------- 7c. Standing film ----------
