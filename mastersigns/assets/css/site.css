@@ -264,9 +264,11 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 
 /* ---------- 7b. Hero scroll expansion ----------
-   Scrolling off the hero opens the sign out: it turns to face you and grows,
-   holds briefly, then fades, handing straight over to the next section with
-   no empty stretch. Because the film is blended rather than boxed there is no
+   Scrolling off the hero opens the sign out: it turns to face you, grows and
+   then stays, right up to the moment the pinned section releases and the
+   next one scrolls over it. It deliberately does not fade: the copy no
+   longer fades either, so fading the film only produced a stretch of empty
+   hero to scroll past. Because the film is blended rather than boxed there is no
    edge to feather -- it is simply lit sign over page colour throughout.
    Driven by --h (0..1) from site.js; transform and opacity only.
 
@@ -290,10 +292,7 @@ ul,ol{margin:0;padding:0;list-style:none}
     transform-origin:center center;will-change:transform,opacity;
     transform:translate(calc(var(--fx,0px) * var(--e)), -50%)
               scale(calc(1 + (var(--fk,1) - 1) * var(--e)))
-              rotateY(calc((1 - var(--e)) * -8deg));
-    /* gone by 95% of the track, so the pin releases into the next section
-       instead of holding an empty screen */
-    opacity:clamp(0, calc((.95 - var(--h)) * 3), 1)}
+              rotateY(calc((1 - var(--e)) * -8deg))}
 
   /* The wording and the calls to action stay put and stay readable for the
      whole hero scroll -- they do not fade and are never hidden, so the

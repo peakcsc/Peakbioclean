@@ -104,8 +104,9 @@
       var h = span > 0 ? -r.top / span : 0;
       h = h < 0 ? 0 : (h > 1 ? 1 : h);
       heroEl.style.setProperty('--h', h.toFixed(4));
-      /* the standing wordmark comes up as the film goes down */
-      var bin = (h - 0.45) / 0.35;
+      /* The hero film now stays to the end, so the standing background film
+         arrives at the handoff rather than cross-fading with it. */
+      var bin = (h - 0.82) / 0.18;
       bin = bin < 0 ? 0 : (bin > 1 ? 1 : bin);
       document.documentElement.style.setProperty('--brand-in', bin.toFixed(3));
     };

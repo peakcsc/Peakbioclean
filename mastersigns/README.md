@@ -72,16 +72,23 @@ ramp would be up). The scrim is the page colour, so it is invisible once the
 film has faded — it only does work where the sign would otherwise sit under
 the text. Verified by hiding the copy, sampling the brightest ground it
 actually sits on, and computing contrast for the weakest of its colours
-across 21 scroll positions at 1200, 1280, 1440, 1920 and 2560: worst 4.85:1,
-clear of AA.
+across 21 scroll positions at 1200, 1280, 1440, 1920 and 2560: worst 5.91:1,
+clear of AA. Re-measured after the film stopped fading, since it now sits at
+full strength behind the copy at the end of the scroll.
 
 `site.js` measures the offset and scale once per resize as `--fx` / `--fk`;
 the scroll handler writes only `--h` (0 to 1), and CSS derives `--e`, the
 expansion, finishing at `--h` 0.5. The track is 130vh, giving 30vh of pinned
-travel, and the film is gone by `--h` 0.95 so the pin releases into the next
-section rather than holding an empty screen. Measured at 1440x900: the film
-is effectively gone at 350px of scroll and the trigger strip is in view by
-450px, leaving about 100px (11vh) of ink between them.
+travel.
+
+The film does not fade out. It stays at full opacity and on screen right up
+to the moment the pinned section releases and the next one scrolls over it.
+It used to fade, back when the copy faded with it; once the copy started
+staying, that fade only produced a stretch of empty hero — measured at
+1440x900, the sign dimmed for 80px and was then fully absent for another
+100px before the trigger strip arrived. The standing background film now
+comes in at the handoff (`--brand-in` over `--h` 0.82 to 1.0) instead of
+cross-fading with the hero film.
 
 ## The standing film
 
