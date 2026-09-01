@@ -75,7 +75,7 @@ def main():
     logo = image_reader(ROOT / "assets" / "logo" / "logo-white-2.png")
     c.drawImage(logo, 0.62 * inch, H - 0.88 * inch, width=2.15 * inch, height=0.60 * inch, mask="auto")
 
-    pill(c, 3.25 * inch, H - 0.82 * inch, "AVAILABLE 24/7")
+    pill(c, W - 2.25 * inch, H - 0.82 * inch, "AVAILABLE 24/7")
 
     c.setFillColor(colors.white)
     c.setFont("Helvetica-Bold", 25)
@@ -84,17 +84,10 @@ def main():
 
     c.setFont("Helvetica", 9.4)
     c.setFillColor(colors.HexColor("#C8D7D0"))
-    wrapped(c, "Discreet, certified support for trauma, crime scene, death cleanup, and specialty biohazard jobs across Florida.", 0.62 * inch, H - 2.05 * inch, 5.65 * inch, size=9.4, leading=11, color=colors.HexColor("#C8D7D0"))
+    wrapped(c, "Discreet, certified support for trauma, crime scene, death cleanup, and specialty biohazard jobs across Florida.", 0.62 * inch, H - 2.05 * inch, 6.9 * inch, size=9.4, leading=11, color=colors.HexColor("#C8D7D0"))
     c.setFont("Helvetica-Bold", 11)
     c.setFillColor(green)
     c.drawString(0.62 * inch, H - 2.36 * inch, "407-758-0682  |  info@peakbioclean.com  |  PeakBioClean.com")
-
-    photo = image_reader(ROOT / "assets" / "photos" / "technician-portrait-blue2.png")
-    c.saveState()
-    c.roundRect(W - 1.92 * inch, H - 2.38 * inch, 1.24 * inch, 1.48 * inch, 18, fill=0, stroke=0)
-    c.clipPath(c.beginPath())
-    c.drawImage(photo, W - 2.05 * inch, H - 2.62 * inch, width=1.52 * inch, height=2.02 * inch, mask="auto")
-    c.restoreState()
 
     left = 0.62 * inch
     right = 4.18 * inch
