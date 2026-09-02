@@ -1,0 +1,1111 @@
+{
+  "SERVICES": [
+    [
+      "Unattended Death Cleanup",
+      "unattended-death-cleanup"
+    ],
+    [
+      "Crime Scene Cleanup",
+      "crime-scene-cleanup"
+    ],
+    [
+      "Biohazard Waste Disposal",
+      "biohazard-waste-disposal"
+    ],
+    [
+      "Trauma Cleanup",
+      "trauma-cleanup"
+    ],
+    [
+      "Compassionate & Discreet Suicide Cleanup",
+      "suicide-cleanup"
+    ],
+    [
+      "Decomposition Cleanup",
+      "decomposition-cleanup"
+    ],
+    [
+      "Blood Cleanup",
+      "blood-cleanup"
+    ],
+    [
+      "Hoarding Cleanup",
+      "hoarding-cleanup"
+    ],
+    [
+      "Rodent Waste Removal",
+      "rodent-waste-removal"
+    ],
+    [
+      "Sewage Cleanup",
+      "sewage-cleanup"
+    ],
+    [
+      "Urine & Feces Cleanup",
+      "urine-and-feces-cleanup"
+    ],
+    [
+      "Homeless Encampment Cleanup",
+      "homeless-camp-cleanup"
+    ],
+    [
+      "Gross Filth Cleanup",
+      "gross-filth-cleanup"
+    ],
+    [
+      "Infectious Disease Cleanup",
+      "infectious-disease-cleanup"
+    ],
+    [
+      "Medical Waste Cleanup",
+      "medical-waste-cleanup"
+    ],
+    [
+      "Smoke Damage Cleanup",
+      "smoke-damage-cleanup"
+    ],
+    [
+      "Private & Emergency Vehicle Cleanup",
+      "vehicle-cleanup"
+    ],
+    [
+      "COVID-19 Cleanup",
+      "covid-19-cleanup"
+    ],
+    [
+      "Accident Cleanup",
+      "accident-cleanup"
+    ],
+    [
+      "Homicide Cleanup",
+      "homicide-cleanup"
+    ],
+    [
+      "Commercial Biohazard Cleanup",
+      "commercial-biohazard-cleanup"
+    ],
+    [
+      "Tear Gas Cleanup",
+      "tear-gas-cleanup"
+    ],
+    [
+      "Drug Lab Cleanup",
+      "drug-lab-cleanup"
+    ],
+    [
+      "Meth Lab Cleanup",
+      "meth-lab-cleanup"
+    ],
+    [
+      "Meth Lab Testing",
+      "meth-lab-testing"
+    ],
+    [
+      "Water Removal & Extraction",
+      "water-removal"
+    ],
+    [
+      "Water Damage Cleanup & Repair",
+      "water-damage-cleanup"
+    ],
+    [
+      "Flood Cleanup",
+      "flood-cleanup"
+    ],
+    [
+      "Flood Restoration",
+      "flood-restoration"
+    ],
+    [
+      "Water Damage Mold Removal",
+      "water-damage-mold-removal"
+    ],
+    [
+      "Fire Damage Cleanup & Repair",
+      "fire-damage-cleanup"
+    ],
+    [
+      "Mold Remediation & Removal",
+      "mold-remediation"
+    ],
+    [
+      "Mold Damage Restoration",
+      "mold-damage-restoration"
+    ],
+    [
+      "Storm Damage Cleanup",
+      "storm-damage-cleanup"
+    ],
+    [
+      "Storm Damage Restoration",
+      "storm-damage-restoration"
+    ],
+    [
+      "Hurricane Damage Cleanup",
+      "hurricane-damage-cleanup"
+    ],
+    [
+      "Hurricane Restoration",
+      "hurricane-restoration"
+    ],
+    [
+      "Deep Cleaning",
+      "deep-cleaning"
+    ],
+    [
+      "Rental Property Deep Cleaning",
+      "rental-deep-cleaning"
+    ],
+    [
+      "Move-Out / Move-In Cleaning",
+      "move-cleaning"
+    ],
+    [
+      "Estate & Property Cleanout",
+      "estate-cleanout"
+    ],
+    [
+      "Odor Removal & Deodorization",
+      "odor-removal"
+    ],
+    [
+      "Eviction Cleanout",
+      "eviction-cleanout"
+    ],
+    [
+      "Vandalism & Graffiti Cleanup",
+      "vandalism-cleanup"
+    ],
+    [
+      "Animal Waste & Deceased Animal Removal",
+      "animal-waste-removal"
+    ],
+    [
+      "Nicotine & Cigarette Smoke Residue Removal",
+      "nicotine-odor-removal"
+    ],
+    [
+      "Chemical Spill Cleanup",
+      "chemical-spill-cleanup"
+    ],
+    [
+      "Industrial & Workplace Accident Cleanup",
+      "industrial-accident-cleanup"
+    ],
+    [
+      "Attic & Crawl Space Decontamination",
+      "attic-crawlspace-decontamination"
+    ],
+    [
+      "Junk & Debris Removal",
+      "junk-debris-removal"
+    ],
+    [
+      "Jail & Detention Cell Cleanup",
+      "jail-cell-cleanup"
+    ]
+  ],
+  "SVC": {
+    "unattended-death-cleanup": {
+      "title": "Unattended Death Cleanup",
+      "sub": "Discreet, compassionate cleanup and decontamination after an unattended death.",
+      "intros": [
+        "When a death goes undiscovered for hours, days, or longer, the affected area requires professional biohazard remediation — not ordinary cleaning. Bodily fluids and decomposition byproducts can penetrate flooring, subfloor, and structural materials and pose real health risks.",
+        "Peak Bio-Clean responds quickly and quietly, treating both the property and your family with the dignity the situation deserves. We handle the entire process so loved ones never have to."
+      ],
+      "incl": [
+        "Full assessment of affected porous and non-porous materials",
+        "Safe removal and disposal of contaminated items",
+        "Hospital-grade disinfection and decontamination",
+        "Odor neutralization at the molecular level",
+        "Discreet, unmarked vehicles and uniforms"
+      ]
+    },
+    "crime-scene-cleanup": {
+      "title": "Crime Scene Cleanup",
+      "sub": "Certified remediation of crime scenes once authorities have released the property.",
+      "intros": [
+        "After law enforcement completes their work, the cleanup is left to the property owner or family. Peak Bio-Clean steps in to restore the scene safely, removing blood, bodily fluids, and other biohazards in full compliance with OSHA and state regulations.",
+        "Our technicians are trained to work methodically and respectfully, returning the space to a safe, sanitary condition."
+      ],
+      "incl": [
+        "Blood and bodily-fluid removal",
+        "Fingerprint powder and chemical residue cleanup",
+        "Structural decontamination and disposal",
+        "Regulated medical-waste transport",
+        "Coordination with insurance"
+      ]
+    },
+    "biohazard-waste-disposal": {
+      "title": "Biohazard Waste Disposal",
+      "sub": "Licensed pickup, transport, and disposal of regulated biohazardous waste.",
+      "intros": [
+        "Biohazardous and infectious waste cannot be thrown away with ordinary trash — it must be handled, transported, and destroyed under strict federal and state rules. Peak Bio-Clean is equipped and certified to do exactly that.",
+        "From a single contaminated cleanup to large-scale waste removal, we take everything safely and legally, sparing you the liability and the hassle."
+      ],
+      "incl": [
+        "Certified hazardous-waste hauling",
+        "Sealed, compliant containment",
+        "Manifested chain-of-custody documentation",
+        "EPA-compliant final disposal",
+        "Service for homes and businesses"
+      ]
+    },
+    "trauma-cleanup": {
+      "title": "Trauma Cleanup",
+      "sub": "Professional cleanup and restoration after a traumatic incident.",
+      "intros": [
+        "Traumatic events — accidents, medical emergencies, and violent incidents — can leave behind blood and biohazards that require specialized handling. Peak Bio-Clean restores the affected area so you don't have to face it alone.",
+        "We arrive 24/7, work with compassion and discretion, and coordinate directly with your insurance whenever possible."
+      ],
+      "incl": [
+        "Rapid 24/7 emergency response",
+        "Containment and biohazard removal",
+        "Deep disinfection and sanitizing",
+        "Odor and stain remediation",
+        "Insurance coordination"
+      ]
+    },
+    "suicide-cleanup": {
+      "title": "Compassionate & Discreet Suicide Cleanup",
+      "sub": "Respectful, confidential cleanup so families can begin to heal.",
+      "intros": [
+        "Few situations are more painful than the loss of a loved one to suicide. Peak Bio-Clean handles the cleanup with the utmost compassion and discretion, allowing your family the space to grieve.",
+        "Our trained technicians remove all biohazards, fully decontaminate the area, and restore the space — quietly and respectfully."
+      ],
+      "incl": [
+        "Confidential, judgment-free service",
+        "Complete biohazard decontamination",
+        "Removal of affected materials",
+        "Odor neutralization",
+        "Grief-sensitive coordination"
+      ]
+    },
+    "decomposition-cleanup": {
+      "title": "Decomposition Cleanup",
+      "sub": "Thorough decontamination and odor removal after human or animal decomposition.",
+      "intros": [
+        "Decomposition releases fluids, bacteria, and powerful odors that soak into porous materials and spread through a structure. Surface cleaning is never enough. Peak Bio-Clean performs complete remediation down to the source.",
+        "We identify every affected material, remove what cannot be saved, and treat the area until it is safe and odor-free."
+      ],
+      "incl": [
+        "Source-level contamination removal",
+        "Subfloor and structural treatment",
+        "Industrial odor neutralization",
+        "Antimicrobial application",
+        "Air-quality restoration"
+      ]
+    },
+    "blood-cleanup": {
+      "title": "Blood Cleanup",
+      "sub": "Safe, OSHA-compliant blood and bodily-fluid cleanup.",
+      "intros": [
+        "Blood is a potential carrier of bloodborne pathogens such as HIV and hepatitis, and it must be handled with proper training and protective equipment. Peak Bio-Clean removes and disinfects blood safely and completely.",
+        "Whether from an accident, injury, or medical event, we restore the area to a sanitary condition."
+      ],
+      "incl": [
+        "Bloodborne-pathogen-safe handling",
+        "Complete removal and disinfection",
+        "Disposal as regulated medical waste",
+        "Surface and subsurface treatment",
+        "Verification of decontamination"
+      ]
+    },
+    "hoarding-cleanup": {
+      "title": "Hoarding Cleanup",
+      "sub": "Compassionate, organized clean-outs that restore safe, livable spaces.",
+      "intros": [
+        "Hoarding situations often involve biohazards, structural concerns, and deeply personal belongings. Peak Bio-Clean approaches every clean-out with patience, respect, and zero judgment.",
+        "We work alongside families and individuals to sort, remove, sanitize, and restore the home to a safe and livable condition."
+      ],
+      "incl": [
+        "Compassionate, judgment-free approach",
+        "Sorting and removal of clutter and waste",
+        "Biohazard and waste decontamination",
+        "Deep cleaning and deodorizing",
+        "Coordination with families and case managers"
+      ]
+    },
+    "rodent-waste-removal": {
+      "title": "Rodent Waste Removal",
+      "sub": "Cleanup and decontamination of rodent droppings, nesting, and contamination.",
+      "intros": [
+        "Rodent droppings and urine can carry serious diseases such as hantavirus and salmonella, and disturbing them improperly can release airborne contaminants. Peak Bio-Clean removes and decontaminates rodent waste safely.",
+        "We clean affected areas, sanitize surfaces, and help prevent the spread of contamination."
+      ],
+      "incl": [
+        "Safe droppings and nesting removal",
+        "Disease-aware containment",
+        "Surface and air decontamination",
+        "Odor elimination",
+        "Sanitizing of affected areas"
+      ]
+    },
+    "sewage-cleanup": {
+      "title": "Sewage Cleanup",
+      "sub": "Fast extraction and decontamination of sewage backups and spills.",
+      "intros": [
+        "A sewage backup is more than a mess — it's a biohazard. Raw sewage carries bacteria, viruses, and parasites that demand professional remediation. Peak Bio-Clean responds quickly to extract, sanitize, and dry the affected area.",
+        "We mitigate damage fast to protect your property and your health."
+      ],
+      "incl": [
+        "Rapid sewage extraction",
+        "Contaminated-material removal",
+        "Disinfection and sanitizing",
+        "Structural drying",
+        "Odor and mold prevention"
+      ]
+    },
+    "urine-and-feces-cleanup": {
+      "title": "Urine & Feces Cleanup",
+      "sub": "Decontamination of urine and feces from homes, properties, and vehicles.",
+      "intros": [
+        "Accumulated urine and feces — whether from animals, neglect, or hoarding situations — pose genuine health hazards and stubborn odors. Peak Bio-Clean fully decontaminates and deodorizes the affected space.",
+        "We treat the contamination at the source so the area is truly safe again."
+      ],
+      "incl": [
+        "Complete waste removal",
+        "Deep disinfection",
+        "Source-level odor treatment",
+        "Porous-material assessment",
+        "Sanitizing and restoration"
+      ]
+    },
+    "homeless-camp-cleanup": {
+      "title": "Homeless Encampment Cleanup",
+      "sub": "Safe, respectful cleanup and biohazard removal at encampment sites.",
+      "intros": [
+        "Encampment sites often contain biohazards, sharps, and hazardous waste that require trained handling. Peak Bio-Clean cleans and decontaminates these areas for property owners and managers.",
+        "We work safely and respectfully, restoring the property to a usable condition."
+      ],
+      "incl": [
+        "Sharps and needle removal",
+        "Biohazard and waste cleanup",
+        "Debris and property removal",
+        "Disinfection of affected areas",
+        "Disposal in compliance with regulations"
+      ]
+    },
+    "gross-filth-cleanup": {
+      "title": "Gross Filth Cleanup",
+      "sub": "Restoration of severely neglected or unsanitary properties.",
+      "intros": [
+        "When a property has fallen into severe disrepair and unsanitary conditions, it requires far more than standard cleaning. Peak Bio-Clean handles gross-filth situations with the right equipment, training, and care.",
+        "We remove waste and contamination, sanitize thoroughly, and restore the space to a safe, livable standard."
+      ],
+      "incl": [
+        "Heavy waste and debris removal",
+        "Biohazard decontamination",
+        "Deep cleaning and sanitizing",
+        "Odor remediation",
+        "Full property restoration"
+      ]
+    },
+    "infectious-disease-cleanup": {
+      "title": "Infectious Disease Cleanup",
+      "sub": "Disinfection and decontamination to control infectious-disease exposure.",
+      "intros": [
+        "Infectious diseases can linger on surfaces and spread quickly without proper disinfection. Peak Bio-Clean uses hospital-grade products and EPA-approved protocols to decontaminate affected spaces.",
+        "We help homes, businesses, and facilities reduce the risk of exposure and return to safe operation."
+      ],
+      "incl": [
+        "EPA-approved disinfectants",
+        "Hospital-grade decontamination",
+        "High-touch surface treatment",
+        "Air and surface sanitizing",
+        "Documentation of completed work"
+      ]
+    },
+    "medical-waste-cleanup": {
+      "title": "Medical Waste Cleanup",
+      "sub": "Compliant handling and disposal of regulated medical waste.",
+      "intros": [
+        "Medical waste — sharps, contaminated supplies, and infectious materials — is governed by strict regulations. Peak Bio-Clean collects, transports, and disposes of it in full compliance.",
+        "We serve clinics, facilities, and residences that need safe, documented medical-waste handling."
+      ],
+      "incl": [
+        "Sharps and biohazard collection",
+        "Regulated transport",
+        "Manifested disposal",
+        "Facility and residential service",
+        "Compliance documentation"
+      ]
+    },
+    "smoke-damage-cleanup": {
+      "title": "Smoke Damage Cleanup",
+      "sub": "Cleanup, deodorizing, and restoration after smoke and soot damage.",
+      "intros": [
+        "Smoke and soot leave behind corrosive residue and persistent odor that spread far beyond the burn area. Peak Bio-Clean cleans, deodorizes, and restores smoke-damaged spaces.",
+        "We address residue at the source and neutralize odor so your property feels whole again."
+      ],
+      "incl": [
+        "Soot and residue removal",
+        "Surface and content cleaning",
+        "Deep deodorizing",
+        "Air-quality treatment",
+        "Restoration support"
+      ]
+    },
+    "vehicle-cleanup": {
+      "title": "Private & Emergency Vehicle Cleanup",
+      "sub": "Biohazard decontamination of personal and emergency vehicles.",
+      "intros": [
+        "Vehicles can be the site of accidents, medical events, or biohazard exposure. Peak Bio-Clean decontaminates cars, trucks, and emergency vehicles safely and thoroughly.",
+        "We restore the interior to a clean, sanitary, and safe condition."
+      ],
+      "incl": [
+        "Blood and biohazard removal",
+        "Interior decontamination",
+        "Disinfection and sanitizing",
+        "Odor neutralization",
+        "Service for fleets and individuals"
+      ]
+    },
+    "covid-19-cleanup": {
+      "title": "COVID-19 Cleanup",
+      "sub": "Disinfection of homes and businesses for COVID-19 and other viruses.",
+      "intros": [
+        "Viral contamination requires proper disinfection to reduce the risk of spread. Peak Bio-Clean uses EPA-approved products and proven protocols to sanitize homes and workplaces.",
+        "We help you reopen and return to daily life with confidence."
+      ],
+      "incl": [
+        "EPA-approved viral disinfectants",
+        "High-touch surface focus",
+        "Whole-area sanitizing",
+        "Fast turnaround",
+        "Service for homes and businesses"
+      ]
+    },
+    "accident-cleanup": {
+      "title": "Accident Cleanup",
+      "sub": "Safe cleanup and decontamination after accidents and injuries.",
+      "intros": [
+        "Accidents at home, at work, or on the road can leave behind blood and biohazards that require proper, safe handling. Peak Bio-Clean responds quickly to clean and decontaminate the area.",
+        "We work with compassion and discretion, and coordinate with your insurance whenever possible."
+      ],
+      "incl": [
+        "Rapid 24/7 response",
+        "Blood and biohazard removal",
+        "Disinfection and sanitizing",
+        "Odor neutralization",
+        "Insurance coordination"
+      ]
+    },
+    "homicide-cleanup": {
+      "title": "Homicide Cleanup",
+      "sub": "Discreet, certified cleanup after a homicide once the scene is released.",
+      "intros": [
+        "After investigators finish their work, the cleanup is left to the family or property owner. Peak Bio-Clean restores the scene safely, removing blood and biohazards in full compliance with OSHA and state regulations.",
+        "Our technicians work methodically, respectfully, and confidentially."
+      ],
+      "incl": [
+        "Blood and bodily-fluid removal",
+        "Structural decontamination",
+        "Regulated waste disposal",
+        "Odor neutralization",
+        "Insurance coordination"
+      ]
+    },
+    "commercial-biohazard-cleanup": {
+      "title": "Commercial Biohazard Cleanup",
+      "sub": "Biohazard cleanup for businesses, offices, and facilities.",
+      "intros": [
+        "Businesses face biohazard situations too, from accidents to infectious contamination. Peak Bio-Clean provides discreet, compliant cleanup with minimal disruption to your operations.",
+        "We respond 24/7 and document everything for your records and liability protection."
+      ],
+      "incl": [
+        "Discreet, fast response",
+        "OSHA-compliant decontamination",
+        "Regulated waste disposal",
+        "Documentation provided",
+        "Minimal business disruption"
+      ]
+    },
+    "tear-gas-cleanup": {
+      "title": "Tear Gas Cleanup",
+      "sub": "Removal and decontamination of tear gas and chemical residue.",
+      "intros": [
+        "Tear gas leaves behind chemical residue that clings to surfaces and irritates the eyes, skin, and lungs. Peak Bio-Clean safely removes residue from homes, businesses, and vehicles.",
+        "We ventilate, clean, and decontaminate so the space is safe to occupy again."
+      ],
+      "incl": [
+        "Chemical residue removal",
+        "Surface decontamination",
+        "Air-quality treatment",
+        "Odor neutralization",
+        "Home and vehicle service"
+      ]
+    },
+    "drug-lab-cleanup": {
+      "title": "Drug Lab Cleanup",
+      "sub": "Certified decontamination of former drug-production sites.",
+      "intros": [
+        "Illegal drug labs leave behind toxic chemicals and residue that pose serious health risks. Peak Bio-Clean is equipped to safely decontaminate and restore these properties.",
+        "We follow strict protocols to make the property safe and compliant."
+      ],
+      "incl": [
+        "Hazardous chemical removal",
+        "Surface and air decontamination",
+        "Safe disposal of materials",
+        "Compliance documentation",
+        "Full property restoration"
+      ]
+    },
+    "meth-lab-cleanup": {
+      "title": "Meth Lab Cleanup",
+      "sub": "Safe remediation of meth-contaminated properties.",
+      "intros": [
+        "Methamphetamine production contaminates surfaces, ventilation, and structural materials with toxic residue. Peak Bio-Clean decontaminates the property to safe, compliant standards.",
+        "We remove residue at the source and verify the space is safe."
+      ],
+      "incl": [
+        "Toxic residue removal",
+        "HVAC and surface decontamination",
+        "Hazardous material disposal",
+        "Post-cleanup verification",
+        "Compliance documentation"
+      ]
+    },
+    "meth-lab-testing": {
+      "title": "Meth Lab Testing",
+      "sub": "Surface testing to detect and confirm meth contamination.",
+      "intros": [
+        "Before buying, renting, or remediating a property, meth residue testing reveals whether contamination is present. Peak Bio-Clean performs accurate surface sampling and reporting.",
+        "Results guide a clear plan for decontamination if needed."
+      ],
+      "incl": [
+        "Professional surface sampling",
+        "Accurate lab analysis",
+        "Clear written report",
+        "Pre-purchase and post-cleanup testing",
+        "Decontamination guidance"
+      ]
+    },
+    "water-removal": {
+      "title": "Water Removal & Extraction",
+      "sub": "Fast removal of standing water to limit damage.",
+      "intros": [
+        "Standing water spreads fast and causes structural damage and mold within hours. Peak Bio-Clean extracts water quickly and begins drying immediately.",
+        "We respond 24/7 to protect your property and reduce loss."
+      ],
+      "incl": [
+        "Rapid water extraction",
+        "Structural drying",
+        "Moisture monitoring",
+        "Mold prevention",
+        "Insurance coordination"
+      ]
+    },
+    "water-damage-cleanup": {
+      "title": "Water Damage Cleanup & Repair",
+      "sub": "Complete water damage cleanup, drying, and restoration.",
+      "intros": [
+        "From burst pipes to leaks and floods, water damage requires fast, thorough mitigation. Peak Bio-Clean extracts water, dries the structure, and restores damaged areas.",
+        "We handle the full process and work directly with your insurance."
+      ],
+      "incl": [
+        "Water extraction and drying",
+        "Damaged-material removal",
+        "Sanitizing and deodorizing",
+        "Repairs and restoration",
+        "Insurance coordination"
+      ]
+    },
+    "flood-cleanup": {
+      "title": "Flood Cleanup",
+      "sub": "Rapid cleanup and sanitizing after flooding.",
+      "intros": [
+        "Floodwater carries contaminants and saturates everything it touches. Peak Bio-Clean removes water, sanitizes affected areas, and dries the structure to prevent mold.",
+        "We respond fast to limit damage to your home or business."
+      ],
+      "incl": [
+        "Floodwater extraction",
+        "Contaminant sanitizing",
+        "Structural drying",
+        "Mold prevention",
+        "Debris removal"
+      ]
+    },
+    "flood-restoration": {
+      "title": "Flood Restoration",
+      "sub": "Full restoration of flood-damaged properties.",
+      "intros": [
+        "After the water is gone, properties need drying, decontamination, and rebuilding. Peak Bio-Clean restores flood-damaged homes and businesses to pre-loss condition.",
+        "We manage the process from cleanup through repairs."
+      ],
+      "incl": [
+        "Complete drying and decontamination",
+        "Damaged-material removal",
+        "Mold prevention",
+        "Repairs and rebuilding",
+        "Insurance coordination"
+      ]
+    },
+    "water-damage-mold-removal": {
+      "title": "Water Damage Mold Removal",
+      "sub": "Mold removal and prevention after water damage.",
+      "intros": [
+        "Lingering moisture from water damage leads to mold growth that threatens health and structure. Peak Bio-Clean dries the source and safely removes mold.",
+        "We treat affected areas and help prevent regrowth."
+      ],
+      "incl": [
+        "Moisture source drying",
+        "Safe mold removal",
+        "Containment and air filtration",
+        "Antimicrobial treatment",
+        "Regrowth prevention"
+      ]
+    },
+    "fire-damage-cleanup": {
+      "title": "Fire Damage Cleanup & Repair",
+      "sub": "Cleanup, deodorizing, and repair after fire damage.",
+      "intros": [
+        "Fire leaves behind soot, corrosive residue, smoke odor, and water damage from firefighting. Peak Bio-Clean cleans, deodorizes, and restores fire-damaged properties.",
+        "We handle everything from soot removal to rebuilding."
+      ],
+      "incl": [
+        "Soot and residue removal",
+        "Smoke odor neutralization",
+        "Water damage mitigation",
+        "Content cleaning",
+        "Repairs and restoration"
+      ]
+    },
+    "mold-remediation": {
+      "title": "Mold Remediation & Removal",
+      "sub": "Safe containment and removal of mold growth.",
+      "intros": [
+        "Mold spreads through moisture and can cause health problems and structural damage. Peak Bio-Clean contains and removes mold using EPA-approved methods.",
+        "We address the moisture source and prevent it from returning."
+      ],
+      "incl": [
+        "Mold inspection and containment",
+        "Safe removal",
+        "Air filtration",
+        "Antimicrobial treatment",
+        "Moisture-source correction"
+      ]
+    },
+    "mold-damage-restoration": {
+      "title": "Mold Damage Restoration",
+      "sub": "Restoration of properties damaged by mold.",
+      "intros": [
+        "Severe mold can ruin drywall, flooring, and other materials. Peak Bio-Clean removes mold and restores affected areas to a healthy, sound condition.",
+        "We rebuild what is damaged and restore healthy indoor air."
+      ],
+      "incl": [
+        "Mold removal",
+        "Damaged-material replacement",
+        "Air-quality restoration",
+        "Antimicrobial treatment",
+        "Regrowth prevention"
+      ]
+    },
+    "storm-damage-cleanup": {
+      "title": "Storm Damage Cleanup",
+      "sub": "Fast cleanup and stabilization after storms.",
+      "intros": [
+        "Storms leave behind debris, water intrusion, and structural hazards. Peak Bio-Clean clears debris, extracts water, and secures your property quickly.",
+        "We respond 24/7 to limit further damage."
+      ],
+      "incl": [
+        "Debris removal",
+        "Water extraction",
+        "Emergency tarping and board-up",
+        "Drying and sanitizing",
+        "Insurance coordination"
+      ]
+    },
+    "storm-damage-restoration": {
+      "title": "Storm Damage Restoration",
+      "sub": "Complete restoration after storm damage.",
+      "intros": [
+        "After the storm passes, properties need drying, repairs, and rebuilding. Peak Bio-Clean restores storm-damaged homes and businesses to pre-storm condition.",
+        "We manage cleanup through full restoration."
+      ],
+      "incl": [
+        "Structural drying",
+        "Damaged-material removal",
+        "Repairs and rebuilding",
+        "Mold prevention",
+        "Insurance coordination"
+      ]
+    },
+    "hurricane-damage-cleanup": {
+      "title": "Hurricane Damage Cleanup",
+      "sub": "Rapid hurricane cleanup, water removal, and board-up.",
+      "intros": [
+        "Hurricanes bring wind, water, and debris damage that demand a fast response. Peak Bio-Clean removes debris and water and stabilizes your property.",
+        "We are available 24/7 across Florida before and after the storm."
+      ],
+      "incl": [
+        "Debris and water removal",
+        "Emergency board-up and tarping",
+        "Structural drying",
+        "Sanitizing",
+        "Insurance coordination"
+      ]
+    },
+    "hurricane-restoration": {
+      "title": "Hurricane Restoration",
+      "sub": "Full restoration after hurricane damage.",
+      "intros": [
+        "Hurricane damage often requires extensive drying, decontamination, and rebuilding. Peak Bio-Clean restores affected properties to pre-storm condition.",
+        "We handle the entire recovery process."
+      ],
+      "incl": [
+        "Water and wind damage repair",
+        "Structural drying",
+        "Mold prevention",
+        "Repairs and rebuilding",
+        "Insurance coordination"
+      ]
+    },
+    "deep-cleaning": {
+      "title": "Deep Cleaning",
+      "sub": "Detailed deep cleaning and disinfection for any space.",
+      "intros": [
+        "Some spaces need far more than routine cleaning. Peak Bio-Clean provides thorough deep cleaning and disinfection for homes and businesses.",
+        "We sanitize top to bottom for a fresh, healthy space."
+      ],
+      "incl": [
+        "Top-to-bottom cleaning",
+        "Disinfection and sanitizing",
+        "Odor removal",
+        "High-touch surface focus",
+        "Homes and businesses"
+      ]
+    },
+    "rental-deep-cleaning": {
+      "title": "Rental Property Deep Cleaning",
+      "sub": "Turnover deep cleaning to get units rent-ready.",
+      "intros": [
+        "Between tenants, rental units often need a deep reset. Peak Bio-Clean sanitizes and refreshes properties so they are clean and rent-ready fast.",
+        "We handle messes routine cleaners cannot."
+      ],
+      "incl": [
+        "Full unit deep cleaning",
+        "Disinfection and sanitizing",
+        "Odor removal",
+        "Appliance and fixture cleaning",
+        "Fast turnaround"
+      ]
+    },
+    "move-cleaning": {
+      "title": "Move-Out / Move-In Cleaning",
+      "sub": "Complete cleaning for moving in or out.",
+      "intros": [
+        "Moving is stressful enough without the cleaning. Peak Bio-Clean fully cleans and sanitizes the space so it is spotless and move-ready.",
+        "Perfect for tenants, owners, and property managers."
+      ],
+      "incl": [
+        "Whole-home deep cleaning",
+        "Disinfection and sanitizing",
+        "Odor removal",
+        "Cabinet and appliance cleaning",
+        "Move-ready results"
+      ]
+    },
+    "estate-cleanout": {
+      "title": "Estate & Property Cleanout",
+      "sub": "Complete cleanout of estates and properties after a loss or sale.",
+      "intros": [
+        "After a death, downsizing, or sale, an entire property often needs to be cleared, cleaned, and readied. Peak Bio-Clean handles the full cleanout with care and discretion.",
+        "We sort, remove, dispose, donate, and deep-clean so the property is ready for its next step."
+      ],
+      "incl": [
+        "Full-property cleanout",
+        "Sorting, donation, and disposal",
+        "Biohazard decontamination if needed",
+        "Deep cleaning and deodorizing",
+        "Compassionate, discreet service"
+      ]
+    },
+    "odor-removal": {
+      "title": "Odor Removal & Deodorization",
+      "sub": "Elimination of stubborn odors at the molecular source.",
+      "intros": [
+        "Powerful odors from death, smoke, pets, mold, or waste soak into porous materials, and standard cleaning cannot remove them. Peak Bio-Clean neutralizes odor at the source.",
+        "We use industrial deodorizing methods to restore fresh, breathable air."
+      ],
+      "incl": [
+        "Source-level odor treatment",
+        "Industrial deodorization",
+        "Air-quality restoration",
+        "Porous-material treatment",
+        "Homes, businesses, and vehicles"
+      ]
+    },
+    "eviction-cleanout": {
+      "title": "Eviction Cleanout",
+      "sub": "Fast, thorough cleanout of units after an eviction.",
+      "intros": [
+        "Evicted units are often left with abandoned belongings, damage, and biohazards. Peak Bio-Clean clears, cleans, and sanitizes the space so you can re-rent quickly.",
+        "We work discreetly with landlords and property managers."
+      ],
+      "incl": [
+        "Removal of abandoned property and debris",
+        "Biohazard and waste decontamination",
+        "Deep cleaning and sanitizing",
+        "Odor removal",
+        "Fast turnaround for landlords"
+      ]
+    },
+    "vandalism-cleanup": {
+      "title": "Vandalism & Graffiti Cleanup",
+      "sub": "Cleanup and restoration after vandalism and graffiti.",
+      "intros": [
+        "Vandalism and graffiti damage your property and your image. Peak Bio-Clean removes graffiti, cleans damage, and restores your property quickly.",
+        "We respond fast to help homes and businesses recover."
+      ],
+      "incl": [
+        "Graffiti removal",
+        "Surface cleaning and restoration",
+        "Debris and damage cleanup",
+        "Board-up if needed",
+        "Residential and commercial service"
+      ]
+    },
+    "animal-waste-removal": {
+      "title": "Animal Waste & Deceased Animal Removal",
+      "sub": "Removal and decontamination of animal waste and deceased animals.",
+      "intros": [
+        "Animal droppings, urine, and deceased animals carry disease and strong odors. Peak Bio-Clean safely removes and decontaminates the affected area.",
+        "We sanitize, deodorize, and help prevent contamination from spreading."
+      ],
+      "incl": [
+        "Deceased animal removal",
+        "Droppings and urine cleanup",
+        "Disease-aware decontamination",
+        "Odor elimination",
+        "Sanitizing of affected areas"
+      ]
+    },
+    "nicotine-odor-removal": {
+      "title": "Nicotine & Cigarette Smoke Residue Removal",
+      "sub": "Removal of nicotine residue and cigarette smoke odor.",
+      "intros": [
+        "Years of smoking leave tar, nicotine residue, and stubborn odor on walls, ceilings, and surfaces. Peak Bio-Clean removes residue and neutralizes the smell.",
+        "Ideal for rentals, resale homes, and vehicles."
+      ],
+      "incl": [
+        "Nicotine and tar residue removal",
+        "Surface cleaning and prep",
+        "Deep deodorization",
+        "Air-quality treatment",
+        "Homes, rentals, and vehicles"
+      ]
+    },
+    "chemical-spill-cleanup": {
+      "title": "Chemical Spill Cleanup",
+      "sub": "Safe containment and cleanup of hazardous chemical spills.",
+      "intros": [
+        "Chemical spills pose serious safety and environmental risks that require trained handling. Peak Bio-Clean contains, removes, and decontaminates spills safely.",
+        "We follow strict protocols and dispose of materials in compliance."
+      ],
+      "incl": [
+        "Spill containment",
+        "Safe cleanup and neutralization",
+        "Hazardous material disposal",
+        "Surface decontamination",
+        "Compliance documentation"
+      ]
+    },
+    "industrial-accident-cleanup": {
+      "title": "Industrial & Workplace Accident Cleanup",
+      "sub": "Biohazard cleanup after workplace and industrial accidents.",
+      "intros": [
+        "Workplace accidents can leave blood, biohazards, and hazardous materials that must be handled to OSHA standards. Peak Bio-Clean restores the site safely and quickly.",
+        "We help businesses reopen with minimal downtime."
+      ],
+      "incl": [
+        "OSHA-compliant cleanup",
+        "Blood and biohazard removal",
+        "Hazardous material handling",
+        "Disinfection and sanitizing",
+        "Fast return to operation"
+      ]
+    },
+    "attic-crawlspace-decontamination": {
+      "title": "Attic & Crawl Space Decontamination",
+      "sub": "Cleanup and decontamination of attics and crawl spaces.",
+      "intros": [
+        "Attics and crawl spaces collect rodent waste, mold, and contamination that affect your home's air and safety. Peak Bio-Clean cleans and decontaminates these hard-to-reach areas.",
+        "We remove contamination, sanitize, and help prevent it from returning."
+      ],
+      "incl": [
+        "Rodent waste removal",
+        "Mold treatment",
+        "Insulation removal if needed",
+        "Decontamination and sanitizing",
+        "Odor elimination"
+      ]
+    },
+    "junk-debris-removal": {
+      "title": "Junk & Debris Removal",
+      "sub": "Hauling and disposal of junk, clutter, and debris.",
+      "intros": [
+        "Whether from a cleanout, renovation, or storm, piles of junk and debris need to go. Peak Bio-Clean removes and disposes of it responsibly.",
+        "We handle heavy loads and haul everything away."
+      ],
+      "incl": [
+        "Junk and clutter removal",
+        "Debris hauling",
+        "Responsible disposal and recycling",
+        "Heavy-item removal",
+        "Cleanup after removal"
+      ]
+    },
+    "jail-cell-cleanup": {
+      "title": "Jail & Detention Cell Cleanup",
+      "sub": "Biohazard cleanup and decontamination of holding and detention cells.",
+      "intros": [
+        "Holding cells and detention facilities require regular biohazard decontamination for blood, bodily fluids, and infectious materials. Peak Bio-Clean provides compliant, discreet service.",
+        "We help facilities maintain safe, sanitary conditions."
+      ],
+      "incl": [
+        "Blood and biohazard removal",
+        "Hospital-grade disinfection",
+        "Odor neutralization",
+        "Regulated waste disposal",
+        "Facility service contracts"
+      ]
+    }
+  },
+  "ICONS": {
+    "unattended-death-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 11l9-7 9 7\"/><path d=\"M5 10v10h14V10\"/><path d=\"M10 20v-6h4v6\"/></svg>",
+    "crime-scene-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"10\" cy=\"10\" r=\"6\"/><path d=\"M14.5 14.5L21 21\"/><path d=\"M10 7.5v5M7.5 10h5\"/></svg>",
+    "biohazard-waste-disposal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8.5\" r=\"3\"/><circle cx=\"7.5\" cy=\"15\" r=\"3\"/><circle cx=\"16.5\" cy=\"15\" r=\"3\"/><circle cx=\"12\" cy=\"13\" r=\"1.3\"/></svg>",
+    "trauma-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M12 8v8M8 12h8\"/></svg>",
+    "suicide-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.4-7 10-7 10z\"/></svg>",
+    "decomposition-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9c2-2 4-2 6 0M14 9c2-2 4-2 6 0M4 14c2-2 4-2 6 0M14 14c2-2 4-2 6 0M4 19c2-2 4-2 6 0M14 19c2-2 4-2 6 0\"/></svg>",
+    "blood-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c3 4 6 7 6 10a6 6 0 01-12 0c0-3 3-6 6-10z\"/></svg>",
+    "hoarding-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"13.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"8.5\" y=\"5\" width=\"7\" height=\"7\"/></svg>",
+    "rodent-waste-removal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"10\" cy=\"13\" r=\"5\"/><circle cx=\"6.5\" cy=\"8.5\" r=\"2\"/><path d=\"M14 14c3.5 0 5.5 2 6.5 4\"/></svg>",
+    "sewage-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8h8v4a4 4 0 004 4h4\"/><path d=\"M4 5v6M20 13v6\"/></svg>",
+    "urine-and-feces-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 4c2 2.6 4 4.6 4 6.6a4 4 0 11-8 0C5 8.6 7 6.6 9 4z\"/><path d=\"M16.5 12c1 1.2 2 2.2 2 3.3a2 2 0 11-4 0c0-1.1 1-2.1 2-3.3z\"/></svg>",
+    "homeless-camp-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4L4 20h16z\"/><path d=\"M12 4v16M12 20l-4-7M12 20l4-7\"/></svg>",
+    "gross-filth-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 7h14M10 4h4M6 7l1 13h10l1-13\"/><path d=\"M10 11v6M14 11v6\"/></svg>",
+    "infectious-disease-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"5\"/><path d=\"M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1\"/></svg>",
+    "medical-waste-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"8\" width=\"14\" height=\"12\" rx=\"2\"/><path d=\"M9 8V6.5a3 3 0 016 0V8\"/><path d=\"M12 11.5v5M9.5 14h5\"/></svg>",
+    "smoke-damage-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c2 3 5 5 5 9a5 5 0 01-10 0c0-2 1-4 3-5 0 2 1 3 2 3 0-3 0-4 0-7z\"/></svg>",
+    "vehicle-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 16l1.6-5.2A2 2 0 018.5 9.4h7a2 2 0 011.9 1.4L19 16\"/><path d=\"M4 16h16v3h-2v-1H6v1H4z\"/><circle cx=\"7.5\" cy=\"16.5\" r=\"1.1\"/><circle cx=\"16.5\" cy=\"16.5\" r=\"1.1\"/></svg>",
+    "covid-19-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"4.5\"/><path d=\"M12 7.5V4.5M12 16.5V19.5M7.5 12H4.5M16.5 12H19.5M8.8 8.8L6.7 6.7M17.3 17.3l-2.1-2.1M15.2 8.8l2.1-2.1M6.7 17.3l2.1-2.1\"/></svg>",
+    "accident-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l10 18H2z\"/><path d=\"M12 10v5M12 18h.01\"/></svg>",
+    "homicide-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"10\" cy=\"10\" r=\"6\"/><path d=\"M14.5 14.5L21 21\"/><path d=\"M10 7.5v5M7.5 10h5\"/></svg>",
+    "commercial-biohazard-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"3\" width=\"14\" height=\"18\" rx=\"1\"/><path d=\"M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2\"/></svg>",
+    "tear-gas-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"8\" width=\"6\" height=\"12\" rx=\"2\"/><path d=\"M11 8V5.5a1 1 0 012 0V8M9 13h6\"/></svg>",
+    "drug-lab-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 3h6M10 3v6l-5 8.5A2 2 0 006.7 21h10.6a2 2 0 001.7-3L14 9V3\"/><path d=\"M7.5 14h9\"/></svg>",
+    "meth-lab-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 3h6M10 3v6l-5 8.5A2 2 0 006.7 21h10.6a2 2 0 001.7-3L14 9V3\"/><path d=\"M7.5 14h9\"/></svg>",
+    "meth-lab-testing": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 3h6M10 3v6l-5 8.5A2 2 0 006.7 21h10.6a2 2 0 001.7-3L14 9V3\"/><path d=\"M7.5 14h9\"/></svg>",
+    "water-removal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c3 4 6 7 6 10a6 6 0 01-12 0c0-3 3-6 6-10z\"/></svg>",
+    "water-damage-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c3 4 6 7 6 10a6 6 0 01-12 0c0-3 3-6 6-10z\"/></svg>",
+    "flood-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c3 4 6 7 6 10a6 6 0 01-12 0c0-3 3-6 6-10z\"/></svg>",
+    "flood-restoration": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c3 4 6 7 6 10a6 6 0 01-12 0c0-3 3-6 6-10z\"/></svg>",
+    "water-damage-mold-removal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"9\" r=\"2\"/><circle cx=\"15.5\" cy=\"7.5\" r=\"1.6\"/><circle cx=\"16\" cy=\"14\" r=\"2.2\"/><circle cx=\"9\" cy=\"15.5\" r=\"1.8\"/><circle cx=\"12\" cy=\"11\" r=\"1.3\"/></svg>",
+    "fire-damage-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3c2 3 5 5 5 9a5 5 0 01-10 0c0-2 1-4 3-5 0 2 1 3 2 3 0-3 0-4 0-7z\"/></svg>",
+    "mold-remediation": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"9\" r=\"2\"/><circle cx=\"15.5\" cy=\"7.5\" r=\"1.6\"/><circle cx=\"16\" cy=\"14\" r=\"2.2\"/><circle cx=\"9\" cy=\"15.5\" r=\"1.8\"/><circle cx=\"12\" cy=\"11\" r=\"1.3\"/></svg>",
+    "mold-damage-restoration": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"9\" r=\"2\"/><circle cx=\"15.5\" cy=\"7.5\" r=\"1.6\"/><circle cx=\"16\" cy=\"14\" r=\"2.2\"/><circle cx=\"9\" cy=\"15.5\" r=\"1.8\"/><circle cx=\"12\" cy=\"11\" r=\"1.3\"/></svg>",
+    "storm-damage-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 15a4 4 0 010-8 5 5 0 019.6-1.3A3.5 3.5 0 0117 15\"/><path d=\"M8 18l-1 2M12 18l-1 2M16 18l-1 2\"/></svg>",
+    "storm-damage-restoration": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 15a4 4 0 010-8 5 5 0 019.6-1.3A3.5 3.5 0 0117 15\"/><path d=\"M8 18l-1 2M12 18l-1 2M16 18l-1 2\"/></svg>",
+    "hurricane-damage-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 15a4 4 0 010-8 5 5 0 019.6-1.3A3.5 3.5 0 0117 15\"/><path d=\"M8 18l-1 2M12 18l-1 2M16 18l-1 2\"/></svg>",
+    "hurricane-restoration": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 15a4 4 0 010-8 5 5 0 019.6-1.3A3.5 3.5 0 0117 15\"/><path d=\"M8 18l-1 2M12 18l-1 2M16 18l-1 2\"/></svg>",
+    "deep-cleaning": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 9h4l1 11a1 1 0 01-1 1h-4a1 1 0 01-1-1z\"/><path d=\"M10 9V6h3M13 6l3-2M13 4h3\"/></svg>",
+    "rental-deep-cleaning": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 9h4l1 11a1 1 0 01-1 1h-4a1 1 0 01-1-1z\"/><path d=\"M10 9V6h3M13 6l3-2M13 4h3\"/></svg>",
+    "move-cleaning": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10 9h4l1 11a1 1 0 01-1 1h-4a1 1 0 01-1-1z\"/><path d=\"M10 9V6h3M13 6l3-2M13 4h3\"/></svg>",
+    "estate-cleanout": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"13.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"8.5\" y=\"5\" width=\"7\" height=\"7\"/></svg>",
+    "odor-removal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9c2-2 4-2 6 0M14 9c2-2 4-2 6 0M4 14c2-2 4-2 6 0M14 14c2-2 4-2 6 0M4 19c2-2 4-2 6 0M14 19c2-2 4-2 6 0\"/></svg>",
+    "eviction-cleanout": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"13.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"8.5\" y=\"5\" width=\"7\" height=\"7\"/></svg>",
+    "vandalism-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"8\" width=\"6\" height=\"12\" rx=\"2\"/><path d=\"M11 8V5.5a1 1 0 012 0V8M9 13h6\"/></svg>",
+    "animal-waste-removal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"7\" cy=\"9\" r=\"1.6\"/><circle cx=\"12\" cy=\"7\" r=\"1.6\"/><circle cx=\"17\" cy=\"9\" r=\"1.6\"/><path d=\"M12 12c-2.5 0-4.5 2-4.5 4a2.5 2.5 0 002.5 2.5c.8 0 1.4-.4 2-.4s1.2.4 2 .4A2.5 2.5 0 0016.5 16c0-2-2-4-4.5-4z\"/></svg>",
+    "nicotine-odor-removal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 9c2-2 4-2 6 0M14 9c2-2 4-2 6 0M4 14c2-2 4-2 6 0M14 14c2-2 4-2 6 0M4 19c2-2 4-2 6 0M14 19c2-2 4-2 6 0\"/></svg>",
+    "chemical-spill-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 3h6M10 3v6l-5 8.5A2 2 0 006.7 21h10.6a2 2 0 001.7-3L14 9V3\"/><path d=\"M7.5 14h9\"/></svg>",
+    "industrial-accident-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l10 18H2z\"/><path d=\"M12 10v5M12 18h.01\"/></svg>",
+    "attic-crawlspace-decontamination": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 11l9-7 9 7\"/><path d=\"M5 10v10h14V10\"/><path d=\"M10 20v-6h4v6\"/></svg>",
+    "junk-debris-removal": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"13.5\" y=\"13\" width=\"7\" height=\"7\"/><rect x=\"8.5\" y=\"5\" width=\"7\" height=\"7\"/></svg>",
+    "jail-cell-cleanup": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"18\" rx=\"1\"/><path d=\"M8 3v18M12 3v18M16 3v18\"/></svg>"
+  },
+  "CORE_SLUGS": [
+    "crime-scene-cleanup",
+    "homicide-cleanup",
+    "suicide-cleanup",
+    "unattended-death-cleanup",
+    "trauma-cleanup",
+    "blood-cleanup",
+    "decomposition-cleanup",
+    "biohazard-waste-disposal",
+    "hoarding-cleanup",
+    "infectious-disease-cleanup",
+    "tear-gas-cleanup",
+    "rodent-waste-removal"
+  ],
+  "COUNTIES": [
+    "Alachua",
+    "Baker",
+    "Bay",
+    "Bradford",
+    "Brevard",
+    "Broward",
+    "Calhoun",
+    "Charlotte",
+    "Citrus",
+    "Clay",
+    "Collier",
+    "Columbia",
+    "DeSoto",
+    "Dixie",
+    "Duval",
+    "Escambia",
+    "Flagler",
+    "Franklin",
+    "Gadsden",
+    "Gilchrist",
+    "Glades",
+    "Gulf",
+    "Hamilton",
+    "Hardee",
+    "Hendry",
+    "Hernando",
+    "Highlands",
+    "Hillsborough",
+    "Holmes",
+    "Indian River",
+    "Jackson",
+    "Jefferson",
+    "Lafayette",
+    "Lake",
+    "Lee",
+    "Leon",
+    "Levy",
+    "Liberty",
+    "Madison",
+    "Manatee",
+    "Marion",
+    "Martin",
+    "Miami-Dade",
+    "Monroe",
+    "Nassau",
+    "Okaloosa",
+    "Okeechobee",
+    "Orange",
+    "Osceola",
+    "Palm Beach",
+    "Pasco",
+    "Pinellas",
+    "Polk",
+    "Putnam",
+    "Santa Rosa",
+    "Sarasota",
+    "Seminole",
+    "St. Johns",
+    "St. Lucie",
+    "Sumter",
+    "Suwannee",
+    "Taylor",
+    "Union",
+    "Volusia",
+    "Wakulla",
+    "Walton",
+    "Washington"
+  ]
+}

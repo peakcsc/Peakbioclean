@@ -471,6 +471,7 @@ ul { list-style: none; }
         <li><a href="#about">About</a></li>
         <li class="has-dropdown"><a href="#services">Services <span class="caret">▼</span></a><div class="mega-menu" id="megaMenu"></div></li>
         <li class="has-dropdown areas-dd"><a href="#areas">Service Areas <span class="caret">▼</span></a><div class="mega-menu counties" id="countiesMenu"></div></li>
+        <li><a href="/vendor-partners/">Partners</a></li>
         <li><a href="#contact">Contact</a></li>
         <li class="nav-right"><a href="#why">Why Us</a></li>
       </ul>
@@ -524,7 +525,7 @@ ul { list-style: none; }
       </div>
       <p class="services-note">Most of our services <strong>ARE COVERED</strong> by your insurance. We work directly with your homeowners, renters, or auto insurance — with little to <strong>NO out-of-pocket cost</strong> to you.</p>
       <div class="svc-marquee"><div class="svc-track" id="servicesTrack"></div></div>
-      <div class="text-center" style="margin-top:2rem;"><a href="#services-all" class="btn btn-red">All Services</a></div>
+      <div class="text-center" style="margin-top:2rem;"><a href="/services/" class="btn btn-red">All Services</a></div>
     </div>
   </section>
 
@@ -750,11 +751,12 @@ ul { list-style: none; }
         <div>
           <h4>Services</h4>
           <ul>
-            <li><a href="#services">Crime Scene Cleanup</a></li>
-            <li><a href="#services">Trauma Cleanup</a></li>
-            <li><a href="#services">Unattended Death</a></li>
-            <li><a href="#services">Hoarding Cleanup</a></li>
-            <li><a href="#services">Biohazard Disposal</a></li>
+            <li><a href="/crime-scene-cleanup/">Crime Scene Cleanup</a></li>
+            <li><a href="/trauma-cleanup/">Trauma Cleanup</a></li>
+            <li><a href="/unattended-death-cleanup/">Unattended Death</a></li>
+            <li><a href="/hoarding-cleanup/">Hoarding Cleanup</a></li>
+            <li><a href="/biohazard-waste-disposal/">Biohazard Disposal</a></li>
+            <li><a href="/services/">All Services →</a></li>
           </ul>
         </div>
         <div>
@@ -764,15 +766,17 @@ ul { list-style: none; }
             <li><a href="#why">Why Choose Us</a></li>
             <li><a href="#areas">Service Areas</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="/vendor-partners/">Referral Partners</a></li>
+            <li><a href="/insurance-and-cost/">Insurance &amp; Cost</a></li>
           </ul>
         </div>
         <div>
           <h4>Service Areas</h4>
           <ul>
-            <li><a href="#areas">Miami-Dade County</a></li>
-            <li><a href="#areas">Broward County</a></li>
-            <li><a href="#areas">Palm Beach County</a></li>
-            <li><a href="#areas">Hillsborough County</a></li>
+            <li><a href="/miami-dade-county/">Miami-Dade County</a></li>
+            <li><a href="/broward-county/">Broward County</a></li>
+            <li><a href="/palm-beach-county/">Palm Beach County</a></li>
+            <li><a href="/hillsborough-county/">Hillsborough County</a></li>
             <li><a href="#areas">All of Florida</a></li>
           </ul>
         </div>
@@ -879,16 +883,16 @@ var NAME_OF = {}; SERVICES.forEach(function(x){ NAME_OF[x[1]] = x[0]; });
 var CORE = CORE_SLUGS.filter(function(s){return NAME_OF[s];}).map(function(s){return [NAME_OF[s], s];});
 var servicesTrack = document.getElementById('servicesTrack');
 if (servicesTrack) {
-  var orbs = CORE.map(function(x){return '<a class="svc-orb" href="#service/'+x[1]+'"><span class="orb">'+svcIcon(x[1])+'</span><span class="label">'+x[0]+'</span></a>';}).join('');
+  var orbs = CORE.map(function(x){return '<a class="svc-orb" href="/'+x[1]+'/"><span class="orb">'+svcIcon(x[1])+'</span><span class="label">'+x[0]+'</span></a>';}).join('');
   servicesTrack.innerHTML = orbs + orbs;
 }
 var mm = document.getElementById('megaMenu');
-if (mm) { mm.innerHTML = CORE.map(function(x){return '<a href="#service/'+x[1]+'"><span class="mm-icon">'+svcIcon(x[1])+'</span>'+x[0]+'</a>';}).join(''); }
+if (mm) { mm.innerHTML = CORE.map(function(x){return '<a href="/'+x[1]+'/"><span class="mm-icon">'+svcIcon(x[1])+'</span>'+x[0]+'</a>';}).join('') + '<a href="/services/"><span class="mm-icon">'+ICON+'</span>All Services</a>'; }
 var COUNTIES = ["Alachua","Baker","Bay","Bradford","Brevard","Broward","Calhoun","Charlotte","Citrus","Clay","Collier","Columbia","DeSoto","Dixie","Duval","Escambia","Flagler","Franklin","Gadsden","Gilchrist","Glades","Gulf","Hamilton","Hardee","Hendry","Hernando","Highlands","Hillsborough","Holmes","Indian River","Jackson","Jefferson","Lafayette","Lake","Lee","Leon","Levy","Liberty","Madison","Manatee","Marion","Martin","Miami-Dade","Monroe","Nassau","Okaloosa","Okeechobee","Orange","Osceola","Palm Beach","Pasco","Pinellas","Polk","Putnam","Santa Rosa","Sarasota","Seminole","St. Johns","St. Lucie","Sumter","Suwannee","Taylor","Union","Volusia","Wakulla","Walton","Washington"];
 function countySlug(c){return c.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
 function countyName(slug){for(var i=0;i<COUNTIES.length;i++){if(countySlug(COUNTIES[i])===slug)return COUNTIES[i];}return null;}
 var cm = document.getElementById('countiesMenu');
-if (cm) { cm.innerHTML = COUNTIES.map(function(c){return '<a href="#county/'+countySlug(c)+'"><span class="mm-dot"></span>'+c+' County</a>';}).join(''); }
+if (cm) { cm.innerHTML = COUNTIES.map(function(c){return '<a href="/'+countySlug(c)+'-county/"><span class="mm-dot"></span>'+c+' County</a>';}).join(''); }
 // Keep dropdowns open with a grace period so the menu doesn't vanish before you can reach it
 Array.prototype.forEach.call(document.querySelectorAll('.has-dropdown'), function(dd){
   var t;
