@@ -507,8 +507,8 @@ PARTNERS.forEach(p => {
   <div class="container">
     <p class="breadcrumbs"><a href="/">Home</a> / Referral Partners</p>
     <p class="eyebrow">Become a Referral Partner</p>
-    <h1>Keep Peak Bio-Clean as Your Second Call</h1>
-    <p class="lead">You probably already have somebody. We're not asking you to replace them — we want to be the number you call when they're unavailable, don't answer at 2 a.m., or hand you a job they don't want.</p>
+    <h1>Partner With Peak Bio-Clean</h1>
+    <p class="lead">A direct line, real availability, and documentation your team can rely on — 24/7, including nights and holidays. Let's get us into your vendor file.</p>
     <div class="hero-cta">
       <a href="tel:${PHONE_TEL}" class="btn btn-red">Call Now — ${PHONE_DISPLAY}</a>
       <a href="/#contact" class="btn btn-outline" style="color:#fff;border-color:#fff;">Add Us to Your Vendor File</a>
@@ -534,7 +534,7 @@ PARTNERS.forEach(p => {
 `;
   writePage('/vendor-partners', pageShell({
     title: 'Referral Partners | Vendor Program | Peak Bio-Clean',
-    description: 'Property managers, funeral homes, law enforcement, hospice, restoration companies, and insurance professionals — get Peak Bio-Clean in your vendor file for 24/7 backup cleanup response.',
+    description: 'Property managers, funeral homes, law enforcement, hospice, restoration companies, and insurance professionals — get Peak Bio-Clean in your vendor file for 24/7 cleanup response.',
     canonical: `${DOMAIN}/vendor-partners/`,
     bodyHtml
   }));

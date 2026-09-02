@@ -49,12 +49,12 @@ module.exports = [
     slug: 'property-managers-cams',
     title: 'Property Managers & CAMs',
     h1Sub: 'Property Managers & Community Association Managers',
-    h1: 'Your Backup for the Call You Hope You Never Get',
-    lead: 'You already have a vendor for this. We just want to be the second call — the one that actually answers at 2 a.m.',
+    h1: 'Ready for the Call You Hope You Never Get',
+    lead: 'A direct line that actually answers at 2 a.m. — with insurance and W-9 already on file, so nobody scrambles during the next incident.',
     description: 'A vendor-ready biohazard cleanup partner for Florida property managers, CAMs, and HOA/condo boards — unattended deaths, hoarding, and biohazard cleanup handled fast and documented.',
     body: [
       'An unattended death in a unit, a tenant’s hoarding situation that’s become a code violation, a biohazard left behind after an eviction — these calls don’t wait for business hours, and they don’t wait for your usual vendor to call back.',
-      'Peak Bio-Clean is built to be the property manager’s backup vendor: insurance and W-9 already on file, a direct response line, and documentation thorough enough to satisfy ownership, the board, and the insurance carrier. We work fast so the unit is turned over and re-rentable as quickly as possible.',
+      'Peak Bio-Clean is built for property management: insurance and W-9 already on file, a direct response line, and documentation thorough enough to satisfy ownership, the board, and the insurance carrier. We work fast so the unit is turned over and re-rentable as quickly as possible.',
       'We also offer short continuing-education sessions for CAMs and property teams — what to do in the first 60 minutes after an unattended death, and when a hoarding cleanout crosses into biohazard territory. No sales pitch, just the information your team needs before the next incident.'
     ],
     listTitle: 'Built for Property Management',
