@@ -46,6 +46,7 @@
     "telephone": "+1-407-758-0682",
     "email": "info@peakbioclean.com",
     "url": "https://www.peakbioclean.com",
+    "sameAs": ["https://www.facebook.com/Peakbioclean", "https://www.instagram.com/peakbioclean"],
     "description": "Certified crime scene, trauma, and biohazard cleanup. Available 24/7 across all of Florida. Compassionate, professional, licensed, insured and bondable.",
     "priceRange": "$$",
     "address": { "@type": "PostalAddress", "addressRegion": "FL", "addressCountry": "US" },
@@ -484,6 +485,7 @@ ul { list-style: none; }
         <li class="has-dropdown"><a href="#services">Services <span class="caret">▼</span></a><div class="mega-menu" id="megaMenu"></div></li>
         <li class="has-dropdown areas-dd"><a href="#areas">Service Areas <span class="caret">▼</span></a><div class="mega-menu counties" id="countiesMenu"></div></li>
         <li><a href="/vendor-partners/">Partners</a></li>
+        <li><a href="/blog/">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
         <li class="nav-right"><a href="#why">Why Us</a></li>
       </ul>
@@ -779,6 +781,7 @@ ul { list-style: none; }
             <li><a href="#why">Why Choose Us</a></li>
             <li><a href="#areas">Service Areas</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="/blog/">Blog</a></li>
             <li><a href="/vendor-partners/">Referral Partners</a></li>
             <li><a href="/insurance-and-cost/">Insurance &amp; Cost</a></li>
           </ul>
@@ -920,102 +923,6 @@ Array.prototype.forEach.call(document.querySelectorAll('.has-dropdown'), functio
   dd.addEventListener('mouseleave', function(){ clearTimeout(t); t = setTimeout(function(){ dd.classList.remove('open'); }, 400); });
   dd.addEventListener('click', function(){ clearTimeout(t); dd.classList.remove('open'); });
 });
-var home = document.getElementById('homeMain');
-var page = document.getElementById('servicePage');
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-var HOME_TITLE = document.title;
-var HOME_DESC = (document.querySelector('meta[name="description"]')||{}).content || '';
-function setSEO(title, desc){
-  document.title = title;
-  var m = document.querySelector('meta[name="description"]'); if(m && desc) m.setAttribute('content', desc);
-  var c = document.querySelector('link[rel="canonical"]'); if(c) c.setAttribute('href', 'https://www.peakbioclean.com/'+location.hash);
-  var ot = document.querySelector('meta[property="og:title"]'); if(ot) ot.setAttribute('content', title);
-  var od = document.querySelector('meta[property="og:description"]'); if(od && desc) od.setAttribute('content', desc);
-}
-function renderService(slug){
-  var d = SVC[slug]; if(!d){location.hash=''; return;}
-  setSEO(d.title+' in Florida | Peak Bio-Clean', d.sub+' Available 24/7 across all of Florida. Call (407) 758-0682.');
-  var others = SERVICES.filter(function(x){return x[1]!==slug;}).slice(0,8).map(function(x){return '<a class="svc-pill" href="#service/'+x[1]+'">'+x[0]+'</a>';}).join('');
-  page.innerHTML =
-  '<section class="page-hero"><div class="container"><p class="eyebrow">Our Services</p><h1>'+esc(d.title)+'</h1>'+
-  '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">'+esc(d.sub)+'</p>'+
-  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a> <a href="#contact" class="btn btn-outline" style="margin-top:1rem;">Request Cleanup Assistance</a></div></section>'+
-  '<section class="section"><div class="container">'+
-  '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / '+esc(d.title)+'</p>'+
-  '<div class="svc-layout"><div class="svc-body">'+
-  d.intros.map(function(p){return '<p>'+esc(p)+'</p>';}).join('')+
-  '<h2>What\'s Included</h2><ul>'+d.incl.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>'+
-  '<h2>Our Process</h2><ol class="svc-steps">'+
-  '<li>Call us 24/7 for an immediate, confidential response.</li>'+
-  '<li>We assess the scene and explain every step — no surprises.</li>'+
-  '<li>We contain, remove, and decontaminate all affected materials.</li>'+
-  '<li>We disinfect, deodorize, and verify the area is safe.</li>'+
-  '<li>We coordinate with your insurance to minimize your cost.</li></ol>'+
-  '<h2>Insurance &amp; Cost</h2><p>Most of our services are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost to you. We work directly with your provider and handle the paperwork so you can focus on what matters.</p>'+
-  '</div><aside class="svc-aside"><h3>Need Help Now?</h3><p>Available 24/7. A real person answers.</p>'+
-  '<a href="tel:+14077580682" class="big-phone">(407) 758-0682</a>'+
-  '<a href="tel:+14077580682" class="btn btn-red btn-full">Call Now — (407) 758-0682</a>'+
-  '<a href="#contact" class="btn btn-outline btn-full" style="margin-top:.6rem;">Request Cleanup Assistance</a>'+
-  '<p style="margin-top:1rem;font-size:.85rem;color:var(--gray);">Licensed, Insured &amp; Bondable · OSHA Trained · EPA Compliant</p></aside>'+
-  '</div></div></section>'+
-  '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Services</p>'+
-  '<h2 class="section-title">We Also Help With</h2><div class="svc-other-grid">'+others+'</div></div></section>';
-}
-function renderCounty(slug){
-  var name = countyName(slug); if(!name){ location.hash=''; return; }
-  setSEO('Biohazard & Crime Scene Cleanup in '+name+' County, FL | Peak Bio-Clean', '24/7 certified biohazard, crime scene, and trauma cleanup in '+name+' County, Florida. Compassionate, discreet, licensed and insured. Call (407) 758-0682.');
-  var svcLinks = SERVICES.map(function(x){return '<a href="#service/'+x[1]+'"><span class="mm-icon">'+svcIcon(x[1])+'</span>'+x[0]+'</a>';}).join('');
-  var others = COUNTIES.filter(function(c){return c!==name;}).slice(0,12).map(function(c){return '<a class="svc-pill" href="#county/'+countySlug(c)+'">'+c+' County</a>';}).join('');
-  page.innerHTML =
-  '<section class="page-hero"><div class="container"><p class="eyebrow">Service Areas</p><h1>Biohazard &amp; Crime Scene Cleanup in '+esc(name)+' County</h1>'+
-  '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">24/7 certified trauma, biohazard, and crime scene cleanup throughout '+esc(name)+' County and all of Florida.</p>'+
-  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a> <a href="#contact" class="btn btn-outline" style="margin-top:1rem;">Request Cleanup Assistance</a></div></section>'+
-  '<section class="section"><div class="container">'+
-  '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / '+esc(name)+' County</p>'+
-  '<div class="svc-layout"><div class="svc-body">'+
-  '<p>Peak Bio-Clean provides compassionate, professional biohazard and crime scene cleanup to families, property owners, and businesses across '+esc(name)+' County. We are available 24 hours a day, 7 days a week, and a real person answers every call.</p>'+
-  '<p>When the unexpected happens, you should not have to face the cleanup alone. Our certified technicians respond quickly and discreetly, restoring your property safely and in full compliance with OSHA and state regulations — anywhere in '+esc(name)+' County.</p>'+
-  '<h2>Our Services in '+esc(name)+' County</h2><div class="county-svc-grid">'+svcLinks+'</div>'+
-  '<h2>Our Process</h2><ol class="svc-steps">'+
-  '<li>Call us 24/7 for an immediate, confidential response.</li>'+
-  '<li>We assess the scene and explain every step — no surprises.</li>'+
-  '<li>We contain, remove, and decontaminate all affected materials.</li>'+
-  '<li>We disinfect, deodorize, and verify the area is safe.</li>'+
-  '<li>We coordinate with your insurance to minimize your cost.</li></ol>'+
-  '<h2>Insurance &amp; Cost</h2><p>Most of our services are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost to you. We work directly with your provider and handle the paperwork so you can focus on what matters.</p>'+
-  '</div><aside class="svc-aside"><h3>Need Help in '+esc(name)+' County?</h3><p>Available 24/7. A real person answers.</p>'+
-  '<a href="tel:+14077580682" class="big-phone">(407) 758-0682</a>'+
-  '<a href="tel:+14077580682" class="btn btn-red btn-full">Call Now — (407) 758-0682</a>'+
-  '<a href="#contact" class="btn btn-outline btn-full" style="margin-top:.6rem;">Request Cleanup Assistance</a>'+
-  '<p style="margin-top:1rem;font-size:.85rem;color:var(--gray);">Licensed, Insured &amp; Bondable · OSHA Trained · EPA Compliant</p></aside>'+
-  '</div></div></section>'+
-  '<section class="section svc-other"><div class="container text-center"><p class="eyebrow">More Service Areas</p>'+
-  '<h2 class="section-title">We Also Serve</h2><div class="svc-other-grid">'+others+'</div></div></section>';
-}
-function renderAllServices(){
-  setSEO('All Biohazard & Cleanup Services in Florida | Peak Bio-Clean', 'Explore all of Peak Bio-Clean’s biohazard, crime scene, trauma, and cleanup services across Florida. Available 24/7. Call (407) 758-0682.');
-  var cards = SERVICES.map(function(x){return '<a class="service-card" href="#service/'+x[1]+'"><div class="service-icon">'+svcIcon(x[1])+'</div><h3>'+x[0]+'</h3>'+(SVC[x[1]]?'<p class="svc-card-sub">'+esc(SVC[x[1]].sub)+'</p>':'')+'</a>';}).join('');
-  page.innerHTML =
-  '<section class="page-hero"><div class="container"><p class="eyebrow">Our Services</p><h1>All Services</h1>'+
-  '<p class="section-sub" style="color:#eaf1fb;margin-top:.5rem;">Complete biohazard, crime scene, and trauma cleanup — available 24/7 across all of Florida.</p>'+
-  '<a href="tel:+14077580682" class="btn btn-red" style="margin-top:1rem;">Call Now — (407) 758-0682</a> <a href="#contact" class="btn btn-outline" style="margin-top:1rem;">Request Cleanup Assistance</a></div></section>'+
-  '<section class="section"><div class="container">'+
-  '<p class="breadcrumb"><a href="#" onclick="location.hash=\'\';return false;">Home</a> / All Services</p>'+
-  '<div class="services-grid">'+cards+'</div></div></section>';
-}
-function route(){
-  var ms = location.hash.match(/^#service\/(.+)$/);
-  var mc = location.hash.match(/^#county\/(.+)$/);
-  if(location.hash==='#services-all'){ home.style.display='none'; page.style.display='block'; renderAllServices(); window.scrollTo(0,0); }
-  else if(ms){ home.style.display='none'; page.style.display='block'; renderService(ms[1]); window.scrollTo(0,0); }
-  else if(mc){ home.style.display='none'; page.style.display='block'; renderCounty(mc[1]); window.scrollTo(0,0); }
-  else {
-    page.style.display='none'; page.innerHTML=''; home.style.display='block'; setSEO(HOME_TITLE, HOME_DESC);
-    if(location.hash.length>1){ var el=document.querySelector(location.hash); if(el){ setTimeout(function(){ el.scrollIntoView({behavior:'smooth'}); }, 30); } }
-  }
-}
-window.addEventListener('hashchange', route);
-route();
 // Peak Bio-Clean — Main JS
 
 // Year in footer

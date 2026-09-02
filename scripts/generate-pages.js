@@ -87,10 +87,33 @@ const EXTRA_CSS = `
 .icp-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow); }
 .icp-card h3 { color: var(--blue-dark); margin-bottom: 0.6rem; font-size: 1.1rem; }
 .icp-card a.btn { margin-top: 1rem; }
+.blog-post p { margin-bottom: 1.1rem; }
+.blog-post h2 { margin: 2rem 0 0.9rem; color: var(--blue-dark); font-size: 1.4rem; }
+.blog-post ul { margin: 0 0 1.3rem; }
+.blog-post li { position: relative; padding-left: 1.6rem; margin-bottom: 0.55rem; }
+.blog-post li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
+.blog-post a { color: var(--blue); text-decoration: underline; font-weight: 600; }
 `;
 
-function pageShell({ title, description, canonical, ogImage, bodyHtml, jsonLd, breadcrumbHtml }) {
+function breadcrumbJsonLd(crumbs) {
+  // crumbs: [[name, url], ...] — url omitted on the final (current) item
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map(([name, url], i) => {
+      const item = { '@type': 'ListItem', position: i + 1, name };
+      if (url) item.item = url;
+      return item;
+    })
+  });
+}
+
+function pageShell({ title, description, canonical, ogImage, bodyHtml, jsonLd, breadcrumb }) {
   ogImage = ogImage || DOMAIN + '/og-image.png';
+  const jsonLdBlocks = [jsonLd, breadcrumb ? breadcrumbJsonLd(breadcrumb) : null]
+    .filter(Boolean)
+    .map(j => `<script type="application/ld+json">${j}</script>`)
+    .join('\n');
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +141,7 @@ function pageShell({ title, description, canonical, ogImage, bodyHtml, jsonLd, b
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:description" content="${esc(description)}" />
 <meta name="twitter:image" content="${ogImage}" />
-${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ''}
+${jsonLdBlocks}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -147,6 +170,8 @@ ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ''}
       <li><a href="/#about">About</a></li>
       <li class="has-dropdown"><a href="/services/">Services <span class="caret">▼</span></a><div class="mega-menu" id="megaMenu"></div></li>
       <li class="has-dropdown areas-dd"><a href="/#areas">Service Areas <span class="caret">▼</span></a><div class="mega-menu counties" id="countiesMenu"></div></li>
+      <li><a href="/vendor-partners/">Partners</a></li>
+      <li><a href="/blog/">Blog</a></li>
       <li><a href="/#contact">Contact</a></li>
       <li class="nav-right"><a href="/#why">Why Us</a></li>
     </ul>
@@ -189,6 +214,7 @@ ${bodyHtml}
           <li><a href="/#why">Why Choose Us</a></li>
           <li><a href="/#areas">Service Areas</a></li>
           <li><a href="/#contact">Contact</a></li>
+          <li><a href="/blog/">Blog</a></li>
           <li><a href="/vendor-partners/">Referral Partners</a></li>
           <li><a href="/insurance-and-cost/">Insurance &amp; Cost</a></li>
         </ul>
@@ -225,8 +251,8 @@ function writePage(relPath, html) {
 
 const sitemapUrls = [{ loc: DOMAIN + '/', priority: '1.0', changefreq: 'weekly' }];
 
-function addSitemap(urlPath, priority) {
-  sitemapUrls.push({ loc: DOMAIN + urlPath, priority: priority || '0.7', changefreq: 'monthly' });
+function addSitemap(urlPath, priority, lastmod) {
+  sitemapUrls.push({ loc: DOMAIN + urlPath, priority: priority || '0.7', changefreq: 'monthly', lastmod });
 }
 
 // ============================= SERVICE PAGES =============================
@@ -287,7 +313,10 @@ SERVICES.forEach(([name, slug]) => {
   </div>
 </section>
 `;
-  writePage(`/${slug}`, pageShell({ title, description, canonical, bodyHtml, jsonLd }));
+  writePage(`/${slug}`, pageShell({
+    title, description, canonical, bodyHtml, jsonLd,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Services', DOMAIN + '/services/'], [d.title, null]]
+  }));
   addSitemap(`/${slug}/`, '0.8');
 });
 
@@ -312,7 +341,10 @@ SERVICES.forEach(([name, slug]) => {
 </section>
 <section class="section"><div class="container"><div class="icp-grid">${cards}</div></div></section>
 `;
-  writePage('/services', pageShell({ title, description, canonical, bodyHtml }));
+  writePage('/services', pageShell({
+    title, description, canonical, bodyHtml,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Services', null]]
+  }));
   addSitemap('/services/', '0.9');
 }
 
@@ -356,7 +388,8 @@ const REGIONS = [
     title: 'Service Areas | All 67 Florida Counties | Peak Bio-Clean',
     description: 'Peak Bio-Clean serves all 67 counties across Florida with 24/7 crime scene, trauma, and biohazard cleanup. Find your county.',
     canonical: `${DOMAIN}/service-areas/`,
-    bodyHtml
+    bodyHtml,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Service Areas', null]]
   }));
   addSitemap('/service-areas/', '0.8');
 }
@@ -422,7 +455,10 @@ COUNTIES.forEach(name => {
   </div>
 </section>
 `;
-  writePage(`/${slug}-county`, pageShell({ title, description, canonical, bodyHtml, jsonLd }));
+  writePage(`/${slug}-county`, pageShell({
+    title, description, canonical, bodyHtml, jsonLd,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Service Areas', DOMAIN + '/service-areas/'], [`${name} County`, null]]
+  }));
   addSitemap(`/${slug}-county/`, '0.7');
 });
 
@@ -489,10 +525,99 @@ CITIES.forEach(city => {
   </div>
 </section>
 `;
-    writePage(`/${pagePath}`, pageShell({ title, description, canonical, bodyHtml, jsonLd }));
+    writePage(`/${pagePath}`, pageShell({
+      title, description, canonical, bodyHtml, jsonLd,
+      breadcrumb: [['Home', DOMAIN + '/'], [d.title, DOMAIN + `/${slug}/`], [city.name, null]]
+    }));
     addSitemap(`/${pagePath}/`, '0.65');
   });
 });
+
+// ============================= BLOG =============================
+const BLOG_POSTS = require('./blog-data.js').slice().sort((a, b) => b.date.localeCompare(a.date));
+
+function formatDate(iso) {
+  const d = new Date(iso + 'T12:00:00Z');
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+
+BLOG_POSTS.forEach(post => {
+  const canonical = `${DOMAIN}/blog/${post.slug}/`;
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { '@type': 'Organization', name: 'Peak Bio-Clean', url: DOMAIN },
+    publisher: { '@type': 'Organization', name: 'Peak Bio-Clean', url: DOMAIN, logo: { '@type': 'ImageObject', url: DOMAIN + '/assets/logo/logo-color-2.png' } },
+    mainEntityOfPage: canonical
+  });
+  const others = BLOG_POSTS.filter(p => p.slug !== post.slug).slice(0, 3)
+    .map(p => `<a class="icp-card" href="/blog/${p.slug}/"><h3>${esc(p.title)}</h3><p class="muted">${esc(p.description)}</p></a>`).join('');
+  const bodyHtml = `
+<section class="subhero">
+  <div class="container">
+    <p class="breadcrumbs"><a href="/">Home</a> / <a href="/blog/">Blog</a> / ${esc(post.category)}</p>
+    <p class="eyebrow">${esc(post.category)} · ${formatDate(post.date)}</p>
+    <h1>${esc(post.title)}</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container sub-grid">
+    <article class="blog-post">${post.bodyHtml}</article>
+    <div>
+      <div class="side-card">
+        <h3>Need Help Now?</h3>
+        <p class="muted">Available 24/7, including holidays. A real person answers every call.</p>
+        <a href="tel:${PHONE_TEL}" class="btn btn-red">Call ${PHONE_DISPLAY}</a>
+        <a href="/#contact" class="btn btn-outline">Request Assessment</a>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top:1rem;">
+    <h2 style="margin-bottom:1rem;">More From the Blog</h2>
+    <div class="icp-grid">${others}</div>
+  </div>
+</section>
+`;
+  writePage(`/blog/${post.slug}`, pageShell({
+    title: `${post.title} | Peak Bio-Clean Blog`,
+    description: post.description,
+    canonical, bodyHtml, jsonLd,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Blog', DOMAIN + '/blog/'], [post.title, null]]
+  }));
+  addSitemap(`/blog/${post.slug}/`, '0.6', post.date);
+});
+
+{
+  const cards = BLOG_POSTS.map(post => `
+    <a class="icp-card" href="/blog/${post.slug}/">
+      <p class="eyebrow" style="margin-bottom:0.4rem;">${esc(post.category)} · ${formatDate(post.date)}</p>
+      <h3>${esc(post.title)}</h3>
+      <p class="muted">${esc(post.description)}</p>
+    </a>`).join('');
+  const bodyHtml = `
+<section class="subhero">
+  <div class="container">
+    <p class="breadcrumbs"><a href="/">Home</a> / Blog</p>
+    <p class="eyebrow">Resources & Guides</p>
+    <h1>The Peak Bio-Clean Blog</h1>
+    <p class="lead">Straight answers about insurance, what to expect, and how cleanup actually works — from crime scene and trauma cleanup to hoarding and unattended death.</p>
+  </div>
+</section>
+<section class="section"><div class="container"><div class="icp-grid">${cards}</div></div></section>
+`;
+  writePage('/blog', pageShell({
+    title: 'Blog | Resources & Guides | Peak Bio-Clean',
+    description: 'Guides on insurance coverage, what to expect, and how crime scene, trauma, biohazard, and hoarding cleanup actually work in Florida.',
+    canonical: `${DOMAIN}/blog/`,
+    bodyHtml,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Blog', null]]
+  }));
+  addSitemap('/blog/', '0.8');
+}
 
 // ============================= REFERRAL PARTNER PAGES =============================
 const PARTNERS = require('./partner-pages-data.js');
@@ -537,7 +662,8 @@ PARTNERS.forEach(p => {
   writePage(`/for/${p.slug}`, pageShell({
     title: `${p.title} | Peak Bio-Clean Referral Partners`,
     description: p.description,
-    canonical, bodyHtml
+    canonical, bodyHtml,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Referral Partners', DOMAIN + '/vendor-partners/'], [p.h1Sub, null]]
   }));
   addSitemap(`/for/${p.slug}/`, '0.7');
 });
@@ -581,7 +707,8 @@ PARTNERS.forEach(p => {
     title: 'Referral Partners | Vendor Program | Peak Bio-Clean',
     description: 'Property managers, funeral homes, law enforcement, hospice, restoration companies, and insurance professionals — get Peak Bio-Clean in your vendor file for 24/7 cleanup response.',
     canonical: `${DOMAIN}/vendor-partners/`,
-    bodyHtml
+    bodyHtml,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Referral Partners', null]]
   }));
   addSitemap('/vendor-partners/', '0.75');
 }
@@ -638,16 +765,19 @@ PARTNERS.forEach(p => {
     title: 'Insurance & Cost | Peak Bio-Clean',
     description: 'How insurance works for crime scene, trauma, and biohazard cleanup in Florida. Documentation, adjuster coordination, and honest cost guidance from Peak Bio-Clean.',
     canonical: `${DOMAIN}/insurance-and-cost/`,
-    bodyHtml
+    bodyHtml,
+    breadcrumb: [['Home', DOMAIN + '/'], ['Insurance & Cost', null]]
   }));
   addSitemap('/insurance-and-cost/', '0.6');
 }
 
 // ============================= SITEMAP =============================
+const TODAY = new Date().toISOString().slice(0, 10);
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls.map(u => `  <url>
     <loc>${u.loc}</loc>
+    <lastmod>${u.lastmod || TODAY}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`).join('\n')}
