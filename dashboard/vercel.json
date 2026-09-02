@@ -3,7 +3,8 @@
   "rewrites": [
     { "source": "/api/dashboard", "destination": "/dashboard.html" },
     { "source": "/api/legacy", "destination": "/legacy-dashboard.html" },
-    { "source": "/api/operations", "destination": "/operations.html" }
+    { "source": "/api/operations", "destination": "/operations.html" },
+    { "source": "/email-settings", "destination": "/gmail-settings.html" }
   ],
   "headers": [
     {
