@@ -316,8 +316,6 @@ SERVICES.forEach(([name, slug]) => {
   addSitemap('/services/', '0.9');
 }
 
-const FL_SVG_LARGE = '<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg"><path fill="var(--red)" d="M15,140 L20,110 L70,95 L130,88 L190,88 L240,95 L270,110 L285,135 L290,180 L293,220 L299,255 L293,285 L289,320 L282,355 L270,385 L250,405 L220,415 L195,405 L200,385 L185,355 L178,320 L180,290 L188,270 L178,255 L183,220 L178,185 L168,155 L135,138 L90,128 L45,122 L18,128 Z"/></svg>';
-
 const REGIONS = [
   ['South Florida', ['Miami-Dade', 'Broward', 'Palm Beach', 'Monroe']],
   ['Southwest Florida', ['Lee', 'Collier', 'Charlotte', 'Sarasota', 'Hendry', 'Glades', 'DeSoto']],
@@ -347,11 +345,8 @@ const REGIONS = [
 <section class="section">
   <div class="container">
     <div class="fl-coverage">
-      ${FL_SVG_LARGE}
-      <div class="fl-coverage-text">
-        <h3>No Part of Florida Is Out of Reach</h3>
-        <p>From Pensacola to Key West, Peak Bio-Clean responds statewide, 24/7. Find your county below for local response details, or call any time.</p>
-      </div>
+      <h3>No Part of Florida Is Out of Reach</h3>
+      <p>From Pensacola to Key West, Peak Bio-Clean responds statewide, 24/7. Find your county below for local response details, or call any time.</p>
     </div>
     ${regionBlocks}
   </div>

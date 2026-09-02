@@ -26,7 +26,7 @@
     }).join('') + '<a href="/services/"><span class="mm-icon">' + ICON + '</span>All Services</a>';
   }
 
-  var FL_SVG = '<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg"><path fill="var(--red)" d="M15,140 L20,110 L70,95 L130,88 L190,88 L240,95 L270,110 L285,135 L290,180 L293,220 L299,255 L293,285 L289,320 L282,355 L270,385 L250,405 L220,415 L195,405 L200,385 L185,355 L178,320 L180,290 L188,270 L178,255 L183,220 L178,185 L168,155 L135,138 L90,128 L45,122 L18,128 Z"/></svg>';
+  var AREAS_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
   var REGION_FLAGSHIPS = [["South Florida",["Miami-Dade","Broward","Palm Beach"]],["Southwest Florida",["Lee","Collier","Sarasota"]],["Tampa Bay",["Hillsborough","Pinellas","Polk"]],["Central Florida",["Orange","Volusia","Brevard"]],["North Florida",["Duval","St. Johns","Alachua"]],["Panhandle",["Leon","Escambia","Bay"]]];
   var cm = document.getElementById('countiesMenu');
   if (cm) {
@@ -35,7 +35,7 @@
         return '<a href="/' + countySlug(c) + '-county/"><span class="mm-dot"></span>' + c + '</a>';
       }).join('') + '</div>';
     }).join('');
-    cm.innerHTML = '<div class="areas-map">' + FL_SVG + '<span class="areas-map-label">All 67 Florida Counties</span></div><div class="areas-regions">' + regionsHtml + '<div class="areas-viewall"><a href="/service-areas/">View All 67 Counties →</a></div></div>';
+    cm.innerHTML = '<div class="areas-map"><span class="areas-map-icon">' + AREAS_ICON + '</span><span class="areas-map-label">All 67 Florida Counties</span></div><div class="areas-regions">' + regionsHtml + '<div class="areas-viewall"><a href="/service-areas/">View All 67 Counties →</a></div></div>';
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('.has-dropdown'), function (dd) {
