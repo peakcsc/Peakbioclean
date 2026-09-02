@@ -316,6 +316,56 @@ SERVICES.forEach(([name, slug]) => {
   addSitemap('/services/', '0.9');
 }
 
+const FL_SVG_LARGE = '<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><path fill="var(--red)" d="M28,138 L60,120 L110,104 L160,94 L205,93 L233,102 L230,118 L236,138 L256,152 L274,190 L290,235 L300,285 L297,330 L284,368 L264,400 L248,382 L260,358 L238,332 L220,298 L204,254 L194,210 L199,186 L180,180 L187,152 L150,145 L108,141 L66,146 L38,152 Z"/></svg>';
+
+const REGIONS = [
+  ['South Florida', ['Miami-Dade', 'Broward', 'Palm Beach', 'Monroe']],
+  ['Southwest Florida', ['Lee', 'Collier', 'Charlotte', 'Sarasota', 'Hendry', 'Glades', 'DeSoto']],
+  ['Tampa Bay', ['Hillsborough', 'Pinellas', 'Pasco', 'Hernando', 'Manatee', 'Citrus', 'Polk']],
+  ['Central Florida', ['Orange', 'Seminole', 'Osceola', 'Lake', 'Volusia', 'Brevard', 'Sumter', 'Marion', 'Indian River', 'St. Lucie', 'Martin', 'Okeechobee', 'Highlands', 'Hardee']],
+  ['North Florida', ['Duval', 'St. Johns', 'Clay', 'Nassau', 'Baker', 'Putnam', 'Flagler', 'Alachua', 'Bradford', 'Union', 'Columbia', 'Suwannee', 'Hamilton', 'Lafayette', 'Dixie', 'Gilchrist', 'Levy', 'Madison', 'Taylor']],
+  ['Panhandle', ['Leon', 'Wakulla', 'Jefferson', 'Gadsden', 'Liberty', 'Franklin', 'Calhoun', 'Gulf', 'Bay', 'Washington', 'Holmes', 'Jackson', 'Walton', 'Okaloosa', 'Santa Rosa', 'Escambia']]
+];
+
+// ============================= SERVICE AREAS PAGE =============================
+{
+  const regionBlocks = REGIONS.map(([region, list]) => `
+    <div>
+      <h3 style="margin:1.75rem 0 0.75rem;color:var(--blue-dark);">${esc(region)}</h3>
+      <div class="pill-row">${list.map(c => `<a class="svc-pill" href="/${countySlug(c)}-county/">${esc(c)} County</a>`).join('')}</div>
+    </div>`).join('');
+  const bodyHtml = `
+<section class="subhero">
+  <div class="container">
+    <p class="breadcrumbs"><a href="/">Home</a> / Service Areas</p>
+    <p class="eyebrow">Statewide Coverage</p>
+    <h1>Serving All 67 Counties in Florida</h1>
+    <p class="lead">Crime scene, trauma, and biohazard cleanup — available 24/7, from the Panhandle to the Keys.</p>
+    <div class="hero-cta"><a href="tel:${PHONE_TEL}" class="btn btn-red">Call Now — ${PHONE_DISPLAY}</a></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="fl-coverage">
+      ${FL_SVG_LARGE}
+      <div class="fl-coverage-text">
+        <h3>No Part of Florida Is Out of Reach</h3>
+        <p>From Pensacola to Key West, Peak Bio-Clean responds statewide, 24/7. Find your county below for local response details, or call any time.</p>
+      </div>
+    </div>
+    ${regionBlocks}
+  </div>
+</section>
+`;
+  writePage('/service-areas', pageShell({
+    title: 'Service Areas | All 67 Florida Counties | Peak Bio-Clean',
+    description: 'Peak Bio-Clean serves all 67 counties across Florida with 24/7 crime scene, trauma, and biohazard cleanup. Find your county.',
+    canonical: `${DOMAIN}/service-areas/`,
+    bodyHtml
+  }));
+  addSitemap('/service-areas/', '0.8');
+}
+
 // ============================= COUNTY PAGES =============================
 COUNTIES.forEach(name => {
   const slug = countySlug(name);

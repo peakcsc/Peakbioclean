@@ -203,10 +203,23 @@ ul { list-style: none; }
 .mega-menu .mm-icon { width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; }
 .mega-menu .mm-icon svg { width: 17px; height: 17px; stroke: var(--blue); fill: none; }
 /* Service Areas counties dropdown */
-.has-dropdown.areas-dd .mega-menu { left: auto; right: 0; transform: translateX(0) translateY(10px); width: 680px; grid-template-columns: repeat(4, minmax(150px, 1fr)); max-height: 72vh; overflow-y: auto; }
+.has-dropdown.areas-dd .mega-menu { left: auto; right: 0; transform: translateX(0) translateY(10px); width: 560px; max-height: none; overflow: visible; }
 .has-dropdown.areas-dd:hover .mega-menu, .has-dropdown.areas-dd:focus-within .mega-menu, .has-dropdown.areas-dd.open .mega-menu { transform: translateX(0) translateY(4px); }
-.mega-menu.counties a { font-size: 0.82rem; padding: 0.38rem 0.5rem; }
+.mega-menu.counties { grid-template-columns: 128px 1fr; column-gap: 1rem; align-items: start; }
+.mega-menu.counties a { font-size: 0.82rem; padding: 0.32rem 0.5rem; }
 .mega-menu.counties .mm-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.areas-map { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.6rem 0.4rem; text-align: center; }
+.areas-map svg { width: 84px; height: 84px; }
+.areas-map .areas-map-label { font-size: 0.72rem; font-weight: 800; color: var(--blue-dark); line-height: 1.3; }
+.areas-regions { display: grid; grid-template-columns: repeat(2, 1fr); }
+.areas-region h5 { font-size: 0.64rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gray); font-weight: 700; margin: 0.6rem 0 0.1rem; padding-left: 0.5rem; }
+.areas-viewall { grid-column: 1 / -1; margin-top: 0.5rem; border-top: 1px solid var(--border); padding-top: 0.6rem; }
+.areas-viewall a { color: var(--red); font-weight: 800; justify-content: center; }
+/* Standalone Florida coverage graphic (service-areas page, homepage) */
+.fl-coverage { display: flex; align-items: center; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+.fl-coverage svg { width: 160px; height: 160px; flex-shrink: 0; }
+.fl-coverage-text { max-width: 380px; }
+.fl-coverage-text h3 { color: var(--blue-dark); margin-bottom: 0.4rem; }
 /* County page service grid */
 .county-svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem; margin: 1rem 0 1.75rem; }
 .county-svc-grid a { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.65rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; color: var(--ink); border: 1px solid var(--border); }
@@ -646,6 +659,7 @@ ul { list-style: none; }
           <ul><li>Tampa</li><li>Brandon</li><li>Riverview</li><li>Plant City</li></ul>
         </div>
       </div>
+      <div class="text-center" style="margin-top:2rem;"><a href="/service-areas/" class="btn btn-outline">View All 67 Counties</a></div>
     </div>
   </section>
 
@@ -891,8 +905,15 @@ if (mm) { mm.innerHTML = CORE.map(function(x){return '<a href="/'+x[1]+'/"><span
 var COUNTIES = ["Alachua","Baker","Bay","Bradford","Brevard","Broward","Calhoun","Charlotte","Citrus","Clay","Collier","Columbia","DeSoto","Dixie","Duval","Escambia","Flagler","Franklin","Gadsden","Gilchrist","Glades","Gulf","Hamilton","Hardee","Hendry","Hernando","Highlands","Hillsborough","Holmes","Indian River","Jackson","Jefferson","Lafayette","Lake","Lee","Leon","Levy","Liberty","Madison","Manatee","Marion","Martin","Miami-Dade","Monroe","Nassau","Okaloosa","Okeechobee","Orange","Osceola","Palm Beach","Pasco","Pinellas","Polk","Putnam","Santa Rosa","Sarasota","Seminole","St. Johns","St. Lucie","Sumter","Suwannee","Taylor","Union","Volusia","Wakulla","Walton","Washington"];
 function countySlug(c){return c.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
 function countyName(slug){for(var i=0;i<COUNTIES.length;i++){if(countySlug(COUNTIES[i])===slug)return COUNTIES[i];}return null;}
+var FL_SVG = '<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><path fill="var(--red)" d="M28,138 L60,120 L110,104 L160,94 L205,93 L233,102 L230,118 L236,138 L256,152 L274,190 L290,235 L300,285 L297,330 L284,368 L264,400 L248,382 L260,358 L238,332 L220,298 L204,254 L194,210 L199,186 L180,180 L187,152 L150,145 L108,141 L66,146 L38,152 Z"/></svg>';
+var REGION_FLAGSHIPS = [["South Florida",["Miami-Dade","Broward","Palm Beach"]],["Southwest Florida",["Lee","Collier","Sarasota"]],["Tampa Bay",["Hillsborough","Pinellas","Polk"]],["Central Florida",["Orange","Volusia","Brevard"]],["North Florida",["Duval","St. Johns","Alachua"]],["Panhandle",["Leon","Escambia","Bay"]]];
 var cm = document.getElementById('countiesMenu');
-if (cm) { cm.innerHTML = COUNTIES.map(function(c){return '<a href="/'+countySlug(c)+'-county/"><span class="mm-dot"></span>'+c+' County</a>';}).join(''); }
+if (cm) {
+  var regionsHtml = REGION_FLAGSHIPS.map(function(r){
+    return '<div class="areas-region"><h5>'+r[0]+'</h5>'+r[1].map(function(c){return '<a href="/'+countySlug(c)+'-county/"><span class="mm-dot"></span>'+c+'</a>';}).join('')+'</div>';
+  }).join('');
+  cm.innerHTML = '<div class="areas-map">'+FL_SVG+'<span class="areas-map-label">All 67 Florida Counties</span></div><div class="areas-regions">'+regionsHtml+'<div class="areas-viewall"><a href="/service-areas/">View All 67 Counties →</a></div></div>';
+}
 // Keep dropdowns open with a grace period so the menu doesn't vanish before you can reach it
 Array.prototype.forEach.call(document.querySelectorAll('.has-dropdown'), function(dd){
   var t;
