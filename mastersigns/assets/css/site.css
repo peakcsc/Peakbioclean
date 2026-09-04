@@ -1,0 +1,599 @@
+/* ============================================================
+   MASTER SIGNS & PRINTS — site.css
+   Palette and forms pulled from the company logo:
+   concrete disc, navy reticle outline, chrome-blue block
+   lettering, green script. Structural vocabulary is borrowed
+   from sign shop drawings and press registration sheets.
+   ============================================================ */
+
+/* ---------- 1. Tokens ---------- */
+:root{
+  /* colour — sampled from FINAL_COMPLETE_LOGO.pdf */
+  --ink:        #14102E;   /* logo outline, near-black navy */
+  --ink-raised: #201B44;
+  --ink-line:   #2E2856;
+  --steel:      #3A4A7E;   /* MASTER / & PRINTS lettering */
+  --steel-soft: #8492BC;
+  --concrete:   #C4C4C4;   /* the disc */
+  --concrete-d: #9E9E9C;
+  --paper:      #F6F5F2;
+  --paper-2:    #EBE9E4;
+  --signal:     #00E01C;   /* Signs script green */
+  --signal-dim: #0B8A17;
+  --alarm:      #C8102E;   /* reticle centre — detail only */
+
+  --text:       #14102E;
+  --text-mute:  #57536E;
+  --text-onink: #EDEBF5;
+  --text-onink-mute: #A9A4C4;
+
+  /* type */
+  --display: "Archivo", "Arial Narrow", Helvetica, sans-serif;
+  --body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* rhythm */
+  --gut: clamp(1.25rem, 4vw, 2.5rem);
+  --sec: clamp(3.5rem, 9vw, 7.5rem);
+  --max: 1280px;
+  --rule: 1px solid rgba(20,16,46,.14);
+  --rule-onink: 1px solid rgba(237,235,245,.16);
+}
+
+/* ---------- 2. Reset / base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--text);
+  font-family:var(--body);font-size:17px;line-height:1.65;
+  font-weight:400;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg,video{max-width:100%;height:auto;display:block}
+a{color:inherit}
+button{font:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:800;
+  font-stretch:125%;text-transform:uppercase;line-height:.92;letter-spacing:-.018em}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--ink);color:var(--paper);
+  padding:.9rem 1.3rem;font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-decoration:none}
+.skip:focus{left:12px;top:12px}
+
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:2px}
+.on-ink :focus-visible{outline-color:var(--signal)}
+
+/* ---------- 3. Type scale ---------- */
+.h-hero{font-size:clamp(1.92rem,3.6vw,3.25rem)}
+.h-sec{font-size:clamp(1.8rem,3.7vw,2.9rem)}
+.h-sub{font-size:clamp(1.28rem,2.1vw,1.6rem);font-stretch:110%;letter-spacing:-.005em}
+.h-card{font-size:1.06rem;font-stretch:106%;letter-spacing:.006em;line-height:1.15}
+
+.eyebrow{
+  font-family:var(--mono);font-size:.7rem;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--steel);
+  display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--signal);flex:none}
+.on-ink .eyebrow{color:var(--steel-soft)}
+
+/* the address is long; break at the <wbr> after the @, never mid-domain */
+.h-sub--mail{font-size:clamp(.98rem,1.5vw,1.18rem);overflow-wrap:break-word;line-height:1.25}
+.lede{font-size:clamp(1.06rem,1.55vw,1.24rem);line-height:1.6;color:var(--text-mute);max-width:60ch}
+.on-ink .lede{color:var(--text-onink-mute)}
+.tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mute)}
+.on-ink{color:var(--text-onink)}
+.on-ink h1,.on-ink h2,.on-ink h3{color:var(--text-onink)}
+
+/* ---------- 4. Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  min-height:52px;padding:.85rem 1.5rem;border:2px solid var(--ink);
+  background:var(--ink);color:var(--paper);text-decoration:none;
+  font-family:var(--display);font-weight:800;font-stretch:112%;
+  text-transform:uppercase;font-size:.88rem;letter-spacing:.03em;
+  cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  box-shadow:4px 4px 0 rgba(20,16,46,.16);
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(20,16,46,.22)}
+.btn:active{transform:translate(1px,1px);box-shadow:2px 2px 0 rgba(20,16,46,.2)}
+.btn--go{background:var(--signal);border-color:var(--signal);color:var(--ink);
+  box-shadow:4px 4px 0 rgba(11,138,23,.45)}
+.btn--go:hover{box-shadow:6px 6px 0 rgba(11,138,23,.5)}
+.btn--ghost{background:transparent;color:var(--ink);box-shadow:none}
+.btn--ghost:hover{background:var(--ink);color:var(--paper);box-shadow:none}
+.on-ink .btn--ghost{color:var(--text-onink);border-color:rgba(237,235,245,.5)}
+.on-ink .btn--ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+
+.link-arrow{
+  display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--steel);border-bottom:2px solid var(--signal);padding-bottom:2px;
+  transition:gap .18s ease;
+}
+.link-arrow:hover{gap:.85rem}
+.on-ink .link-arrow{color:var(--signal)}
+
+/* ---------- 5. Surfaces: concrete + registration marks ---------- */
+.concrete{
+  background-color:var(--concrete);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 22% 12%, rgba(255,255,255,.5), transparent 62%),
+    radial-gradient(90% 80% at 84% 88%, rgba(20,16,46,.16), transparent 60%);
+  background-blend-mode:overlay,normal,normal;
+}
+.ink-panel{background:var(--ink);color:var(--text-onink);position:relative;isolation:isolate}
+.ink-panel::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+}
+
+/* registration / crosshair mark — echoes the reticle in the logo */
+.regmark{position:absolute;width:22px;height:22px;opacity:.5;pointer-events:none}
+.regmark::before,.regmark::after{content:"";position:absolute;background:currentColor}
+.regmark::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-.5px)}
+.regmark::after{top:50%;left:0;right:0;height:1px;transform:translateY(-.5px)}
+.regmark i{position:absolute;inset:5px;border:1px solid currentColor;border-radius:50%}
+
+/* Mounted sign panel — a concrete surround with the mark recessed into a
+   dark face. Used on About; the home hero carries the film instead. */
+.signpanel{position:relative;padding:clamp(1.1rem,3vw,1.8rem);
+  border:1px solid rgba(20,16,46,.28);
+  box-shadow:0 34px 64px -28px rgba(20,16,46,.6),
+             inset 0 1px 0 rgba(255,255,255,.55),
+             inset 0 -2px 0 rgba(20,16,46,.14)}
+.signpanel__face{position:relative;display:grid;place-items:center;
+  padding:clamp(1.6rem,4.5vw,3rem) clamp(1.2rem,3.5vw,2.2rem);
+  background:var(--ink);border:2px solid rgba(20,16,46,1);
+  box-shadow:inset 0 3px 14px rgba(0,0,0,.65),inset 0 -1px 0 rgba(255,255,255,.06)}
+.signpanel__face img{width:min(100%,420px);position:relative;z-index:1}
+.signpanel__bolts{position:absolute;inset:0;pointer-events:none}
+.signpanel__bolts i{position:absolute;width:9px;height:9px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%, #fff, var(--concrete-d) 62%, #6f6f6d);
+  box-shadow:0 1px 2px rgba(0,0,0,.45)}
+.signpanel__bolts i:nth-child(1){top:12px;left:12px}
+.signpanel__bolts i:nth-child(2){top:12px;right:12px}
+.signpanel__bolts i:nth-child(3){bottom:12px;left:12px}
+.signpanel__bolts i:nth-child(4){bottom:12px;right:12px}
+
+/* ---------- 6. Header ---------- */
+.hdr{position:sticky;top:0;z-index:60;background:rgba(246,245,242,.96);
+  border-bottom:var(--rule)}
+.hdr__in{display:flex;align-items:center;gap:1rem;min-height:74px;
+  max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
+.brand img{width:52px;height:auto}
+.brand b{font-family:var(--display);font-weight:800;font-stretch:112%;
+  text-transform:uppercase;font-size:.95rem;line-height:1;letter-spacing:.01em;display:block}
+.brand span{font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--text-mute);display:block;margin-top:3px}
+.nav{display:none;gap:1.6rem;align-items:center}
+.nav a{font-family:var(--mono);font-size:.76rem;letter-spacing:.11em;text-transform:uppercase;
+  text-decoration:none;padding:.35rem 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a[aria-current="page"]{border-bottom-color:var(--signal)}
+.hdr__cta{display:none;align-items:center;gap:.6rem}
+.hdr .btn{min-height:44px;padding:.6rem 1.05rem;font-size:.78rem;box-shadow:3px 3px 0 rgba(20,16,46,.16)}
+.tel{display:inline-flex;align-items:center;gap:.4rem;text-decoration:none;
+  font-family:var(--mono);font-size:.82rem;letter-spacing:.04em;white-space:nowrap}
+.tel:hover{color:var(--steel)}
+.burger{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;
+  width:48px;height:48px;background:none;border:2px solid var(--ink);cursor:pointer}
+.burger span{display:block;width:20px;height:2px;background:var(--ink);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--ink)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+.burger[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+.mnav{display:none;border-top:var(--rule);background:var(--paper)}
+.mnav.open{display:block}
+.mnav ul{padding:.5rem var(--gut) 1.4rem}
+.mnav a{display:block;padding:.95rem 0;text-decoration:none;border-bottom:var(--rule);
+  font-family:var(--display);font-weight:800;font-stretch:112%;text-transform:uppercase;font-size:1.15rem}
+.mnav .btn{width:100%;margin-top:1.1rem}
+.mnav .tel{margin-top:1rem;justify-content:center;width:100%;min-height:48px;
+  border:2px solid var(--ink);display:flex}
+@media (min-width:1000px){
+  .nav,.hdr__cta{display:flex}
+  .burger{display:none}
+  .brand img{width:58px}
+}
+
+/* ---------- 7. Hero (film) ----------
+   The hero is the 3D sign film. On phones it is a full-width square with
+   the copy beneath it; from 900px up the square is pinned to the right at
+   full hero height and its left edge is feathered into the ink ground, so
+   the panel and the page read as one dark scene. The sign pushes in and
+   fills most of its frame, so the copy is never laid over it. */
+.hero{position:relative;background:var(--ink);color:var(--text-onink);
+  overflow:hidden;isolation:isolate}
+.hero__film{position:relative;width:100%;max-width:560px;margin-inline:auto;
+  aspect-ratio:1;overflow:hidden;background:transparent;
+  /* The clip is graded so its ground sits below the ink; `lighten` then
+     replaces every dark pixel with the page colour and keeps only the lit
+     sign, so there is no rectangle left to see at any size and no mask is
+     needed. The blend must sit on the film, not the video: the film makes
+     its own stacking context (z-index, later a transform), which would
+     isolate a blend applied inside it. */
+  mix-blend-mode:lighten;
+  /* a narrow feather on all four sides so the faint residual haze has no
+     straight line to end on; the middle 86% is untouched */
+  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
+                     linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
+             linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-composite:intersect}
+.hero__film video,.hero__film .poster{width:100%;height:100%;object-fit:cover;display:block}
+.hero__over{position:relative;z-index:2;padding:clamp(2rem,7vw,3rem) var(--gut) clamp(2.5rem,8vw,4rem)}
+.hero__copy{max-width:60ch}
+.hero h1{margin-bottom:1.4rem}
+.hero h1 em{font-style:normal;display:block;color:var(--steel-soft)}
+.hero__acts{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.hero__note{margin-top:1.9rem;padding-top:1.1rem;border-top:var(--rule-onink);
+  font-size:.86rem;color:var(--text-onink-mute);line-height:1.6;max-width:52ch}
+.hero__note b{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--text-onink);font-weight:500;margin-bottom:.5rem}
+
+/* The sign fills nearly its whole square frame and pushes in as it plays, so
+   the copy is kept clear of that square's footprint entirely rather than
+   scrimmed on top of it. The square is sized off the viewport width, not the
+   hero height, so a long copy column can never inflate it into the text. */
+@media (min-width:1200px){
+  .hero{min-height:min(78vh,760px);display:flex;align-items:center}
+  .hero__film{position:absolute;top:50%;right:0;left:auto;transform:translateY(-50%);
+    width:min(50vw,700px);height:auto;max-width:none;margin:0;aspect-ratio:1}
+  .hero__over{width:100%;max-width:var(--max);margin-inline:auto;
+    padding-inline:var(--gut);padding-block:clamp(3rem,6vw,4.5rem)}
+  .hero__copy{max-width:min(46%,580px)}
+}
+/* The film is decoration. If the viewer asked for stillness they get the
+   frame instead — declared before the query so the query actually wins. */
+.hero__film .poster{display:none}
+.hero__film.is-still video{display:none}
+.hero__film.is-still .poster{display:block}
+@media (prefers-reduced-motion:reduce){
+  .hero__film video{display:none}
+  .hero__film .poster{display:block}
+}
+
+/* ---------- 7b. Hero scroll expansion ----------
+   Two phases, so the sign is never hidden behind the wording and never
+   appears twice.
+
+   Phase 1 (--p1, over the first half of the track): the sign turns to face
+   you and grows into the clear space beside the copy. It does not cross the
+   copy, so the whole mark is visible while it is at full strength.
+
+   Phase 2 (--p2, the last quarter): it moves to the exact position and size
+   of the standing background film and fades out as that fades in. Because
+   both end up identical -- same centre, same square, same clip -- the
+   handover reads as one object settling into the page rather than two signs
+   overlapping. An ink scrim rises with this phase only, since this is the
+   only point at which the sign passes over the copy.
+
+   Geometry for both phases is measured once per resize by site.js and handed
+   over as --fx1/--fk1 and --fx2/--fk2. Transform and opacity only. */
+.hero{--h:0}
+
+@media (min-width:1200px){
+  /* overflow:hidden on .hero would make it the scroll container and stop
+     .hero__pin from ever sticking; the clipping lives on the pin instead */
+  .hero--scroll{height:130vh;min-height:0;display:block;overflow:visible;
+    --p1:clamp(0, calc(var(--h) / .5), 1);
+    --p2:clamp(0, calc((var(--h) - .72) / .25), 1)}
+  .hero--scroll .hero__pin{position:sticky;top:0;height:100vh;overflow:hidden;
+    display:flex;align-items:center;perspective:1600px;perspective-origin:60% 50%;
+    background:var(--ink)}
+
+  .hero--scroll .hero__film{
+    transform-origin:center center;will-change:transform,opacity;
+    transform:translate(calc(var(--fx1,0px) * var(--p1)
+                             + (var(--fx2,0px) - var(--fx1,0px)) * var(--p2)), -50%)
+              scale(calc(1 + (var(--fk1,1) - 1) * var(--p1)
+                           + (var(--fk2,1) - var(--fk1,1)) * var(--p2)))
+              rotateY(calc((1 - var(--p1)) * -8deg));
+    opacity:clamp(0, calc(1 - var(--p2) * 1.1), 1)}
+
+  /* The wording and the calls to action stay put and stay readable for the
+     whole hero scroll -- they never fade and are never hidden, so the
+     buttons remain clickable and focusable throughout. The scrim only rises
+     in phase 2, when the sign crosses the copy on its way to becoming the
+     background; in phase 1 there is nothing to protect against, so the mark
+     is seen whole. It is the page colour, so it is invisible once the film
+     has gone. Sits above the film, below the copy. */
+  .hero--scroll .hero__pin::before{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(90deg,
+      var(--ink) 0%, var(--ink) 48%, rgba(20,16,46,.62) 62%,
+      rgba(20,16,46,.18) 72%, rgba(20,16,46,0) 82%);
+    opacity:clamp(0, calc(var(--p2) * 2.2), 1)}
+}
+
+/* ---------- 7c. Standing film ----------
+   The looping sign sits behind every page. Two fixed layers, because one
+   cannot read on both grounds: the ink layer screens (its dark scene is a
+   no-op on paper, its lit sign glows on ink), and the paper layer is
+   inverted and multiplied (its now-white ground is a no-op on paper, its
+   sign reads as a soft grey ghost). Each is near enough invisible against
+   the ground it is not meant for.
+
+   The blend sits on the fixed layer itself, not the <video>: the layer makes
+   its own stacking context, which would isolate a nested blend and paint it
+   flat. z-index 1 rather than 0 because the sections are position:relative
+   and would otherwise cover it; it stays under the header (60) and the call
+   bar (70). Strengths are set by contrast measurement, not by eye. */
+.sitefilm{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+  display:grid;place-items:center}
+.sitefilm video{width:min(84vw,86vh);aspect-ratio:1;height:auto;object-fit:cover}
+.sitefilm--paper{mix-blend-mode:multiply;opacity:calc(var(--brand-in,1) * .19)}
+/* inverting flips the hue too - the red sphere goes cyan, the green script
+   goes pink - so the paper layer is desaturated to a neutral grey ghost.
+   The ink layer keeps its colour, where it is the actual brand palette. */
+.sitefilm--paper video{filter:invert(1) grayscale(1)}
+.sitefilm--ink{mix-blend-mode:screen;opacity:calc(var(--brand-in,1) * .15)}
+
+/* it is decoration: never run it for a viewer who asked for stillness */
+@media (prefers-reduced-motion:reduce){
+  .sitefilm video{display:none}
+}
+
+/* ---------- 8. Trigger strip ---------- */
+.triggers{border-top:var(--rule);border-bottom:var(--rule);margin-top:clamp(3rem,7vw,5rem)}
+.triggers__in{display:grid;gap:0;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.triggers__lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-mute);padding:1.1rem 0 .4rem}
+.triggers ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  border-left:var(--rule)}
+.triggers li{border-right:var(--rule);border-top:var(--rule)}
+.triggers a{display:block;padding:1.15rem 1.1rem;text-decoration:none;min-height:88px;
+  transition:background .18s ease}
+.triggers a:hover{background:var(--paper-2)}
+.triggers a b{display:block;font-family:var(--display);font-weight:800;font-stretch:110%;
+  text-transform:uppercase;font-size:.95rem;line-height:1.1;margin-bottom:.3rem}
+.triggers a span{font-size:.82rem;color:var(--text-mute);line-height:1.4;display:block}
+
+/* ---------- 9. Section shells ---------- */
+.sec{padding-block:var(--sec);position:relative}
+.sec--tight{padding-block:clamp(2.75rem,6vw,4.5rem)}
+.sec__head{max-width:66ch;margin-bottom:clamp(2.2rem,4.5vw,3.2rem)}
+.sec__head p{margin-top:1.1rem}
+.split{display:grid;gap:clamp(2rem,4.5vw,3.5rem)}
+@media (min-width:900px){
+  .split{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start}
+  .split--even{grid-template-columns:1fr 1fr}
+  .split__sticky{position:sticky;top:106px}
+}
+
+/* ---------- 10. The chain diagram ---------- */
+.chain{display:grid;gap:0;border-top:var(--rule-onink)}
+.chain li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:baseline;
+  padding:.95rem 0;border-bottom:var(--rule-onink)}
+.chain .n{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--steel-soft)}
+.chain .t{font-family:var(--display);font-weight:700;font-stretch:106%;text-transform:uppercase;
+  font-size:.95rem;letter-spacing:.02em}
+.chain .g{grid-column:1/-1;display:flex;align-items:center;gap:.6rem;margin:.15rem 0 -.15rem;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--signal)}
+.chain .g::before{content:"";width:14px;height:14px;border:1px dashed var(--signal);flex:none;transform:rotate(45deg)}
+
+/* ---------- 11. Numbered process ---------- */
+.steps{display:grid;gap:0;counter-reset:s}
+.steps li{padding:1.5rem 0;border-top:var(--rule);display:grid;gap:.5rem}
+.steps li:last-child{border-bottom:var(--rule)}
+.steps .num{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--steel)}
+.steps p{color:var(--text-mute);font-size:.96rem;max-width:62ch}
+@media (min-width:760px){
+  .steps li{grid-template-columns:74px minmax(0,15rem) minmax(0,1fr);gap:1.5rem;align-items:baseline}
+  .steps p{grid-column:3}
+}
+
+/* ---------- 11b. Scroll build ----------
+   The seven checkpoints read down the right; beside them a sign is
+   fabricated in CSS 3D as you scroll: layout drawn, returns extruded,
+   faces fitted, mounted, then powered. --p is the section's scroll
+   progress, 0 to 1, set by site.js. It defaults to 1, so with no JS --
+   or under prefers-reduced-motion -- the sign simply renders finished
+   and lit rather than blank. */
+.build{--p:1}
+.build__grid{display:grid;gap:clamp(2rem,5vw,3.5rem)}
+.build__stage{display:grid;gap:.9rem}
+.build__cap{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:.6rem}
+.build__cap::before{content:"";width:22px;height:2px;background:var(--signal);flex:none}
+
+.stage{perspective:1100px;perspective-origin:50% 46%}
+.scene{position:relative;aspect-ratio:4/3;transform-style:preserve-3d;
+  transform:rotateX(calc(8deg - var(--p) * 5deg)) rotateY(calc(-30deg + var(--p) * 14deg))}
+.lyr{position:absolute;inset:0;transform-style:preserve-3d}
+
+.wall{border:1px solid rgba(20,16,46,.3);
+  box-shadow:0 40px 70px -34px rgba(20,16,46,.6), inset 0 1px 0 rgba(255,255,255,.5)}
+
+/* shop drawing: present while it is being set out, gone once it is built */
+.draw{transform:translateZ(2px);
+  opacity:calc(clamp(0, .5 + var(--p) * 6, 1) * clamp(0, (.86 - var(--p)) * 7, 1))}
+
+/* the raceway the letters mount to */
+.raceway{transform:translateZ(9px);display:grid;place-items:center}
+.raceway::before{content:"";width:70%;height:5.2%;background:linear-gradient(180deg,#9a9ca1,#63656a);
+  border:1px solid rgba(20,16,46,.5);
+  transform:scaleX(clamp(0, (var(--p) - .52) * 5, 1));transform-origin:left center}
+
+/* LEDs behind the faces — the payoff at the end of the scroll */
+.glow{transform:translateZ(5px);
+  background:radial-gradient(ellipse 40% 21% at 50% 50%, rgba(0,224,28,.58), rgba(0,224,28,0) 72%);
+  filter:blur(14px);opacity:clamp(0, (var(--p) - .8) * 6, 1)}
+
+/* channel letters: stacked copies form the returns, one bright face on top */
+.letters{display:grid;place-items:center;
+  --depth:calc(clamp(0, (var(--p) - .12) * 3.1, 1) * 66px)}
+.letters span{position:absolute;font-family:var(--display);font-weight:800;font-stretch:125%;
+  font-size:clamp(1.7rem,6.2vw,3.6rem);letter-spacing:.06em;line-height:1;white-space:nowrap;
+  opacity:clamp(0, (var(--p) - .1) * 6, 1)}
+.letters .ext{color:#2b3350;transform:translateZ(calc(var(--i) * var(--depth) / 18))}
+.letters .ext:nth-child(n+15){color:#55618c}   /* return edge catches the light */
+.letters .ext:nth-child(18){color:#7c88b4}
+.letters .face{color:#E8E7E2;transform:translateZ(var(--depth));
+  text-shadow:0 1px 0 rgba(255,255,255,.6);
+  opacity:clamp(0, (var(--p) - .42) * 5, 1)}
+
+@media (min-width:1000px){
+  .build__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:stretch;gap:clamp(2.5rem,5vw,4.5rem)}
+  .build__stage{position:sticky;top:104px}
+  .build__steps li:first-child{border-top:0;padding-top:0}
+}
+@media (min-width:1000px) and (max-width:1199px){
+  .letters span{font-size:clamp(1.6rem,3.4vw,2.6rem)}
+}
+
+/* ---------- 12. Cards / service groups ---------- */
+.cards{display:grid;gap:1px;background:rgba(20,16,46,.14);border:var(--rule)}
+.cards--3{grid-template-columns:1fr}
+.card{background:var(--paper);padding:clamp(1.4rem,3vw,2rem);display:grid;gap:.8rem;align-content:start}
+.card__k{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.card ul{display:grid;gap:.4rem;font-size:.94rem;color:var(--text-mute)}
+.card li{display:flex;gap:.6rem;align-items:baseline}
+.card li::before{content:"";width:6px;height:6px;background:var(--signal);flex:none;transform:translateY(-1px)}
+.card--external li::before{background:var(--steel-soft)}
+.card p{color:var(--text-mute);font-size:.95rem}
+@media (min-width:820px){.cards--3{grid-template-columns:repeat(3,1fr)}.cards--2{grid-template-columns:1fr 1fr}}
+
+/* ---------- 13. Responsibility matrix ---------- */
+.matrix{width:100%;border-collapse:collapse;font-size:.94rem}
+.matrix caption{text-align:left;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-onink-mute);padding-bottom:1rem}
+.matrix th,.matrix td{text-align:left;padding:.85rem .9rem;border-bottom:var(--rule-onink);vertical-align:top}
+.matrix thead th{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--steel-soft);font-weight:500;border-bottom:1px solid rgba(237,235,245,.3)}
+.matrix tbody th{font-weight:600;font-family:var(--body);color:var(--text-onink)}
+.matrix td{color:var(--text-onink-mute)}
+.owner{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);
+  font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.owner::before{content:"";width:8px;height:8px;flex:none}
+.owner--us::before{background:var(--signal)}
+.owner--partner::before{background:var(--steel-soft)}
+.owner--you::before{background:var(--concrete)}
+.owner--auth::before{background:transparent;border:1px solid var(--text-onink-mute)}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* the matrix stacks rather than squeezes on small screens */
+@media (max-width:760px){
+  .matrix thead{display:none}
+  .matrix caption{display:block;width:100%;text-align:left}
+  .matrix,.matrix tbody,.matrix tr,.matrix th,.matrix td{display:block;width:100%}
+  .matrix tr{padding:1.15rem 0;border-bottom:var(--rule-onink)}
+  .matrix tr:last-child{border-bottom:0}
+  .matrix tbody th{padding:0 0 .55rem;border:0;font-family:var(--display);font-weight:700;
+    font-stretch:110%;text-transform:uppercase;font-size:1rem;letter-spacing:.01em}
+  .matrix td{padding:0;border:0}
+  .matrix td:first-of-type{margin-bottom:.55rem}
+  .matrix .owner{white-space:normal}
+}
+
+/* ---------- 14. Evidence notes ---------- */
+.notes{display:grid;gap:1px;background:rgba(20,16,46,.14);border:var(--rule)}
+.note{background:var(--paper);padding:clamp(1.4rem,3vw,1.9rem);display:grid;gap:.6rem;align-content:start}
+.note .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.note p{font-size:.95rem;color:var(--text-mute)}
+@media (min-width:760px){.notes{grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}}
+
+/* ---------- 15. Q&A ---------- */
+.qa{border-top:var(--rule)}
+.qa details{border-bottom:var(--rule)}
+.qa summary{cursor:pointer;list-style:none;padding:1.25rem 3rem 1.25rem 0;position:relative;
+  font-family:var(--display);font-weight:700;font-stretch:108%;text-transform:uppercase;
+  font-size:1rem;letter-spacing:.01em;line-height:1.25}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"";position:absolute;right:8px;top:1.55rem;width:13px;height:13px;
+  border-right:2px solid var(--steel);border-bottom:2px solid var(--steel);
+  transform:rotate(45deg);transition:transform .2s ease}
+.qa details[open] summary::after{transform:rotate(-135deg)}
+.qa .a{padding:0 0 1.5rem;max-width:70ch;color:var(--text-mute);font-size:.98rem}
+.qa .a p+p{margin-top:.8rem}
+
+/* ---------- 16. Work grid ---------- */
+.work{display:grid;gap:1px;background:rgba(20,16,46,.14);border:var(--rule)}
+.work__item{background:var(--paper);display:grid;gap:0}
+.work__shot{position:relative;aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden}
+.work__shot img{width:100%;height:100%;object-fit:cover}
+.work__ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--steel);
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:1rem}
+.work__meta{padding:1.15rem 1.25rem 1.4rem;display:grid;gap:.45rem}
+.work__meta .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--steel)}
+.work__meta p{font-size:.9rem;color:var(--text-mute)}
+@media (min-width:700px){.work{grid-template-columns:1fr 1fr}}
+@media (min-width:1050px){.work{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- 17. Forms ---------- */
+.form{display:grid;gap:1.6rem}
+.fieldset{border:0;padding:0;margin:0;display:grid;gap:1.05rem}
+.fieldset legend{padding:0;margin-bottom:.35rem;font-family:var(--mono);font-size:.7rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--steel);
+  border-bottom:2px solid var(--signal);padding-bottom:.5rem;width:100%}
+.row{display:grid;gap:1.05rem}
+@media (min-width:680px){.row--2{grid-template-columns:1fr 1fr}.row--3{grid-template-columns:repeat(3,1fr)}}
+.f{display:grid;gap:.4rem}
+.f label{font-size:.85rem;font-weight:600}
+.f .hint{font-size:.78rem;color:var(--text-mute)}
+.f input,.f select,.f textarea{
+  font:inherit;font-size:1rem;padding:.8rem .9rem;min-height:50px;
+  background:var(--paper);color:var(--text);
+  border:1px solid rgba(20,16,46,.34);border-radius:0;width:100%;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.f textarea{min-height:130px;resize:vertical;line-height:1.55}
+.f input:focus,.f select,.f textarea:focus{}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--ink);
+  box-shadow:inset 0 -3px 0 var(--signal);outline:none}
+.f input[aria-invalid="true"],.f textarea[aria-invalid="true"],.f select[aria-invalid="true"]{border-color:var(--alarm)}
+.f .err{font-size:.78rem;color:var(--alarm);font-weight:600;min-height:0}
+.f select{appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%233A4A7E' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.4rem}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chip span{display:block;padding:.62rem 1rem;min-height:44px;display:flex;align-items:center;
+  border:1px solid rgba(20,16,46,.34);font-family:var(--mono);font-size:.74rem;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:.15s ease}
+.chip input:checked+span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip input:focus-visible+span{outline:3px solid var(--signal);outline-offset:3px}
+.formnote{font-size:.85rem;color:var(--text-mute);border-left:2px solid var(--signal);padding-left:1rem}
+.formstatus{padding:1.1rem 1.2rem;border:2px solid var(--ink);background:var(--paper-2);font-size:.95rem}
+.formstatus[hidden]{display:none}
+
+/* ---------- 18. Footer ---------- */
+.ftr{padding-block:clamp(3rem,6vw,4.5rem) 2rem}
+.ftr__top{display:grid;gap:2.5rem;padding-bottom:2.5rem;border-bottom:var(--rule-onink)}
+.ftr h2{font-size:.8rem;font-stretch:108%;letter-spacing:.1em;color:var(--steel-soft);margin-bottom:1rem;
+  font-family:var(--mono);font-weight:500;text-transform:uppercase}
+.ftr ul{display:grid;gap:.6rem;font-size:.94rem}
+.ftr a{text-decoration:none;color:var(--text-onink-mute)}
+.ftr a:hover{color:var(--signal)}
+.ftr__brand img{width:78px;margin-bottom:1rem}
+.ftr__legal{padding-top:1.8rem;display:grid;gap:.6rem;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--text-onink-mute);line-height:1.7}
+@media (min-width:780px){.ftr__top{grid-template-columns:1.4fr 1fr 1fr 1.1fr}}
+
+/* sticky mobile call bar */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:1fr 1fr;
+  border-top:2px solid var(--ink);background:var(--paper)}
+.callbar a{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:56px;
+  text-decoration:none;font-family:var(--display);font-weight:800;font-stretch:110%;
+  text-transform:uppercase;font-size:.84rem;letter-spacing:.03em}
+.callbar a+a{background:var(--signal);color:var(--ink)}
+@media (min-width:1000px){.callbar{display:none}}
+@media (max-width:999px){body{padding-bottom:56px}}
+
+/* ---------- 19. Motion ----------
+   One moment only: the hero sign switching on. Nothing else animates
+   on scroll — see CLAUDE.md §6. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
