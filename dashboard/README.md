@@ -33,7 +33,9 @@ Four new tabs added to the same dashboard, no new hosting, no new bills:
 | **🧠 Second Brain** | Save SOPs, contracts, client policies, pricing rules. Ask a question and it searches your docs (and, if `OPENAI_API_KEY` is set, summarizes an answer from them — optional, off by default). |
 | **🎨 Brand Kit** | Colors, voice rules, caption formula and hashtag bank pulled from `brand-kit.json`, plus a quick log for published posts that feeds the Briefing and Review Agent. |
 
-A fifth piece runs with no UI: **`/api/nightly-review`**, wired to Vercel Cron (see `vercel.json`, defaults to 3am UTC / ~11pm ET) — it checks what shipped that day (outreach logged, posts published) against what slipped (follow-ups still overdue), writes it to `daily_review_log`, and emails the report using the same Gmail credentials as lead outreach.
+A fifth piece runs with no UI: **`/api/nightly-review`**, wired to Vercel Cron (see `vercel.json`, 11:00 UTC / 7am ET) — it reports on the Eastern-time day that just ended, checking what shipped (outreach logged, posts published, leads moved to Partner) against what slipped (follow-ups still overdue, nothing posted, no outreach), writes it to `daily_review_log`, and emails the report using the same Gmail credentials as lead outreach.
+
+Every date comparison in that job runs through `Intl.DateTimeFormat` in `America/New_York`. Vercel executes in UTC, so comparing against the server's own calendar day puts an evening touch in Florida on the following day and the report comes back empty.
 
 ### One-time setup
 1. Run `dashboard/supabase/weekend-builds.sql` once in the Supabase SQL editor for this project — it creates `brain_docs`, `content_log`, and `daily_review_log` with RLS open to the anon key, matching how every other table in this app already works. Safe to re-run.
