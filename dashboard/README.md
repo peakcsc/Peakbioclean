@@ -33,9 +33,16 @@ Four new tabs added to the same dashboard, no new hosting, no new bills:
 | **🧠 Second Brain** | Save SOPs, contracts, client policies, pricing rules. Ask a question and it searches your docs (and, if `OPENAI_API_KEY` is set, summarizes an answer from them — optional, off by default). |
 | **🎨 Brand Kit** | Colors, voice rules, caption formula and hashtag bank pulled from `brand-kit.json`, plus a quick log for published posts that feeds the Briefing and Review Agent. |
 
-A fifth piece runs with no UI: **`/api/nightly-review`**, wired to Vercel Cron (see `vercel.json`, 11:00 UTC / 7am ET) — it reports on the Eastern-time day that just ended, checking what shipped (outreach logged, posts published, leads moved to Partner) against what slipped (follow-ups still overdue, nothing posted, no outreach), writes it to `daily_review_log`, and emails the report using the same Gmail credentials as lead outreach.
+A fifth piece runs with no UI: **`/api/daily-brief`**, wired to two Vercel Cron entries (see `vercel.json`):
 
-Every date comparison in that job runs through `Intl.DateTimeFormat` in `America/New_York`. Vercel executes in UTC, so comparing against the server's own calendar day puts an evening touch in Florida on the following day and the report comes back empty.
+- `0 11 * * *` (7am ET) — the full brief: today's tasks from the 30-day plan, overdue and due-today follow-ups, and yesterday's shipped-versus-slipped recap. Also writes the recap to `daily_review_log`.
+- `0 15 * * *` (11am ET) — a short nudge listing only what's still open.
+
+The slot is taken from the `?slot=` query string, falling back to the Eastern hour, so it behaves correctly even if the query string is dropped. Add `&test=1` to send a one-off marked `[TEST]` without writing to the database.
+
+**`startup-plan.json`** at the deployment root holds the 30-day launch plan. Day 1 is `startDate`; past day 30 it falls through to a day-of-week `ongoing` rhythm. Editing that file is the only thing needed to change what the emails say — no code change. The same file drives the Today's Plan panel in the Morning Briefing tab, with per-task checkboxes kept in the browser's local storage.
+
+Every date comparison in that job runs through `Intl.DateTimeFormat` in `America/New_York`. Vercel executes in UTC, so comparing against the server's own calendar day puts an evening touch in Florida on the following day and the recap comes back empty.
 
 ### One-time setup
 1. Run `dashboard/supabase/weekend-builds.sql` once in the Supabase SQL editor for this project — it creates `brain_docs`, `content_log`, and `daily_review_log` with RLS open to the anon key, matching how every other table in this app already works. Safe to re-run.
