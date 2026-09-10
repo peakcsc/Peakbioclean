@@ -88,6 +88,29 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // Everything still open whose due day has arrived, today's tasks and anything
+    // rolled forward from an earlier day. Mirrors the same logic in the dashboard.
+    let openList = null;
+    if (plan && planNumber >= 1) {
+      let rows = null;
+      try { rows = await sbGet('plan_progress?select=*&limit=500'); } catch (_) { rows = null; }
+      if (rows !== null) {
+        const byKey = new Map(rows.map(r => [`${r.plan_day}:${r.task_index}`, r]));
+        openList = [];
+        for (let d = 1; d <= Math.min(planNumber, plan.days.length); d++) {
+          const entry = plan.days.find(x => x.day === d);
+          if (!entry) continue;
+          const natural = shiftDay(plan.startDate, d - 1);
+          (entry.tasks || []).forEach((task, i) => {
+            const row = byKey.get(`${d}:${i}`);
+            if (row && row.status === 'done') return;
+            const due = (row && row.due_day) || natural;
+            if (due <= today) openList.push({ planDay: d, task, carried: natural < today });
+          });
+        }
+      }
+    }
+
     // ---- follow-ups ----
     const now = new Date();
     const actionable = l => !['Partner', 'Not Interested'].includes(l.outreach_status);
@@ -133,21 +156,34 @@ module.exports = async function handler(req, res) {
     const section = (title, inner) =>
       `<tr><td style="padding:22px 26px 0"><div style="font:600 11px/1.4 -apple-system,Segoe UI,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:${BLUE};margin-bottom:9px">${esc(title)}</div>${inner}</td></tr>`;
 
-    const taskList = tasks => tasks.map(t =>
-      `<div style="margin:0 0 13px;padding-left:16px;border-left:2px solid #E0E8F2">
-         <div style="font:600 15px/1.45 -apple-system,Segoe UI,sans-serif;color:#1B2733">${esc(t.title)}</div>
-         ${t.detail ? `<div style="font:400 14px/1.55 -apple-system,Segoe UI,sans-serif;color:#5A6675;margin-top:3px">${esc(t.detail)}</div>` : ''}
-       </div>`).join('');
+    const taskList = tasks => tasks.map(t => {
+      const carried = t.carried;
+      const task = t.task || t;
+      return `<div style="margin:0 0 13px;padding-left:16px;border-left:2px solid ${carried ? '#E8B765' : '#E0E8F2'}">
+         <div style="font:600 15px/1.45 -apple-system,Segoe UI,sans-serif;color:#1B2733">${esc(task.title)}${carried ? ` <span style="font:600 11px -apple-system,sans-serif;color:#9A6212;background:#FBF1DF;padding:2px 6px;border-radius:99px;white-space:nowrap">from Day ${t.planDay}</span>` : ''}</div>
+         ${task.detail ? `<div style="font:400 14px/1.55 -apple-system,Segoe UI,sans-serif;color:#5A6675;margin-top:3px">${esc(task.detail)}</div>` : ''}
+       </div>`;
+    }).join('');
 
     const leadRows = list => list.slice(0, 8).map(l =>
       `<div style="font:400 14px/1.6 -apple-system,Segoe UI,sans-serif;color:#3B4654">
          <b style="color:#1B2733">${esc(l.company || 'Unnamed')}</b>${l.name ? ` — ${esc(l.name)}` : ''}${l.phone ? ` · ${esc(l.phone)}` : ''}
        </div>`).join('');
 
+    // Prefer the tracked list (carries unfinished work forward); fall back to the
+    // raw plan day when progress tracking isn't set up yet.
+    const carriedCount = openList ? openList.filter(t => t.carried).length : 0;
+    const todaysTasks = openList || (planDay?.tasks || []);
+    const carriedNote = carriedCount
+      ? `<div style="font:500 14px/1.5 -apple-system,Segoe UI,sans-serif;color:#9A6212;margin:0 0 12px">${carriedCount} task${carriedCount === 1 ? '' : 's'} carried over from an earlier day.</div>`
+      : '';
+
     let body = '';
     if (isMorning) {
-      if (planDay) {
-        body += section(planDay.focus ? `Today · ${planDay.focus}` : 'Today', taskList(planDay.tasks || []));
+      if (todaysTasks.length) {
+        body += section(planDay?.focus ? `Today · ${planDay.focus}` : 'Today', carriedNote + taskList(todaysTasks));
+      } else if (openList) {
+        body += section('Today', `<div style="font:400 15px/1.55 -apple-system,Segoe UI,sans-serif;color:#14724A">Everything on the plan is done. Spend the day on the follow-up queue.</div>`);
       }
       if (overdue.length || dueToday.length) {
         body += section(
@@ -169,8 +205,8 @@ module.exports = async function handler(req, res) {
         open.length
           ? leadRows(open) + `<div style="font:400 13px -apple-system,sans-serif;color:#6B7A8C;margin-top:8px">Clear these before the day gets away from you.</div>`
           : `<div style="font:400 15px/1.55 -apple-system,Segoe UI,sans-serif;color:#14724A">Nothing overdue. If today's plan tasks are done too, you're clear.</div>`);
-      if (planDay) {
-        body += section('Today\'s plan, in case it slipped', taskList((planDay.tasks || []).slice(0, 3)));
+      if (todaysTasks.length) {
+        body += section('Still on the plan today', taskList(todaysTasks.slice(0, 4)));
       }
     }
 
@@ -191,11 +227,13 @@ ${body}
 </table></div>`;
 
     const textLines = [`PEAK BIO-CLEAN — ${isMorning ? prettyDate(today) : 'Mid-day check'} — ${dayLabel}`, ''];
-    if (planDay) {
-      textLines.push(`TODAY: ${planDay.focus || ''}`);
-      (planDay.tasks || []).forEach(t => {
-        textLines.push(`  - ${t.title}`);
-        if (t.detail) textLines.push(`    ${t.detail}`);
+    if (todaysTasks.length) {
+      textLines.push(`TODAY: ${planDay?.focus || ''}`);
+      if (carriedCount) textLines.push(`(${carriedCount} carried over from an earlier day)`);
+      todaysTasks.forEach(t => {
+        const task = t.task || t;
+        textLines.push(`  - ${task.title}${t.carried ? ` [from Day ${t.planDay}]` : ''}`);
+        if (task.detail) textLines.push(`    ${task.detail}`);
       });
       textLines.push('');
     }

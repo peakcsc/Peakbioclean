@@ -110,34 +110,106 @@ function planDayFor(plan, today) {
   return { n, label: 'Starts tomorrow — here\'s Day 1', entry: plan.days[0] };
 }
 
-async function renderPlan() {
-  try {
-    const plan = await (await fetch('/startup-plan.json')).json();
-    const { n, label, entry } = planDayFor(plan, nowDay());
-    $('planEy').textContent = label;
-    if (!entry) { $('planFocus').textContent = 'Nothing scheduled today.'; $('planTasks').innerHTML = ''; return; }
-    $('planFocus').textContent = entry.focus || 'Today';
-    $('planTasks').innerHTML = (entry.tasks || []).map((t, i) => {
-      const key = `peakplan-${n}-${i}`;
-      let done = false;
-      try { done = localStorage.getItem(key) === '1'; } catch (e) {}
-      return `<label class="activity" style="cursor:pointer;align-items:flex-start">
-        <input type="checkbox" data-key="${key}" ${done ? 'checked' : ''} style="width:18px;height:18px;margin-top:3px;accent-color:var(--accent)">
-        <div><b style="${done ? 'text-decoration:line-through;opacity:.55' : ''}">${esc(t.title)}</b>${t.detail ? `<small>${esc(t.detail)}</small>` : ''}</div>
-      </label>`;
-    }).join('') || '<p class="muted">No tasks today.</p>';
-    $('planTasks').querySelectorAll('input[type=checkbox]').forEach(box => {
-      box.onchange = () => {
-        try { localStorage.setItem(box.dataset.key, box.checked ? '1' : '0'); } catch (e) {}
-        const b = box.parentElement.querySelector('b');
-        b.style.textDecoration = box.checked ? 'line-through' : '';
-        b.style.opacity = box.checked ? '.55' : '';
-      };
+function shiftDay(day, delta) {
+  const d = new Date(day + 'T12:00:00Z');
+  d.setUTCDate(d.getUTCDate() + delta);
+  return d.toISOString().slice(0, 10);
+}
+
+// Everything still open whose due day has arrived, from today's plan day and every
+// day before it. An unfinished task doesn't vanish, it rolls forward until it's
+// either done or pushed to a later day.
+function openTasks(plan, rows, today) {
+  const byKey = new Map((rows || []).map(r => [`${r.plan_day}:${r.task_index}`, r]));
+  const planNumber = Math.round((new Date(today + 'T12:00:00Z') - new Date(plan.startDate + 'T12:00:00Z')) / 864e5) + 1;
+  const list = [];
+  for (let d = 1; d <= Math.min(planNumber, plan.days.length); d++) {
+    const entry = plan.days.find(x => x.day === d);
+    if (!entry) continue;
+    const natural = shiftDay(plan.startDate, d - 1);
+    (entry.tasks || []).forEach((task, i) => {
+      const row = byKey.get(`${d}:${i}`);
+      if (row && row.status === 'done') return;
+      const due = (row && row.due_day) || natural;
+      if (due <= today) list.push({ planDay: d, index: i, task, carried: natural < today, focus: entry.focus });
     });
+  }
+  return list;
+}
+
+async function saveTaskState(planDay, index, title, patch) {
+  return sb('plan_progress?on_conflict=plan_day,task_index', {
+    method: 'POST',
+    prefer: 'resolution=merge-duplicates,return=minimal',
+    body: JSON.stringify({ plan_day: planDay, task_index: index, title, updated_at: new Date().toISOString(), ...patch })
+  });
+}
+
+async function renderPlan() {
+  let plan;
+  try {
+    plan = await (await fetch('/startup-plan.json')).json();
   } catch (e) {
     $('planFocus').textContent = 'Plan unavailable';
     $('planTasks').innerHTML = `<p class="muted">${esc(e.message)}</p>`;
+    return;
   }
+
+  const today = nowDay();
+  const { label, entry } = planDayFor(plan, today);
+  $('planEy').textContent = label;
+
+  let rows = null;
+  try { rows = await sb('plan_progress?select=*&limit=500'); } catch (e) { rows = null; }
+
+  const list = (rows !== null) ? openTasks(plan, rows, today) : null;
+
+  if (list === null) {
+    $('planFocus').textContent = entry ? entry.focus : 'Today';
+    $('planTasks').innerHTML = (entry?.tasks || []).map(t =>
+      `<div class="activity"><div class="bubble">•</div><div><b>${esc(t.title)}</b>${t.detail ? `<small>${esc(t.detail)}</small>` : ''}</div></div>`).join('')
+      + `<div class="empty" style="padding:18px">${SETUP_MSG}<br>Ticking tasks off and pushing them to tomorrow needs it.</div>`;
+    return;
+  }
+
+  if (!list.length) {
+    $('planFocus').textContent = entry ? entry.focus : 'Today';
+    $('planTasks').innerHTML = '<div class="empty">Everything for today is done. Go work the follow-up queue.</div>';
+    return;
+  }
+
+  const carried = list.filter(x => x.carried).length;
+  $('planFocus').textContent = entry ? entry.focus : 'Today';
+  $('planTasks').innerHTML =
+    (carried ? `<p class="small" style="color:var(--amber)">${carried} task${carried === 1 ? '' : 's'} carried over from earlier days.</p>` : '') +
+    list.map(x => `<div class="activity" style="align-items:flex-start" data-t="${x.planDay}:${x.index}">
+      <input type="checkbox" style="width:18px;height:18px;margin-top:4px;accent-color:var(--accent)">
+      <div><b>${esc(x.task.title)}</b>${x.carried ? ` <span class="pill" style="color:var(--amber)">Day ${x.planDay}</span>` : ''}${x.task.detail ? `<small>${esc(x.task.detail)}</small>` : ''}</div>
+      <button class="btn ghost small" type="button">Push to tomorrow</button>
+    </div>`).join('');
+
+  $('planTasks').querySelectorAll('[data-t]').forEach(row => {
+    const [planDay, index] = row.dataset.t.split(':').map(Number);
+    const item = list.find(x => x.planDay === planDay && x.index === index);
+    row.querySelector('input').onchange = async e => {
+      e.target.disabled = true;
+      try {
+        await saveTaskState(planDay, index, item.task.title, {
+          status: 'done', completed_at: new Date().toISOString(), due_day: today
+        });
+        toast('Done. Nice.');
+        renderPlan();
+      } catch (err) { toast('Could not save — run the Supabase setup first'); e.target.disabled = false; }
+    };
+    row.querySelector('button').onclick = async e => {
+      e.target.disabled = true;
+      try {
+        await saveTaskState(planDay, index, item.task.title, { status: 'open', due_day: shiftDay(today, 1) });
+        toast('Pushed to tomorrow');
+        renderPlan();
+      } catch (err) { toast('Could not save — run the Supabase setup first'); e.target.disabled = false; }
+    };
+  });
 }
 
 // ---------- Morning Briefing ----------
