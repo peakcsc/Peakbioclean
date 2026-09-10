@@ -15,5 +15,8 @@
         { "key": "X-Robots-Tag", "value": "noindex" }
       ]
     }
+  ],
+  "crons": [
+    { "path": "/api/nightly-review", "schedule": "0 3 * * *" }
   ]
 }

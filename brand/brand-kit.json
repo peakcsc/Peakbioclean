@@ -1,0 +1,55 @@
+{
+  "name": "Peak Bio-Clean",
+  "tagline": "Biohazard, Crime Scene & Trauma Cleanup in Florida — 24/7",
+  "phone": "(407) 758-0682",
+  "website": "https://peakbioclean.com",
+  "font": "Inter",
+  "colors": [
+    { "name": "Primary Blue", "hex": "#1965B1", "use": "Primary brand color — buttons, links, headers" },
+    { "name": "Deep Blue", "hex": "#134E89", "use": "Hover states, dark accents" },
+    { "name": "Light Blue", "hex": "#E9EFF9", "use": "Backgrounds, highlight cards" },
+    { "name": "Alert Red", "hex": "#BE0404", "use": "Urgency only — 24/7 callouts, never decorative" },
+    { "name": "Ink", "hex": "#1B2733", "use": "Headlines" },
+    { "name": "Body Text", "hex": "#333333", "use": "Paragraph text" },
+    { "name": "Gray", "hex": "#6B7280", "use": "Muted / secondary text" }
+  ],
+  "voice": {
+    "summary": "Calm, competent, human. We show up for people on the worst day of their life — the tone is compassionate first, professional second, never clinical or cold and never sensational.",
+    "rules": [
+      "Lead with reassurance and clarity before credentials — people want to know it will be handled, then that we're licensed/certified.",
+      "Use plain language, short sentences. No jargon without explaining it.",
+      "Always emphasize: 24/7 availability, discretion, compassion, and that we work directly with insurance.",
+      "Name the real situation plainly but respectfully (crime scene, unattended death, hoarding, biohazard) — don't euphemism it into vagueness, but don't sensationalize it either.",
+      "First person plural ('we', 'our team') — Peak Bio-Clean shows up as a team, not a faceless company.",
+      "Every post should answer 'why would someone trust us with this' without being salesy about it.",
+      "Before/after content: focus on relief and restoration, not shock value."
+    ],
+    "avoid": [
+      "gore or graphic imagery",
+      "dark humor",
+      "clickbait phrasing",
+      "overly corporate language",
+      "fear-based scare tactics",
+      "emojis stacked more than 2-3 per caption"
+    ]
+  },
+  "captions": {
+    "formula": "Hook (the real situation, 1 line) → What we did / what changed (2-3 lines) → Reassurance + CTA (24/7 line, phone number or link)",
+    "hashtags": [
+      "biohazardcleanup",
+      "crimescenecleanup",
+      "traumacleanup",
+      "floridacleaning",
+      "peakbioclean",
+      "hoardingcleanup",
+      "deathcleanup",
+      "biohazardremediation",
+      "certifiedcleanup",
+      "compassionatecleanup"
+    ]
+  },
+  "logo": {
+    "white": "assets/logo/logo-white-2.png",
+    "color": "assets/logo/logo-color-2.png"
+  }
+}

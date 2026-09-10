@@ -4,14 +4,28 @@
 :root{--bg:#07100e;--side:#06100d;--panel:#0d1d18;--panel2:#10271f;--line:#24433a;--text:#eef8f2;--muted:#92aaa0;--green:#4ee6a3;--green2:#1f8d65;--amber:#ffc66b;--red:#ff777d;--blue:#6db7ff;--white:#fff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0,#123b2c 0,transparent 27%),var(--bg);color:var(--text);font:14px/1.45 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}.shell{display:grid;grid-template-columns:224px minmax(0,1fr);min-height:100vh}.side{background:var(--side);border-right:1px solid var(--line);padding:22px 14px;position:sticky;top:0;height:100vh}.brand{padding:0 9px 22px;font-size:18px;font-weight:950;letter-spacing:-.02em}.brand b{color:var(--green)}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em;margin-top:3px}.nav button{width:100%;display:flex;align-items:center;gap:10px;text-align:left;border:0;background:transparent;color:#aec4ba;padding:11px 12px;border-radius:10px;margin:4px 0}.nav button:hover,.nav button.on{background:#123027;color:var(--text)}.nav .count{margin-left:auto;background:#1c4537;color:var(--green);padding:2px 7px;border-radius:99px;font-size:10px;font-weight:900}.sidefoot{position:absolute;left:14px;right:14px;bottom:18px;color:var(--muted);font-size:10px}.main{padding:26px clamp(16px,3.2vw,46px) 60px;max-width:1600px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px}.ey{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.top h1{font-size:32px;line-height:1.05;letter-spacing:-.04em;margin:4px 0}.muted{color:var(--muted)}.small{font-size:11px}.btn{border:0;border-radius:10px;padding:10px 13px;background:var(--green);color:#042016;font-weight:850}.btn:hover{filter:brightness(1.06)}.ghost{background:#0b1b16;color:var(--text);border:1px solid var(--line)}.danger{background:#5c1c20;color:#fff}.blue{background:#173c5f;color:#d8edff;border:1px solid #315f82}.amber{background:#4d3b16;color:#ffe0a1;border:1px solid #765b20}.iconbtn{padding:7px 9px;border-radius:8px}.actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.spacer{flex:1}.view{display:none}.view.on{display:block}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.stat,.panel,.card{border:1px solid var(--line);background:linear-gradient(145deg,var(--panel2),#091713);border-radius:15px}.stat{padding:16px}.stat b{display:block;font-size:28px;letter-spacing:-.04em}.stat span{font-size:11px;color:var(--muted)}.panel{padding:18px;margin:12px 0}.panel h3{margin:2px 0 10px;font-size:18px}.queue{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;background:linear-gradient(110deg,#123126,#0a1b15);border-color:#316555}.queue h2{font-size:23px;margin:4px 0;letter-spacing:-.03em}.toolbar{display:grid;grid-template-columns:minmax(220px,2fr) 1fr 1fr 1fr auto;gap:9px;align-items:end}.field label,label.field{display:block;color:#bdcec7;font-size:10px;font-weight:800}.field input,.field select,label.field input,label.field select{width:100%;margin-top:5px;padding:10px;border:1px solid var(--line);border-radius:9px;background:#071510;color:var(--text)}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:12px}table{width:100%;border-collapse:collapse;min-width:980px;background:#091713}th{position:sticky;top:0;background:#10231d;color:#8fa79d;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;padding:11px;border-bottom:1px solid var(--line)}td{padding:11px;border-bottom:1px solid #173228;vertical-align:middle}tr:last-child td{border-bottom:0}tbody tr:hover{background:#0f241d}.leadname b{font-size:14px}.leadname small{display:block;color:var(--muted);max-width:260px}.contact a{color:#cde8dd;text-decoration:none}.contact small{display:block;color:var(--muted)}.pill{display:inline-block;padding:4px 8px;border-radius:99px;border:1px solid var(--line);font-size:10px;font-weight:850}.p-New{color:#c2d5cd}.p-Contacted,.p-Follow-Up{color:var(--amber)}.p-Replied,.p-Qualified{color:var(--blue)}.p-Partner{color:var(--green)}.p-Not-Interested{color:#ff9b9f}.due{color:var(--amber);font-weight:800}.overdue{color:var(--red);font-weight:850}.ok{color:var(--green)}.empty{padding:38px;text-align:center;color:var(--muted)}.activity{display:grid;grid-template-columns:30px 1fr auto;gap:9px;padding:11px 0;border-bottom:1px solid var(--line)}.activity:last-child{border-bottom:0}.bubble{width:28px;height:28px;border-radius:9px;background:#143328;display:grid;place-items:center;color:var(--green);font-weight:900}.activity b{display:block}.activity small{color:var(--muted)}.opgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.opcard{padding:20px;text-decoration:none;color:var(--text);transition:.15s}.opcard:hover{border-color:#438270;transform:translateY(-1px)}.opcard h3{font-size:20px;margin:5px 0}.drawer{position:fixed;z-index:30;top:0;right:-760px;width:min(720px,96vw);height:100vh;background:#07130f;border-left:1px solid var(--line);box-shadow:-30px 0 80px #0008;transition:right .2s ease;overflow:auto;padding:20px}.drawer.open{right:0}.shade{display:none;position:fixed;inset:0;background:#0008;z-index:29}.shade.on{display:block}.drawerhead{display:flex;align-items:flex-start;gap:10px;position:sticky;top:-20px;background:#07130ff2;padding:14px 0;border-bottom:1px solid var(--line);z-index:1}.drawer h2{font-size:25px;margin:3px 0}.drawergrid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.drawer input,.drawer select,.drawer textarea,dialog input,dialog select,dialog textarea{width:100%;margin-top:5px;padding:10px;border:1px solid var(--line);border-radius:9px;background:#071510;color:var(--text)}.drawer label,dialog label{display:block;color:#c3d2cc;font-size:10px;font-weight:850;margin:9px 0}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:15px 0}.quick .btn{padding:12px 8px}.timeline{border-top:1px solid var(--line);margin-top:15px;padding-top:10px}dialog{width:min(620px,94vw);border:1px solid var(--line);border-radius:16px;background:#0a1814;color:var(--text);padding:20px}dialog::backdrop{background:#000a}.templatehint{background:#0c2019;border:1px solid var(--line);border-radius:10px;padding:10px;margin:10px 0;color:var(--muted);font-size:11px}.toast{position:fixed;z-index:80;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:#eef8f2;color:#092017;padding:11px 16px;border-radius:10px;font-weight:800;box-shadow:0 10px 40px #0008;transition:.2s}.toast.on{transform:translateX(-50%) translateY(0)}.mobiletop{display:none}.authgate{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 70% 10%,#163c2d,#07100e 45%);display:none;place-items:center;padding:18px}.authgate.on{display:grid}.authcard{width:min(430px,100%);border:1px solid var(--line);border-radius:18px;background:#0a1914;padding:25px}.authcard h2{font-size:27px;margin:5px 0 16px}.authcard input{width:100%;margin-top:5px;padding:11px;border:1px solid var(--line);border-radius:9px;background:#071510;color:var(--text)}@media(max-width:1050px){.toolbar{grid-template-columns:1fr 1fr 1fr}.toolbar .search{grid-column:1/-1}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.shell{display:block}.side{display:none}.mobiletop{display:flex;position:sticky;top:0;z-index:20;background:#06100def;border-bottom:1px solid var(--line);padding:10px;gap:6px;overflow:auto}.mobiletop button{white-space:nowrap}.main{padding:16px}.top{align-items:flex-start}.top h1{font-size:27px}.stats{grid-template-columns:1fr 1fr}.queue{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.toolbar .search{grid-column:auto}.opgrid{grid-template-columns:1fr}.drawergrid{grid-template-columns:1fr}.quick{grid-template-columns:1fr 1fr}.top .actions .ghost{display:none}}@media(max-width:420px){.stats{grid-template-columns:1fr 1fr}.stat b{font-size:23px}}
 </style></head><body>
 <div class="authgate" id="authgate"><div class="authcard"><div class="ey">Peak BioClean Cloud</div><h2>Lead Command Center</h2><p class="muted">Sign in with the same Peak Bio Clean dashboard account.</p><form id="authform"><label>Email<input id="authemail" type="email" required autocomplete="email"></label><label>Password<input id="authpass" type="password" required autocomplete="current-password"></label><button class="btn" style="width:100%;margin-top:12px" type="submit">Sign In</button><p id="authmsg" class="muted small"></p></form></div></div>
-<div class="mobiletop"><button class="btn ghost" data-v="leads">Leads</button><button class="btn ghost" data-v="followups">Follow-Ups</button><button class="btn ghost" data-v="activity">Activity</button><button class="btn ghost" data-v="operations">Operations</button></div>
-<div class="shell"><aside class="side"><div class="brand"><b>PEAK</b> BIO CLEAN<small>LEAD COMMAND CENTER</small></div><nav class="nav"><button class="on" data-v="leads">◎ Leads <span class="count" id="navLeadCount">0</span></button><button data-v="followups">↻ Follow-Ups <span class="count" id="navDueCount">0</span></button><button data-v="activity">≡ Activity</button><button data-v="operations">▦ Operations</button></nav><div class="sidefoot">24/7 BIOHAZARD REMEDIATION<br>407-758-0682</div></aside>
+<div class="mobiletop"><button class="btn ghost" data-v="leads">Leads</button><button class="btn ghost" data-v="followups">Follow-Ups</button><button class="btn ghost" data-v="activity">Activity</button><button class="btn ghost" data-v="briefing">Briefing</button><button class="btn ghost" data-v="jobhistory">History</button><button class="btn ghost" data-v="brain">Brain</button><button class="btn ghost" data-v="brandkit">Brand Kit</button><button class="btn ghost" data-v="operations">Operations</button></div>
+<div class="shell"><aside class="side"><div class="brand"><b>PEAK</b> BIO CLEAN<small>LEAD COMMAND CENTER</small></div><nav class="nav"><button class="on" data-v="leads">◎ Leads <span class="count" id="navLeadCount">0</span></button><button data-v="followups">↻ Follow-Ups <span class="count" id="navDueCount">0</span></button><button data-v="activity">≡ Activity</button><button data-v="briefing">☀ Morning Briefing</button><button data-v="jobhistory">🗂 Job History</button><button data-v="brain">🧠 Second Brain</button><button data-v="brandkit">🎨 Brand Kit</button><button data-v="operations">▦ Operations</button></nav><div class="sidefoot">24/7 BIOHAZARD REMEDIATION<br>407-758-0682</div></aside>
 <main class="main"><header class="top"><div><div class="ey">Peak Bio Clean • Outreach</div><h1 id="viewTitle">Leads & Outreach</h1><div class="muted small" id="syncLabel">Loading your leads…</div></div><div class="actions"><button class="btn ghost" id="signout">Sign Out</button><button class="btn" id="addLeadBtn">+ Add Lead</button></div></header>
 <section class="view on" id="leads"><div class="stats"><div class="stat"><b id="mTotal">—</b><span>Total leads</span></div><div class="stat"><b id="mNew">—</b><span>Never contacted</span></div><div class="stat"><b id="mDue">—</b><span>Follow-ups due</span></div><div class="stat"><b id="mToday">—</b><span>Contacted today</span></div></div>
 <div class="panel queue"><div><div class="ey">Today's outreach queue</div><h2 id="queueHeadline">Turn the list into conversations.</h2><div class="muted" id="queueSub">Loading contact readiness…</div></div><div class="actions"><button class="btn ghost" id="dueOnlyBtn">Show Due</button><button class="btn" id="startQueueBtn">Start Next Lead →</button></div></div>
 <div class="panel"><div class="toolbar"><div class="field search"><label>Search<input id="search" placeholder="Search company, person, phone or email"></label></div><div class="field"><label>Status<select id="statusFilter"><option value="">All statuses</option></select></label></div><div class="field"><label>ICP<select id="icpFilter"><option value="">All ICPs</option></select></label></div><div class="field"><label>Contact method<select id="contactFilter"><option value="">Any method</option><option value="email">Has email</option><option value="phone">Has phone</option><option value="both">Email + phone</option></select></label></div><button class="btn ghost" id="clearFilters">Clear</button></div><div class="tablewrap"><table><thead><tr><th>Lead</th><th>ICP</th><th>Contact</th><th>Status</th><th>Last Contact</th><th>Next Follow-Up</th><th>Actions</th></tr></thead><tbody id="leadRows"></tbody></table></div></div></section>
 <section class="view" id="followups"><div class="stats"><div class="stat"><b id="fOverdue">—</b><span>Overdue</span></div><div class="stat"><b id="fToday">—</b><span>Due today</span></div><div class="stat"><b id="fUpcoming">—</b><span>Upcoming 7 days</span></div><div class="stat"><b id="fNoDate">—</b><span>Contacted, no follow-up</span></div></div><div class="panel"><div class="ey">Follow-up queue</div><h3>What needs your attention next</h3><div id="followupList"></div></div></section>
 <section class="view" id="activity"><div class="panel"><div class="ey">Outreach history</div><h3>Every contact attempt in one timeline</h3><div id="activityList"></div></div></section>
+<section class="view" id="briefing"><div class="panel queue"><div><div class="ey">Good morning, Parker</div><h2 id="briefHeadline">Here's what needs you today.</h2><div class="muted" id="briefSub">Loading briefing…</div></div><div class="actions"><button class="btn ghost" id="refreshBrief">Refresh</button></div></div>
+<div class="stats"><div class="stat"><b id="bOverdue">—</b><span>Overdue follow-ups</span></div><div class="stat"><b id="bDueToday">—</b><span>Due today</span></div><div class="stat"><b id="bPostsWeek">—</b><span>Posts this week</span></div><div class="stat"><b id="bLastReview">—</b><span>Last nightly review</span></div></div>
+<div class="panel"><div class="ey">Act on this first</div><h3>Today's priorities</h3><div id="briefPriorities"><p class="muted">Loading…</p></div></div>
+<div class="panel"><div class="ey">Last night's review</div><h3>What shipped, what slipped</h3><div id="briefReview"><p class="muted">No nightly review recorded yet — the review agent runs automatically once it's deployed.</p></div></div>
+<div class="panel"><div class="ey">Content cadence</div><h3>Recent posts logged</h3><div id="briefContent"><p class="muted">Loading…</p></div></div></section>
+<section class="view" id="jobhistory"><div class="panel"><div class="toolbar" style="grid-template-columns:1fr auto"><div class="field search"><label>Search every client, lead and job touch<input id="jhSearch" placeholder="Search company, contact, notes, outreach…"></label></div><button class="btn ghost" id="jhClear">Clear</button></div></div>
+<div class="panel"><div class="ey">Searchable history</div><h3>Every client & job record in one place</h3><p class="muted small">Pulls from every lead and every logged contact/job touch. As formal job records get added this becomes the full job archive.</p><div id="jhResults"><p class="muted">Loading…</p></div></div></section>
+<section class="view" id="brain"><div class="panel"><div class="ey">Company Second Brain</div><h3>Ask it anything — SOPs, contracts, client policy, pricing rules</h3><div class="toolbar" style="grid-template-columns:1fr auto"><div class="field search"><label>Ask a question or search<input id="brainQ" placeholder="e.g. What's our hoarding job cancellation policy?"></label></div><button class="btn" id="brainAskBtn">Ask</button></div><div id="brainAnswer"></div></div>
+<div class="panel"><div class="ey">Add to the brain</div><h3>Save a doc, SOP, or policy</h3><div class="drawergrid"><label>Title<input id="bnTitle"></label><label>Category<select id="bnCategory"><option>SOP</option><option>Contract</option><option>Client Policy</option><option>Pricing</option><option>Vendor / Partner</option><option>Compliance</option><option>Other</option></select></label></div><label>Content<textarea id="bnContent" rows="6" placeholder="Paste or write the full doc — this becomes searchable."></textarea></label><div class="actions"><span class="spacer"></span><button class="btn" id="bnSave">Save to Brain</button></div></div>
+<div class="panel"><div class="ey">Everything saved</div><h3>Browse all docs</h3><div id="brainList"><p class="muted">Loading…</p></div></div></section>
+<section class="view" id="brandkit"><div class="panel"><div class="ey">Brand Kit</div><h3>Colors, voice, and templates — for every post, email, and doc</h3><div id="bkColors"></div></div>
+<div class="panel"><div class="ey">Voice & tone</div><div id="bkVoice"></div></div>
+<div class="panel"><div class="ey">Caption formulas & hashtag banks</div><div id="bkCaptions"></div></div>
+<div class="panel"><div class="ey">Log a published post</div><h3>Track cadence for the briefing & review agent</h3><div class="drawergrid"><label>Platform<select id="clPlatform"><option>Instagram</option><option>Facebook</option><option>TikTok</option><option>Other</option></select></label><label>Post URL<input id="clUrl" placeholder="https://instagram.com/p/…"></label></div><label>Caption<textarea id="clCaption" rows="3"></textarea></label><div class="actions"><span class="spacer"></span><button class="btn" id="clSave">Log Post</button></div></div></section>
 <section class="view" id="operations"><div class="panel"><div class="ey">Keep the complicated stuff out of your way</div><h3>Operations tools</h3><p class="muted">Lead outreach is now your home screen. Use these only when you need to intake or run an actual job.</p><div class="opgrid"><a class="card opcard" href="/api/legacy"><div class="ey">Intake + documents</div><h3>Full Operations Dashboard →</h3><p class="muted">Job Intake, vendor packet, GHL field setup, integrations and the original tools.</p></a><a class="card opcard" href="/api/operations"><div class="ey">After the job comes in</div><h3>Job Operations & Compliance →</h3><p class="muted">Job workflow, estimates, signatures, logs, files and business-readiness checklist.</p></a></div></div></section>
 </main></div>
 <div class="shade" id="shade"></div><aside class="drawer" id="drawer"><div class="drawerhead"><div><div class="ey">Lead record</div><h2 id="dTitle">Lead</h2><div class="muted" id="dSub"></div></div><div class="spacer"></div><button class="btn ghost" id="closeDrawer">×</button></div><div class="quick"><button class="btn" id="dEmail">✉ Email</button><button class="btn blue" id="dSms">● SMS</button><button class="btn ghost" id="dCall">☎ Call</button><button class="btn ghost" id="dLog">＋ Log Touch</button></div><div class="panel" style="margin:0"><div class="drawergrid"><label>Company<input id="dCompany"></label><label>Contact name<input id="dName"></label><label>Decision-maker title<input id="dTitleField"></label><label>ICP<select id="dIcp"></select></label><label>Phone<input id="dPhone" type="tel"></label><label>Email<input id="dEmailField" type="email"></label><label>Status<select id="dStatus"></select></label><label>Priority<select id="dPriority"><option>Hot</option><option selected>Normal</option><option>Low</option></select></label><label>Next follow-up<input id="dFollow" type="datetime-local"></label><label>Website<input id="dWebsite"></label></div><label>Notes<textarea id="dNotes" rows="4"></textarea></label><div class="actions"><button class="btn" id="saveLead">Save Lead</button><button class="btn ghost" id="nextLead">Next Lead →</button><span class="spacer"></span><span class="muted small" id="dMeta"></span></div></div><div class="timeline"><div class="ey">Contact history</div><h3>How you've contacted this lead</h3><div id="leadTimeline"><p class="muted">No activity yet.</p></div></div></aside>
@@ -32,7 +46,7 @@ async function ensure(){return true}
 async function dashboard(action,payload={}){let r=await fetch('/api/dashboard-data',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action,...payload})}),d=await r.json();if(!r.ok||d.error)throw Error(d.error||'Dashboard request failed');if(d.user)U=d.user;return d}
 async function db(path,opt={}){let method=(opt.method||'GET').toUpperCase();if(method==='PATCH'&&path.startsWith('peak_leads?id=eq.')){let id=decodeURIComponent(path.split('peak_leads?id=eq.')[1].split('&')[0]);return await dashboard('update_lead',{id,values:JSON.parse(opt.body||'{}')})}if(method==='POST'&&path==='peak_leads')return await dashboard('add_lead',{values:JSON.parse(opt.body||'{}')});let data=await dashboard('load');if(path.startsWith('peak_leads?'))return data.leads||[];if(path.startsWith('peak_lead_touches?lead_id=eq.')){let id=decodeURIComponent(path.split('lead_id=eq.')[1].split('&')[0]);return (data.touches||[]).filter(x=>x.lead_id===id)}if(path.startsWith('peak_lead_touches?'))return data.touches||[];if(path.startsWith('peak_outreach_templates?'))return data.templates||[];throw Error('Dashboard route is not available yet')}
 async function edge(path,payload){let r=await fetch(path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)}),d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');return d}
-function go(v){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id===v));document.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x.dataset.v===v));$('viewTitle').textContent={leads:'Leads & Outreach',followups:'Follow-Ups',activity:'Outreach Activity',operations:'Operations'}[v]||v;if(v==='followups')renderFollowups();if(v==='activity')renderActivity()}
+function go(v){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id===v));document.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',x.dataset.v===v));$('viewTitle').textContent={leads:'Leads & Outreach',followups:'Follow-Ups',activity:'Outreach Activity',briefing:'Morning Briefing',jobhistory:'Job & Client History',brain:'Second Brain',brandkit:'Brand Kit',operations:'Operations'}[v]||v;if(v==='followups')renderFollowups();if(v==='activity')renderActivity();if(v==='briefing'&&window.renderBriefing)renderBriefing();if(v==='jobhistory'&&window.renderJobHistory)renderJobHistory();if(v==='brain'&&window.renderBrainList)renderBrainList();if(v==='brandkit'&&window.renderBrandKit)renderBrandKit()}
 document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>go(b.dataset.v));
 function localDay(d){let x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`}
 function nowDay(){return localDay(new Date())}function rel(d){if(!d)return '—';let ms=new Date(d)-Date.now(),days=Math.round(ms/864e5);if(Math.abs(ms)<36e5)return 'Today';if(days===0)return 'Today';if(days===1)return 'Tomorrow';if(days===-1)return 'Yesterday';return days>1?`In ${days}d`:`${Math.abs(days)}d overdue`}
@@ -66,4 +80,125 @@ $('logForm').onsubmit=async e=>{e.preventDefault();if(!selected)return;let follo
 $('addLeadBtn').onclick=()=>$('addDialog').showModal();$('cancelAdd').onclick=()=>$('addDialog').close();$('addForm').onsubmit=async e=>{e.preventDefault();try{let row={id:crypto.randomUUID(),user_id:U.id,company:$('aCompany').value,name:$('aName').value,phone:$('aPhone').value,email:$('aEmail').value,icp:$('aIcp').value,priority:$('aPriority').value,notes:$('aNotes').value,outreach_status:'New',stage:'Research Queued',last_touch_at:new Date().toISOString()};await db('peak_leads',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(row)});$('addDialog').close();$('addForm').reset();toast('Lead added');await loadAll()}catch(x){alert(x.message)}};
 $('signout').style.display='none';$('signout').onclick=()=>{};$('authform').onsubmit=async e=>{e.preventDefault();$('authgate').classList.remove('on');await loadAll()};
 async function init(){fillSelects();try{store(null);await loadAll()}catch(e){console.error(e);$('syncLabel').textContent=e.message;toast(e.message)}}init();
-</script></body></html>
+</script>
+<script>
+// ---- Weekend builds: Morning Briefing, Second Brain, Job History, Brand Kit ----
+// New tables (brain_docs, content_log, daily_review_log) are queried directly against
+// Supabase PostgREST with the public anon key, same trust model as the rest of this
+// open dashboard. See /dashboard/supabase/weekend-builds.sql for the one-time setup.
+async function sb(path, opt = {}) {
+  const r = await fetch(SB + '/rest/v1/' + path, {
+    ...opt,
+    headers: { apikey: KEY, 'content-type': 'application/json', Prefer: opt.prefer || 'return=representation', ...(opt.headers || {}) }
+  });
+  const text = await r.text();
+  const data = text ? JSON.parse(text) : null;
+  if (!r.ok) throw Error((data && (data.message || data.error)) || 'Request failed');
+  return data;
+}
+
+// ---------- Morning Briefing ----------
+window.renderBriefing = async function renderBriefing() {
+  const overdue = leads.filter(l => l.next_follow_up_at && new Date(l.next_follow_up_at) < new Date() && !['Partner', 'Not Interested'].includes(l.outreach_status));
+  const dueToday = leads.filter(l => l.next_follow_up_at && localDay(l.next_follow_up_at) === nowDay());
+  $('bOverdue').textContent = overdue.length;
+  $('bDueToday').textContent = dueToday.length;
+  $('briefHeadline').textContent = overdue.length ? `${overdue.length} follow-up${overdue.length === 1 ? '' : 's'} are overdue — start there.` : 'Follow-ups are current. Nice.';
+  $('briefSub').textContent = `${leads.length} total leads • ${touches.filter(t => localDay(t.contacted_at) === nowDay()).length} contacted today`;
+  const priorities = [
+    ...overdue.slice(0, 5).map(l => `<div class="activity"><div class="bubble">↻</div><div><b>${esc(l.company)}</b><small>Follow-up overdue — ${esc(l.name || 'no contact name')}</small></div><button class="btn ghost" onclick="go('leads');openLead('${l.id}')">Open</button></div>`),
+    ...dueToday.slice(0, 5).map(l => `<div class="activity"><div class="bubble">☀</div><div><b>${esc(l.company)}</b><small>Follow-up due today</small></div><button class="btn ghost" onclick="go('leads');openLead('${l.id}')">Open</button></div>`)
+  ];
+  $('briefPriorities').innerHTML = priorities.length ? priorities.join('') : '<div class="empty">Nothing urgent right now. Good time to work the top of the queue or post content.</div>';
+  try {
+    const reviews = await sb('daily_review_log?select=*&order=review_date.desc&limit=1');
+    if (reviews && reviews.length) {
+      const rv = reviews[0];
+      $('bLastReview').textContent = rel(rv.review_date);
+      const shipped = (rv.shipped || []), slipped = (rv.slipped || []);
+      $('briefReview').innerHTML = `<p><b>${esc(rv.review_date)}</b> — ${shipped.length} shipped, ${slipped.length} slipped</p>` +
+        (shipped.length ? `<p class="ok small">Shipped: ${shipped.map(esc).join(' • ')}</p>` : '') +
+        (slipped.length ? `<p class="small" style="color:var(--amber)">Slipped: ${slipped.map(esc).join(' • ')}</p>` : '') +
+        (rv.summary ? `<p class="muted small">${esc(rv.summary)}</p>` : '');
+    } else { $('bLastReview').textContent = 'None yet'; }
+  } catch (e) { $('bLastReview').textContent = '—'; }
+  try {
+    const since = new Date(Date.now() - 7 * 864e5).toISOString();
+    const posts = await sb(`content_log?select=*&posted_at=gte.${encodeURIComponent(since)}&order=posted_at.desc`);
+    $('bPostsWeek').textContent = posts.length;
+    $('briefContent').innerHTML = posts.length ? posts.map(p => `<div class="activity"><div class="bubble">▣</div><div><b>${esc(p.platform)}</b><small>${esc((p.caption || '').slice(0, 90))}</small></div><small>${when(p.posted_at)}</small></div>`).join('') : '<div class="empty">No posts logged this week yet — log them from the Brand Kit tab.</div>';
+  } catch (e) { $('bPostsWeek').textContent = '0'; }
+};
+$('refreshBrief').onclick = () => renderBriefing();
+
+// ---------- Job & Client History ----------
+window.renderJobHistory = function renderJobHistory() {
+  const q = ($('jhSearch').value || '').trim().toLowerCase();
+  const rows = [];
+  for (const l of leads) {
+    const hay = [l.company, l.name, l.notes, l.icp, l.outreach_status].join(' ').toLowerCase();
+    if (q && !hay.includes(q)) continue;
+    rows.push({ kind: 'Lead', title: l.company, sub: `${l.name || 'No contact'} • ${esc(ICP_NAMES[l.icp] || l.icp || '')}`, when: l.updated_at || l.created_at, id: l.id });
+  }
+  for (const t of touches) {
+    const lead = leads.find(l => l.id === t.lead_id);
+    const hay = [lead?.company, t.channel, t.result, t.message, t.subject].join(' ').toLowerCase();
+    if (q && !hay.includes(q)) continue;
+    rows.push({ kind: 'Touch', title: `${lead?.company || 'Lead'} — ${t.channel}`, sub: (t.message || t.result || '').slice(0, 140), when: t.contacted_at, id: t.lead_id });
+  }
+  rows.sort((a, b) => new Date(b.when || 0) - new Date(a.when || 0));
+  $('jhResults').innerHTML = rows.length ? rows.slice(0, 200).map(r => `<div class="activity"><div class="bubble">${r.kind === 'Lead' ? '◎' : '✎'}</div><div><b>${esc(r.title)}</b><small>${esc(r.sub)}</small></div><div class="actions"><small class="muted">${when(r.when)}</small><button class="btn ghost" onclick="go('leads');openLead('${r.id}')">Open</button></div></div>`).join('') : '<div class="empty">No matches.</div>';
+};
+$('jhSearch').oninput = () => renderJobHistory();
+$('jhClear').onclick = () => { $('jhSearch').value = ''; renderJobHistory(); };
+
+// ---------- Second Brain ----------
+window.renderBrainList = async function renderBrainList() {
+  try {
+    const docs = await sb('brain_docs?select=id,title,category,content,created_at&order=created_at.desc&limit=200');
+    window.__brainDocs = docs;
+    $('brainList').innerHTML = docs.length ? docs.map(d => `<div class="activity"><div class="bubble">📄</div><div><b>${esc(d.title)}</b><small>${esc(d.category)} • ${esc((d.content || '').slice(0, 120))}</small></div><small class="muted">${when(d.created_at)}</small></div>`).join('') : '<div class="empty">Nothing saved yet. Add your first SOP or policy above.</div>';
+  } catch (e) { $('brainList').innerHTML = `<p class="muted">${esc(e.message)}</p>`; }
+};
+$('bnSave').onclick = async () => {
+  const title = $('bnTitle').value.trim(), content = $('bnContent').value.trim();
+  if (!title || !content) return toast('Add a title and content first');
+  try {
+    await sb('brain_docs', { method: 'POST', body: JSON.stringify({ title, category: $('bnCategory').value, content }) });
+    $('bnTitle').value = ''; $('bnContent').value = '';
+    toast('Saved to the second brain'); renderBrainList();
+  } catch (e) { toast(e.message); }
+};
+$('brainAskBtn').onclick = async () => {
+  const q = $('brainQ').value.trim();
+  if (!q) return;
+  $('brainAnswer').innerHTML = '<p class="muted">Searching…</p>';
+  try {
+    const r = await fetch('/api/brain-ask', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ question: q }) });
+    const d = await r.json();
+    if (!r.ok) throw Error(d.error || 'Search failed');
+    const matchesHtml = (d.matches || []).map(m => `<div class="activity"><div class="bubble">📄</div><div><b>${esc(m.title)}</b><small>${esc(m.category)}</small><div class="small">${esc((m.content || '').slice(0, 260))}</div></div></div>`).join('');
+    $('brainAnswer').innerHTML = (d.answer ? `<div class="templatehint"><b>Answer:</b> ${esc(d.answer)}</div>` : '') + (matchesHtml || '<div class="empty">No matching docs yet.</div>');
+  } catch (e) { $('brainAnswer').innerHTML = `<p class="muted">${esc(e.message)}</p>`; }
+};
+
+// ---------- Brand Kit ----------
+window.renderBrandKit = async function renderBrandKit() {
+  try {
+    const kit = await (await fetch('/brand-kit.json')).json();
+    $('bkColors').innerHTML = `<div class="drawergrid">${kit.colors.map(c => `<div><span class="pill" style="background:${c.hex};color:#fff;border:0">${esc(c.name)}</span> <span class="muted small">${esc(c.hex)}</span></div>`).join('')}</div><p class="muted small" style="margin-top:8px">Font: ${esc(kit.font)}</p>`;
+    $('bkVoice').innerHTML = `<p>${esc(kit.voice.summary)}</p><ul>${kit.voice.rules.map(r => `<li>${esc(r)}</li>`).join('')}</ul><p class="muted small">Avoid: ${kit.voice.avoid.map(esc).join(', ')}</p>`;
+    $('bkCaptions').innerHTML = `<p><b>Caption formula:</b> ${esc(kit.captions.formula)}</p><p class="muted small">Hashtag bank: ${kit.captions.hashtags.map(h => '#' + h).join(' ')}</p>`;
+  } catch (e) { $('bkColors').innerHTML = `<p class="muted">Could not load brand-kit.json — ${esc(e.message)}</p>`; }
+};
+$('clSave').onclick = async () => {
+  const caption = $('clCaption').value.trim();
+  if (!caption) return toast('Add a caption first');
+  try {
+    await sb('content_log', { method: 'POST', body: JSON.stringify({ platform: $('clPlatform').value, post_url: $('clUrl').value, caption, posted_at: new Date().toISOString(), status: 'posted' }) });
+    $('clUrl').value = ''; $('clCaption').value = '';
+    toast('Post logged'); if (document.getElementById('briefing').classList.contains('on')) renderBriefing();
+  } catch (e) { toast(e.message); }
+};
+</script>
+</body></html>
