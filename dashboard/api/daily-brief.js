@@ -97,12 +97,17 @@ module.exports = async function handler(req, res) {
 
     // ---- yesterday's recap (morning slot only) ----
     const yTouches = touches.filter(t => etDay(t.contacted_at) === yesterday);
-    let yPosts = [];
+
+    // content_log only exists after the one-time Supabase setup. Until then we know
+    // nothing about posting, which is not the same as knowing nothing was posted —
+    // so stay silent on it rather than accusing him of skipping a day.
+    let yPosts = [], contentTracking = false;
     try {
       const since = new Date(new Date(yesterday + 'T12:00:00Z').getTime() - 36 * 3600 * 1000).toISOString();
       const recent = await sbGet(`content_log?select=*&posted_at=gte.${encodeURIComponent(since)}`);
       yPosts = recent.filter(p => etDay(p.posted_at) === yesterday);
-    } catch (_) { /* table may not exist yet */ }
+      contentTracking = true;
+    } catch (_) { /* not set up yet */ }
 
     const shipped = [];
     if (yTouches.length) shipped.push(`${yTouches.length} outreach touch${yTouches.length === 1 ? '' : 'es'} logged`);
@@ -112,7 +117,7 @@ module.exports = async function handler(req, res) {
 
     const slipped = [];
     if (overdue.length) slipped.push(`${overdue.length} follow-up${overdue.length === 1 ? '' : 's'} overdue`);
-    if (!yPosts.length) slipped.push('Nothing posted yesterday');
+    if (contentTracking && !yPosts.length) slipped.push('Nothing posted yesterday');
     if (!yTouches.length) slipped.push('No outreach logged yesterday');
 
     // ---- compose ----

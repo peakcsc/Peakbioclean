@@ -13,7 +13,7 @@
 <section class="view" id="followups"><div class="stats"><div class="stat"><b id="fOverdue">—</b><span>Overdue</span></div><div class="stat"><b id="fToday">—</b><span>Due today</span></div><div class="stat"><b id="fUpcoming">—</b><span>Upcoming 7 days</span></div><div class="stat"><b id="fNoDate">—</b><span>Contacted, no follow-up</span></div></div><div class="panel"><div class="ey">Follow-up queue</div><h3>What needs your attention next</h3><div id="followupList"></div></div></section>
 <section class="view" id="activity"><div class="panel"><div class="ey">Outreach history</div><h3>Every contact attempt in one timeline</h3><div id="activityList"></div></div></section>
 <section class="view" id="briefing"><div class="panel queue"><div><div class="ey">Good morning, Parker</div><h2 id="briefHeadline">Here's what needs you today.</h2><div class="muted" id="briefSub">Loading briefing…</div></div><div class="actions"><button class="btn ghost" id="refreshBrief">Refresh</button></div></div>
-<div class="stats"><div class="stat"><b id="bOverdue">—</b><span>Overdue follow-ups</span></div><div class="stat"><b id="bDueToday">—</b><span>Due today</span></div><div class="stat"><b id="bPostsWeek">—</b><span>Posts this week</span></div><div class="stat"><b id="bLastReview">—</b><span>Last nightly review</span></div></div>
+<div class="stats"><div class="stat"><b id="bOverdue">—</b><span>Overdue follow-ups</span></div><div class="stat"><b id="bDueToday">—</b><span>Due today</span></div><div class="stat"><b id="bYesterday">—</b><span>Contacted yesterday</span></div><div class="stat"><b id="bNever">—</b><span>Never contacted</span></div></div>
 <div class="panel"><div class="ey" id="planEy">Today's plan</div><h3 id="planFocus">Loading your plan…</h3><div id="planTasks"><p class="muted">Loading…</p></div></div>
 <div class="panel"><div class="ey">Act on this first</div><h3>Today's priorities</h3><div id="briefPriorities"><p class="muted">Loading…</p></div></div>
 <div class="panel"><div class="ey">Yesterday</div><h3>What shipped, what slipped</h3><div id="briefReview"><p class="muted">Nothing recorded yet. This fills in after your first 7am email goes out.</p></div></div>
@@ -141,37 +141,62 @@ async function renderPlan() {
 }
 
 // ---------- Morning Briefing ----------
+const SETUP_MSG = 'Run the one-time setup SQL in Supabase to switch this on. Everything else on this page works without it.';
+
 window.renderBriefing = async function renderBriefing() {
   renderPlan();
-  const overdue = leads.filter(l => l.next_follow_up_at && new Date(l.next_follow_up_at) < new Date() && !['Partner', 'Not Interested'].includes(l.outreach_status));
-  const dueToday = leads.filter(l => l.next_follow_up_at && localDay(l.next_follow_up_at) === nowDay());
+  const yesterday = localDay(new Date(Date.now() - 864e5));
+  const actionable = l => !['Partner', 'Not Interested'].includes(l.outreach_status);
+  const overdue = leads.filter(l => l.next_follow_up_at && new Date(l.next_follow_up_at) < new Date() && localDay(l.next_follow_up_at) !== nowDay() && actionable(l));
+  const dueToday = leads.filter(l => l.next_follow_up_at && localDay(l.next_follow_up_at) === nowDay() && actionable(l));
+  const yTouches = touches.filter(t => localDay(t.contacted_at) === yesterday);
+  const never = leads.filter(l => (l.contact_attempts || 0) === 0 && actionable(l));
+
   $('bOverdue').textContent = overdue.length;
   $('bDueToday').textContent = dueToday.length;
-  $('briefHeadline').textContent = overdue.length ? `${overdue.length} follow-up${overdue.length === 1 ? '' : 's'} are overdue — start there.` : 'Follow-ups are current. Nice.';
+  $('bYesterday').textContent = new Set(yTouches.map(t => t.lead_id)).size;
+  $('bNever').textContent = never.length;
+  $('briefHeadline').textContent = overdue.length ? `${overdue.length} follow-up${overdue.length === 1 ? '' : 's'} are overdue. Start there.` : (dueToday.length ? `${dueToday.length} follow-up${dueToday.length === 1 ? '' : 's'} due today.` : 'Follow-ups are current. Nice.');
   $('briefSub').textContent = `${leads.length} total leads • ${touches.filter(t => localDay(t.contacted_at) === nowDay()).length} contacted today`;
+
   const priorities = [
     ...overdue.slice(0, 5).map(l => `<div class="activity"><div class="bubble">↻</div><div><b>${esc(l.company)}</b><small>Follow-up overdue — ${esc(l.name || 'no contact name')}</small></div><button class="btn ghost" onclick="go('leads');openLead('${l.id}')">Open</button></div>`),
     ...dueToday.slice(0, 5).map(l => `<div class="activity"><div class="bubble">☀</div><div><b>${esc(l.company)}</b><small>Follow-up due today</small></div><button class="btn ghost" onclick="go('leads');openLead('${l.id}')">Open</button></div>`)
   ];
-  $('briefPriorities').innerHTML = priorities.length ? priorities.join('') : '<div class="empty">Nothing urgent right now. Good time to work the top of the queue or post content.</div>';
-  try {
-    const reviews = await sb('daily_review_log?select=*&order=review_date.desc&limit=1');
-    if (reviews && reviews.length) {
-      const rv = reviews[0];
-      $('bLastReview').textContent = rel(rv.review_date);
-      const shipped = (rv.shipped || []), slipped = (rv.slipped || []);
-      $('briefReview').innerHTML = `<p><b>${esc(rv.review_date)}</b> — ${shipped.length} shipped, ${slipped.length} slipped</p>` +
-        (shipped.length ? `<p class="ok small">Shipped: ${shipped.map(esc).join(' • ')}</p>` : '') +
-        (slipped.length ? `<p class="small" style="color:var(--amber)">Slipped: ${slipped.map(esc).join(' • ')}</p>` : '') +
-        (rv.summary ? `<p class="muted small">${esc(rv.summary)}</p>` : '');
-    } else { $('bLastReview').textContent = 'None yet'; }
-  } catch (e) { $('bLastReview').textContent = '—'; }
+  $('briefPriorities').innerHTML = priorities.length ? priorities.join('')
+    : (never.length ? `<div class="empty">Nothing scheduled. ${never.length} lead${never.length === 1 ? ' has' : 's have'} never been contacted — start at the top of the queue.</div>`
+      : '<div class="empty">Nothing urgent right now. Good time to add leads or post content.</div>');
+
+  // Yesterday's recap is computed right here from data already loaded, so it works
+  // with no database setup at all.
+  const shipped = [], slipped = [];
+  if (yTouches.length) shipped.push(`${yTouches.length} outreach touch${yTouches.length === 1 ? '' : 'es'} logged`);
+  const wonYesterday = leads.filter(l => l.outreach_status === 'Partner' && l.updated_at && localDay(l.updated_at) === yesterday);
+  if (wonYesterday.length) shipped.push(`${wonYesterday.length} became a partner`);
+  if (overdue.length) slipped.push(`${overdue.length} follow-up${overdue.length === 1 ? '' : 's'} left overdue`);
+  if (!yTouches.length) slipped.push('No outreach logged');
+
+  let posts = null;
   try {
     const since = new Date(Date.now() - 7 * 864e5).toISOString();
-    const posts = await sb(`content_log?select=*&posted_at=gte.${encodeURIComponent(since)}&order=posted_at.desc`);
-    $('bPostsWeek').textContent = posts.length;
-    $('briefContent').innerHTML = posts.length ? posts.map(p => `<div class="activity"><div class="bubble">▣</div><div><b>${esc(p.platform)}</b><small>${esc((p.caption || '').slice(0, 90))}</small></div><small>${when(p.posted_at)}</small></div>`).join('') : '<div class="empty">No posts logged this week yet — log them from the Brand Kit tab.</div>';
-  } catch (e) { $('bPostsWeek').textContent = '0'; }
+    posts = await sb(`content_log?select=*&posted_at=gte.${encodeURIComponent(since)}&order=posted_at.desc`);
+  } catch (e) { posts = null; }
+
+  if (posts) {
+    const yPosts = posts.filter(p => localDay(p.posted_at) === yesterday);
+    if (yPosts.length) shipped.push(`${yPosts.length} post${yPosts.length === 1 ? '' : 's'} published`);
+    else slipped.push('Nothing posted');
+    $('briefContent').innerHTML = posts.length
+      ? `<p class="small muted">${posts.length} post${posts.length === 1 ? '' : 's'} in the last 7 days</p>` + posts.map(p => `<div class="activity"><div class="bubble">▣</div><div><b>${esc(p.platform)}</b><small>${esc((p.caption || '').slice(0, 90))}</small></div><small>${when(p.posted_at)}</small></div>`).join('')
+      : '<div class="empty">No posts logged this week yet. Log them from the Brand Kit tab.</div>';
+  } else {
+    $('briefContent').innerHTML = `<div class="empty">${SETUP_MSG}</div>`;
+  }
+
+  $('briefReview').innerHTML =
+    `<p class="small"><b>${esc(new Date(yesterday + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }))}</b></p>` +
+    `<p class="small"><span class="ok">Shipped:</span> ${shipped.length ? shipped.map(esc).join(' • ') : 'nothing logged'}</p>` +
+    `<p class="small"><span style="color:var(--amber)">Slipped:</span> ${slipped.length ? slipped.map(esc).join(' • ') : 'nothing'}</p>`;
 };
 $('refreshBrief').onclick = () => renderBriefing();
 
@@ -202,7 +227,7 @@ window.renderBrainList = async function renderBrainList() {
     const docs = await sb('brain_docs?select=id,title,category,content,created_at&order=created_at.desc&limit=200');
     window.__brainDocs = docs;
     $('brainList').innerHTML = docs.length ? docs.map(d => `<div class="activity"><div class="bubble">▤</div><div><b>${esc(d.title)}</b><small>${esc(d.category)} • ${esc((d.content || '').slice(0, 120))}</small></div><small class="muted">${when(d.created_at)}</small></div>`).join('') : '<div class="empty">Nothing saved yet. Add your first SOP or policy above.</div>';
-  } catch (e) { $('brainList').innerHTML = `<p class="muted">${esc(e.message)}</p>`; }
+  } catch (e) { $('brainList').innerHTML = `<div class="empty">${SETUP_MSG}</div>`; }
 };
 $('bnSave').onclick = async () => {
   const title = $('bnTitle').value.trim(), content = $('bnContent').value.trim();
@@ -211,7 +236,7 @@ $('bnSave').onclick = async () => {
     await sb('brain_docs', { method: 'POST', body: JSON.stringify({ title, category: $('bnCategory').value, content }) });
     $('bnTitle').value = ''; $('bnContent').value = '';
     toast('Saved to the second brain'); renderBrainList();
-  } catch (e) { toast(e.message); }
+  } catch (e) { toast('Second Brain needs the one-time Supabase setup first'); }
 };
 $('brainAskBtn').onclick = async () => {
   const q = $('brainQ').value.trim();
@@ -242,7 +267,7 @@ $('clSave').onclick = async () => {
     await sb('content_log', { method: 'POST', body: JSON.stringify({ platform: $('clPlatform').value, post_url: $('clUrl').value, caption, posted_at: new Date().toISOString(), status: 'posted' }) });
     $('clUrl').value = ''; $('clCaption').value = '';
     toast('Post logged'); if (document.getElementById('briefing').classList.contains('on')) renderBriefing();
-  } catch (e) { toast(e.message); }
+  } catch (e) { toast('Post logging needs the one-time Supabase setup first'); }
 };
 </script>
 </body></html>
