@@ -290,9 +290,13 @@ window.restoreTask = restoreTask;
 // Anything you ticked or pushed today, recoverable for the rest of the day.
 function renderHidden(plan, rows, today) {
   const hidden = (rows || []).filter(r => {
-    const touchedToday = r.updated_at && localDay(r.updated_at) === today;
-    if (!touchedToday) return false;
-    return r.status === 'done' || (r.due_day && r.due_day > today);
+    // Anything parked in the future is always recoverable — it hasn't happened yet.
+    if (r.status !== 'done' && r.due_day && r.due_day > today) return true;
+    if (r.status !== 'done') return false;
+    // Finished today, or finished at an unknown time (rows written before this
+    // panel existed carry no timestamp, and hiding those strands them for good).
+    const stamp = r.updated_at || r.completed_at;
+    return stamp ? localDay(stamp) === today : true;
   });
   const host = $('planHidden');
   if (!hidden.length) { host.innerHTML = ''; return; }
