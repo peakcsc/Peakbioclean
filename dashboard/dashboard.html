@@ -123,6 +123,20 @@ function openTasks(plan, rows, today) {
   const byKey = new Map((rows || []).map(r => [`${r.plan_day}:${r.task_index}`, r]));
   const planNumber = Math.round((new Date(today + 'T12:00:00Z') - new Date(plan.startDate + 'T12:00:00Z')) / 864e5) + 1;
   const list = [];
+
+  // Before the plan's start date there's nothing to carry, so show Day 1 as a
+  // head start rather than an empty panel.
+  if (planNumber < 1) {
+    const first = plan.days[0];
+    (first.tasks || []).forEach((task, i) => {
+      const row = byKey.get(`1:${i}`);
+      if (row && row.status === 'done') return;
+      if (row && row.due_day && row.due_day > today) return;
+      list.push({ planDay: 1, index: i, task, carried: false, focus: first.focus });
+    });
+    return list;
+  }
+
   for (let d = 1; d <= Math.min(planNumber, plan.days.length); d++) {
     const entry = plan.days.find(x => x.day === d);
     if (!entry) continue;
@@ -137,12 +151,54 @@ function openTasks(plan, rows, today) {
   return list;
 }
 
-async function saveTaskState(planDay, index, title, patch) {
+// Progress saves to Supabase when the table exists, and to this browser when it
+// doesn't, so ticking and pushing work immediately either way. The difference is
+// reach: only rows in the database are visible to the 7am email.
+const PLAN_KEY = 'peak-plan-progress';
+let planBackend = null;
+
+function localRows() { try { return JSON.parse(localStorage.getItem(PLAN_KEY) || '[]'); } catch (e) { return []; } }
+function putLocalRow(planDay, index, title, patch) {
+  const rows = localRows();
+  const i = rows.findIndex(r => r.plan_day === planDay && r.task_index === index);
+  const row = { ...(i >= 0 ? rows[i] : {}), plan_day: planDay, task_index: index, title, ...patch };
+  if (i >= 0) rows[i] = row; else rows.push(row);
+  try { localStorage.setItem(PLAN_KEY, JSON.stringify(rows)); } catch (e) {}
+}
+
+async function dbUpsert(planDay, index, title, patch) {
   return sb('plan_progress?on_conflict=plan_day,task_index', {
     method: 'POST',
     prefer: 'resolution=merge-duplicates,return=minimal',
     body: JSON.stringify({ plan_day: planDay, task_index: index, title, updated_at: new Date().toISOString(), ...patch })
   });
+}
+
+async function loadProgress() {
+  try {
+    let rows = await sb('plan_progress?select=*&limit=500');
+    planBackend = 'db';
+    // First successful read after setup: lift anything saved on this device up
+    // into the database so nothing ticked off earlier gets forgotten.
+    const pending = localRows();
+    if (pending.length) {
+      for (const r of pending) {
+        try { await dbUpsert(r.plan_day, r.task_index, r.title, { status: r.status || 'open', due_day: r.due_day, completed_at: r.completed_at || null }); } catch (e) {}
+      }
+      try { localStorage.removeItem(PLAN_KEY); } catch (e) {}
+      rows = await sb('plan_progress?select=*&limit=500');
+      toast('Synced your saved progress');
+    }
+    return rows;
+  } catch (e) {
+    planBackend = 'local';
+    return localRows();
+  }
+}
+
+async function saveTaskState(planDay, index, title, patch) {
+  if (planBackend === 'db') return dbUpsert(planDay, index, title, patch);
+  return putLocalRow(planDay, index, title, patch);
 }
 
 async function renderPlan() {
@@ -159,47 +215,39 @@ async function renderPlan() {
   const { label, entry } = planDayFor(plan, today);
   $('planEy').textContent = label;
 
-  let rows = null;
-  try { rows = await sb('plan_progress?select=*&limit=500'); } catch (e) { rows = null; }
+  const rows = await loadProgress();
+  const list = openTasks(plan, rows, today);
+  $('planFocus').textContent = entry ? entry.focus : 'Today';
 
-  const list = (rows !== null) ? openTasks(plan, rows, today) : null;
-
-  if (list === null) {
-    $('planFocus').textContent = entry ? entry.focus : 'Today';
-    $('planTasks').innerHTML = (entry?.tasks || []).map(t =>
-      `<div class="activity"><div class="bubble">•</div><div><b>${esc(t.title)}</b>${t.detail ? `<small>${esc(t.detail)}</small>` : ''}</div></div>`).join('')
-      + `<div class="empty" style="padding:18px">${SETUP_MSG}<br>Ticking tasks off and pushing them to tomorrow needs it.</div>`;
-    return;
-  }
+  const localOnly = planBackend === 'local'
+    ? `<p class="small muted" style="margin-top:14px">Saved on this device. Run the Supabase setup so your 7am email can see it too, and so it follows you to your phone.</p>`
+    : '';
 
   if (!list.length) {
-    $('planFocus').textContent = entry ? entry.focus : 'Today';
-    $('planTasks').innerHTML = '<div class="empty">Everything for today is done. Go work the follow-up queue.</div>';
+    $('planTasks').innerHTML = '<div class="empty">Everything for today is done. Go work the follow-up queue.</div>' + localOnly;
     return;
   }
 
   const carried = list.filter(x => x.carried).length;
-  $('planFocus').textContent = entry ? entry.focus : 'Today';
   $('planTasks').innerHTML =
     (carried ? `<p class="small" style="color:var(--amber)">${carried} task${carried === 1 ? '' : 's'} carried over from earlier days.</p>` : '') +
     list.map(x => `<div class="activity" style="align-items:flex-start" data-t="${x.planDay}:${x.index}">
-      <input type="checkbox" style="width:18px;height:18px;margin-top:4px;accent-color:var(--accent)">
+      <input type="checkbox" aria-label="Mark done" style="width:19px;height:19px;margin-top:4px;accent-color:var(--accent)">
       <div><b>${esc(x.task.title)}</b>${x.carried ? ` <span class="pill" style="color:var(--amber)">Day ${x.planDay}</span>` : ''}${x.task.detail ? `<small>${esc(x.task.detail)}</small>` : ''}</div>
-      <button class="btn ghost small" type="button">Push to tomorrow</button>
-    </div>`).join('');
+      <button class="btn ghost small" type="button">Push to tomorrow →</button>
+    </div>`).join('') + localOnly;
 
   $('planTasks').querySelectorAll('[data-t]').forEach(row => {
     const [planDay, index] = row.dataset.t.split(':').map(Number);
     const item = list.find(x => x.planDay === planDay && x.index === index);
+    const fail = e => { toast('Could not save that'); e.target.disabled = false; };
     row.querySelector('input').onchange = async e => {
       e.target.disabled = true;
       try {
-        await saveTaskState(planDay, index, item.task.title, {
-          status: 'done', completed_at: new Date().toISOString(), due_day: today
-        });
+        await saveTaskState(planDay, index, item.task.title, { status: 'done', completed_at: new Date().toISOString(), due_day: today });
         toast('Done. Nice.');
         renderPlan();
-      } catch (err) { toast('Could not save — run the Supabase setup first'); e.target.disabled = false; }
+      } catch (err) { fail(e); }
     };
     row.querySelector('button').onclick = async e => {
       e.target.disabled = true;
@@ -207,7 +255,7 @@ async function renderPlan() {
         await saveTaskState(planDay, index, item.task.title, { status: 'open', due_day: shiftDay(today, 1) });
         toast('Pushed to tomorrow');
         renderPlan();
-      } catch (err) { toast('Could not save — run the Supabase setup first'); e.target.disabled = false; }
+      } catch (err) { fail(e); }
     };
   });
 }
