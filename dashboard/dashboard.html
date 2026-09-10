@@ -14,7 +14,7 @@
 <section class="view" id="activity"><div class="panel"><div class="ey">Outreach history</div><h3>Every contact attempt in one timeline</h3><div id="activityList"></div></div></section>
 <section class="view" id="briefing"><div class="panel queue"><div><div class="ey">Good morning, Parker</div><h2 id="briefHeadline">Here's what needs you today.</h2><div class="muted" id="briefSub">Loading briefing…</div></div><div class="actions"><button class="btn ghost" id="refreshBrief">Refresh</button></div></div>
 <div class="stats"><div class="stat"><b id="bOverdue">—</b><span>Overdue follow-ups</span></div><div class="stat"><b id="bDueToday">—</b><span>Due today</span></div><div class="stat"><b id="bYesterday">—</b><span>Contacted yesterday</span></div><div class="stat"><b id="bNever">—</b><span>Never contacted</span></div></div>
-<div class="panel"><div class="ey" id="planEy">Today's plan</div><h3 id="planFocus">Loading your plan…</h3><div id="planTasks"><p class="muted">Loading…</p></div></div>
+<div class="panel"><div class="ey" id="planEy">Today's plan</div><h3 id="planFocus">Loading your plan…</h3><div id="planTasks"><p class="muted">Loading…</p></div><div id="planHidden"></div></div>
 <div class="panel"><div class="ey">Act on this first</div><h3>Today's priorities</h3><div id="briefPriorities"><p class="muted">Loading…</p></div></div>
 <div class="panel"><div class="ey">Yesterday</div><h3>What shipped, what slipped</h3><div id="briefReview"><p class="muted">Nothing recorded yet. This fills in after your first 7am email goes out.</p></div></div>
 <div class="panel"><div class="ey">Content cadence</div><h3>Recent posts logged</h3><div id="briefContent"><p class="muted">Loading…</p></div></div></section>
@@ -161,9 +161,23 @@ function localRows() { try { return JSON.parse(localStorage.getItem(PLAN_KEY) ||
 function putLocalRow(planDay, index, title, patch) {
   const rows = localRows();
   const i = rows.findIndex(r => r.plan_day === planDay && r.task_index === index);
-  const row = { ...(i >= 0 ? rows[i] : {}), plan_day: planDay, task_index: index, title, ...patch };
+  const row = { ...(i >= 0 ? rows[i] : {}), plan_day: planDay, task_index: index, title, updated_at: new Date().toISOString(), ...patch };
   if (i >= 0) rows[i] = row; else rows.push(row);
   try { localStorage.setItem(PLAN_KEY, JSON.stringify(rows)); } catch (e) {}
+}
+
+// A toast that stays up long enough to take back a mis-tap.
+function toastUndo(msg, undoFn) {
+  const t = $('toast');
+  t.textContent = msg + ' ';
+  const b = document.createElement('button');
+  b.textContent = 'Undo';
+  b.style.cssText = 'margin-left:12px;padding:4px 11px;border:0;border-radius:7px;background:#092017;color:#fff;font-weight:800;font-size:12px;cursor:pointer';
+  b.onclick = async () => { t.classList.remove('on'); await undoFn(); };
+  t.appendChild(b);
+  t.classList.add('on');
+  clearTimeout(window.__undoTimer);
+  window.__undoTimer = setTimeout(() => t.classList.remove('on'), 7000);
 }
 
 async function dbUpsert(planDay, index, title, patch) {
@@ -241,11 +255,12 @@ async function renderPlan() {
     const [planDay, index] = row.dataset.t.split(':').map(Number);
     const item = list.find(x => x.planDay === planDay && x.index === index);
     const fail = e => { toast('Could not save that'); e.target.disabled = false; };
+    const undo = () => restoreTask(planDay, index, item.task.title);
     row.querySelector('input').onchange = async e => {
       e.target.disabled = true;
       try {
         await saveTaskState(planDay, index, item.task.title, { status: 'done', completed_at: new Date().toISOString(), due_day: today });
-        toast('Done. Nice.');
+        toastUndo('Done. Nice.', undo);
         renderPlan();
       } catch (err) { fail(e); }
     };
@@ -253,11 +268,46 @@ async function renderPlan() {
       e.target.disabled = true;
       try {
         await saveTaskState(planDay, index, item.task.title, { status: 'open', due_day: shiftDay(today, 1) });
-        toast('Pushed to tomorrow');
+        toastUndo('Pushed to tomorrow.', undo);
         renderPlan();
       } catch (err) { fail(e); }
     };
   });
+
+  renderHidden(plan, rows, today);
+}
+
+// Puts a task back on today's list, whether it was ticked off or pushed forward.
+async function restoreTask(planDay, index, title) {
+  try {
+    await saveTaskState(planDay, index, title, { status: 'open', due_day: nowDay(), completed_at: null });
+    toast('Back on your list');
+    renderPlan();
+  } catch (e) { toast('Could not undo that'); }
+}
+window.restoreTask = restoreTask;
+
+// Anything you ticked or pushed today, recoverable for the rest of the day.
+function renderHidden(plan, rows, today) {
+  const hidden = (rows || []).filter(r => {
+    const touchedToday = r.updated_at && localDay(r.updated_at) === today;
+    if (!touchedToday) return false;
+    return r.status === 'done' || (r.due_day && r.due_day > today);
+  });
+  const host = $('planHidden');
+  if (!hidden.length) { host.innerHTML = ''; return; }
+
+  const titleFor = r => {
+    const entry = plan.days.find(d => d.day === r.plan_day);
+    return (entry && entry.tasks[r.task_index] && entry.tasks[r.task_index].title) || r.title || 'Task';
+  };
+  host.innerHTML = `<details style="margin-top:14px">
+    <summary style="cursor:pointer;color:var(--muted);font-size:11px">${hidden.length} task${hidden.length === 1 ? '' : 's'} cleared today — tap to review</summary>
+    <div style="margin-top:10px">${hidden.map(r => `<div class="activity">
+      <div class="bubble">${r.status === 'done' ? '✓' : '→'}</div>
+      <div><b style="opacity:.7">${esc(titleFor(r))}</b><small>${r.status === 'done' ? 'Marked done' : 'Pushed to tomorrow'}</small></div>
+      <button class="btn ghost small" type="button" onclick="restoreTask(${r.plan_day},${r.task_index},${JSON.stringify(titleFor(r)).replace(/"/g, '&quot;')})">Bring back</button>
+    </div>`).join('')}</div></details>`;
 }
 
 // ---------- Morning Briefing ----------
