@@ -14,8 +14,9 @@
 <section class="view" id="activity"><div class="panel"><div class="ey">Outreach history</div><h3>Every contact attempt in one timeline</h3><div id="activityList"></div></div></section>
 <section class="view" id="briefing"><div class="panel queue"><div><div class="ey">Good morning, Parker</div><h2 id="briefHeadline">Here's what needs you today.</h2><div class="muted" id="briefSub">Loading briefing…</div></div><div class="actions"><button class="btn ghost" id="refreshBrief">Refresh</button></div></div>
 <div class="stats"><div class="stat"><b id="bOverdue">—</b><span>Overdue follow-ups</span></div><div class="stat"><b id="bDueToday">—</b><span>Due today</span></div><div class="stat"><b id="bPostsWeek">—</b><span>Posts this week</span></div><div class="stat"><b id="bLastReview">—</b><span>Last nightly review</span></div></div>
+<div class="panel"><div class="ey" id="planEy">Today's plan</div><h3 id="planFocus">Loading your plan…</h3><div id="planTasks"><p class="muted">Loading…</p></div></div>
 <div class="panel"><div class="ey">Act on this first</div><h3>Today's priorities</h3><div id="briefPriorities"><p class="muted">Loading…</p></div></div>
-<div class="panel"><div class="ey">Last night's review</div><h3>What shipped, what slipped</h3><div id="briefReview"><p class="muted">No nightly review recorded yet — the review agent runs automatically once it's deployed.</p></div></div>
+<div class="panel"><div class="ey">Yesterday</div><h3>What shipped, what slipped</h3><div id="briefReview"><p class="muted">Nothing recorded yet. This fills in after your first 7am email goes out.</p></div></div>
 <div class="panel"><div class="ey">Content cadence</div><h3>Recent posts logged</h3><div id="briefContent"><p class="muted">Loading…</p></div></div></section>
 <section class="view" id="jobhistory"><div class="panel"><div class="toolbar" style="grid-template-columns:1fr auto"><div class="field search"><label>Search every client, lead and job touch<input id="jhSearch" placeholder="Search company, contact, notes, outreach…"></label></div><button class="btn ghost" id="jhClear">Clear</button></div></div>
 <div class="panel"><div class="ey">Searchable history</div><h3>Every client & job record in one place</h3><p class="muted small">Pulls from every lead and every logged contact/job touch. As formal job records get added this becomes the full job archive.</p><div id="jhResults"><p class="muted">Loading…</p></div></div></section>
@@ -97,8 +98,51 @@ async function sb(path, opt = {}) {
   return data;
 }
 
+// ---------- The 30-day startup plan ----------
+function planDayFor(plan, today) {
+  const between = (f, t) => Math.round((new Date(t + 'T12:00:00Z') - new Date(f + 'T12:00:00Z')) / 864e5);
+  const n = between(plan.startDate, today) + 1;
+  if (n >= 1 && n <= plan.days.length) return { n, label: `Day ${n} of 30`, entry: plan.days.find(d => d.day === n) };
+  if (n > plan.days.length && plan.ongoing) {
+    const dow = new Date(today + 'T12:00:00Z').getUTCDay();
+    return { n, label: 'Ongoing rhythm', entry: plan.ongoing[String(dow)] || null };
+  }
+  return { n, label: 'Starts tomorrow — here\'s Day 1', entry: plan.days[0] };
+}
+
+async function renderPlan() {
+  try {
+    const plan = await (await fetch('/startup-plan.json')).json();
+    const { n, label, entry } = planDayFor(plan, nowDay());
+    $('planEy').textContent = label;
+    if (!entry) { $('planFocus').textContent = 'Nothing scheduled today.'; $('planTasks').innerHTML = ''; return; }
+    $('planFocus').textContent = entry.focus || 'Today';
+    $('planTasks').innerHTML = (entry.tasks || []).map((t, i) => {
+      const key = `peakplan-${n}-${i}`;
+      let done = false;
+      try { done = localStorage.getItem(key) === '1'; } catch (e) {}
+      return `<label class="activity" style="cursor:pointer;align-items:flex-start">
+        <input type="checkbox" data-key="${key}" ${done ? 'checked' : ''} style="width:18px;height:18px;margin-top:3px;accent-color:var(--accent)">
+        <div><b style="${done ? 'text-decoration:line-through;opacity:.55' : ''}">${esc(t.title)}</b>${t.detail ? `<small>${esc(t.detail)}</small>` : ''}</div>
+      </label>`;
+    }).join('') || '<p class="muted">No tasks today.</p>';
+    $('planTasks').querySelectorAll('input[type=checkbox]').forEach(box => {
+      box.onchange = () => {
+        try { localStorage.setItem(box.dataset.key, box.checked ? '1' : '0'); } catch (e) {}
+        const b = box.parentElement.querySelector('b');
+        b.style.textDecoration = box.checked ? 'line-through' : '';
+        b.style.opacity = box.checked ? '.55' : '';
+      };
+    });
+  } catch (e) {
+    $('planFocus').textContent = 'Plan unavailable';
+    $('planTasks').innerHTML = `<p class="muted">${esc(e.message)}</p>`;
+  }
+}
+
 // ---------- Morning Briefing ----------
 window.renderBriefing = async function renderBriefing() {
+  renderPlan();
   const overdue = leads.filter(l => l.next_follow_up_at && new Date(l.next_follow_up_at) < new Date() && !['Partner', 'Not Interested'].includes(l.outreach_status));
   const dueToday = leads.filter(l => l.next_follow_up_at && localDay(l.next_follow_up_at) === nowDay());
   $('bOverdue').textContent = overdue.length;

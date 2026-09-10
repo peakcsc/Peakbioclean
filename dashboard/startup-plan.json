@@ -1,0 +1,272 @@
+{
+  "startDate": "2026-09-11",
+  "note": "Day 1 is startDate. Change startDate to reset the plan. Regulatory items are written as calls to make and things to confirm, not as legal advice — verify every requirement with the agency named.",
+  "days": [
+    {
+      "day": 1,
+      "focus": "Make sure the business legally exists",
+      "tasks": [
+        { "title": "Confirm your LLC is active on Sunbiz", "detail": "search.sunbiz.org, look up Peak Bio-Clean. Check the status says ACTIVE and the annual report isn't overdue. If nothing comes up, file the LLC today." },
+        { "title": "Confirm you have an EIN", "detail": "Free from irs.gov, takes 10 minutes online. You cannot open a business bank account or get insurance without it." },
+        { "title": "Open a business checking account", "detail": "Bring the EIN letter and Sunbiz filing. Keeping business and personal money separate is what makes the LLC actually protect you." }
+      ]
+    },
+    {
+      "day": 2,
+      "focus": "Insurance quotes, the thing that gates every commercial account",
+      "tasks": [
+        { "title": "Get three general liability quotes", "detail": "Tell every agent specifically: biohazard remediation, trauma and crime scene cleanup. Some carriers won't write it. You want an agent who has placed this class before." },
+        { "title": "Ask each one about pollution / environmental liability", "detail": "General liability usually excludes contamination. In this trade that exclusion is the whole job. Ask for it as an endorsement or separate policy." },
+        { "title": "Ask what a certificate of insurance costs to issue", "detail": "Property managers and funeral homes will ask for a COI naming them. You need to know you can produce one same-day." }
+      ]
+    },
+    {
+      "day": 3,
+      "focus": "Biomedical waste, the part most new operators get wrong",
+      "tasks": [
+        { "title": "Call your county health department", "detail": "Ask directly: what registration do I need to transport biomedical waste in this county, and do I need a generator permit if I store it. Florida regulates this under Chapter 64E-16, administered county by county. Write down who you spoke to." },
+        { "title": "Ask what the application costs and how long it takes", "detail": "You need this on the calendar before you take a job that generates regulated waste." },
+        { "title": "Save the answers into Second Brain", "detail": "Title it Biomedical Waste Registration. Six months from now you will not remember what they told you." }
+      ]
+    },
+    {
+      "day": 4,
+      "focus": "Line up where the waste actually goes",
+      "tasks": [
+        { "title": "Get pricing from two medical waste disposal vendors", "detail": "Stericycle and a regional competitor. Ask for per-box and per-pickup pricing, minimum contract term, and whether they do on-call pickups for small operators." },
+        { "title": "Ask whether they'll take trauma waste from a non-medical generator", "detail": "Not all of them will. Find this out now, not on a job." },
+        { "title": "Log both quotes in Second Brain under Vendor / Partner" }
+      ]
+    },
+    {
+      "day": 5,
+      "focus": "Decide what you sell and what it costs",
+      "tasks": [
+        { "title": "Write your service list with a price range for each", "detail": "Unattended death, suicide, homicide, hoarding, gross filth, vehicle, rodent, odor. Range not fixed price. You'll quote on scope, but you need a starting number when someone calls." },
+        { "title": "Write your minimum job price", "detail": "The number below which a job costs you money once you count PPE, disposal, drive time and your day." },
+        { "title": "Save it as Pricing in Second Brain" }
+      ]
+    },
+    {
+      "day": 6,
+      "focus": "Be findable",
+      "tasks": [
+        { "title": "Create or claim your Google Business Profile", "detail": "Free. This is the single highest-value marketing asset for a local service business, above your website and far above Instagram." },
+        { "title": "Start verification", "detail": "It's usually a postcard and takes a week or two, so starting today matters." },
+        { "title": "Add every service category and your full service area" }
+      ]
+    },
+    {
+      "day": 7,
+      "focus": "Week one review",
+      "tasks": [
+        { "title": "Check what's still open from days 1 through 6", "detail": "Insurance quotes and health department callbacks usually lag. Chase them today." },
+        { "title": "Open the dashboard and confirm the week's activity logged correctly" }
+      ]
+    },
+    {
+      "day": 8,
+      "focus": "OSHA bloodborne pathogens plan",
+      "tasks": [
+        { "title": "Write your Exposure Control Plan", "detail": "OSHA 29 CFR 1910.1030 requires a written plan for anyone with occupational exposure to blood. OSHA publishes a model plan on osha.gov, start from that and make it yours." },
+        { "title": "Decide your hepatitis B vaccination policy", "detail": "If you hire anyone, you must offer the vaccine series at no cost within 10 days of assignment. Know what that costs before you hire." },
+        { "title": "Save the finished plan into Second Brain under Compliance" }
+      ]
+    },
+    {
+      "day": 9,
+      "focus": "Respirators",
+      "tasks": [
+        { "title": "Read OSHA 1910.134 and write down what applies to you", "detail": "If you require a respirator, you generally need a written program, a medical evaluation, and a fit test before first use. This is the standard that gets small operators cited." },
+        { "title": "Price a medical evaluation and fit test locally", "detail": "Occupational health clinics do both, often in one visit." },
+        { "title": "Book yours" }
+      ]
+    },
+    {
+      "day": 10,
+      "focus": "Chemicals and documentation",
+      "tasks": [
+        { "title": "Build an SDS binder", "detail": "Safety Data Sheet for every chemical you carry. Download from each manufacturer. Keep a copy in the truck." },
+        { "title": "Confirm your disinfectants are EPA-registered for the pathogens you claim to kill", "detail": "Check the EPA registration number and the label's kill claims. Your marketing cannot claim more than the label does." }
+      ]
+    },
+    {
+      "day": 11,
+      "focus": "Certification",
+      "tasks": [
+        { "title": "Price two certification paths", "detail": "IICRC and ABRA are the two names commercial accounts recognize. Get real numbers on cost and time." },
+        { "title": "Pick one and put the date on the calendar", "detail": "You do not need it to start working, but it shortens every partner conversation and you'll want it before pitching insurance adjusters." }
+      ]
+    },
+    {
+      "day": 12,
+      "focus": "Gear",
+      "tasks": [
+        { "title": "Inventory your PPE and consumables", "detail": "Suits, respirators and cartridges, gloves, boot covers, sharps containers, red bags, disinfectant, HEPA filtration, hand tools." },
+        { "title": "Write your restock threshold", "detail": "The point at which you reorder rather than discovering you're short at 2am." },
+        { "title": "Price a full job's worth of consumables", "detail": "This number goes into your minimum job price." }
+      ]
+    },
+    {
+      "day": 13,
+      "focus": "Paperwork you'll use on every job",
+      "tasks": [
+        { "title": "Build a work authorization form", "detail": "Signed before you touch anything. Names who is authorizing, the scope, and who is paying." },
+        { "title": "Build a scope sheet and a waste log", "detail": "What you removed, what was disposed, where it went, who signed for it." },
+        { "title": "Save all three into Second Brain under Contract" }
+      ]
+    },
+    {
+      "day": 14,
+      "focus": "Week two review",
+      "tasks": [
+        { "title": "Confirm insurance is bound or close to it" },
+        { "title": "Confirm the waste registration is filed or scheduled" },
+        { "title": "Everything in weeks one and two is what lets a property manager say yes. Chase whatever is still open." }
+      ]
+    },
+    {
+      "day": 15,
+      "focus": "Start the pipeline: funeral homes",
+      "tasks": [
+        { "title": "Build a list of 20 funeral homes within an hour's drive", "detail": "Google Maps, get the name, phone, and the director if the site lists one." },
+        { "title": "Add all 20 to the dashboard as leads", "detail": "Set the ICP to Funeral Homes & Decedent Transport." },
+        { "title": "Give every one of them a follow-up date", "detail": "This is what fills your Morning Briefing tomorrow." }
+      ]
+    },
+    {
+      "day": 16,
+      "focus": "Work the funeral home list",
+      "tasks": [
+        { "title": "Call or email all 20", "detail": "Use the vendor packet email in the dashboard. It's already written." },
+        { "title": "Log every single attempt", "detail": "Including no-answers. Unlogged work is invisible work." },
+        { "title": "Set the next follow-up before closing each lead" }
+      ]
+    },
+    {
+      "day": 17,
+      "focus": "Property managers and HOAs",
+      "tasks": [
+        { "title": "Build a list of 20 property management companies and HOA managers", "detail": "These are your highest-repeat customers. Unattended deaths in rentals, evictions, gross filth turnovers." },
+        { "title": "Add them to the dashboard with follow-up dates" },
+        { "title": "Send the first ten" }
+      ]
+    },
+    {
+      "day": 18,
+      "focus": "Restoration, plumbing, junk removal",
+      "tasks": [
+        { "title": "Build a list of 20 restoration and plumbing companies", "detail": "They hit biohazard jobs they don't want and need someone to hand them to. This is the fastest referral source to activate." },
+        { "title": "Add them and send the first ten", "detail": "The pitch is different here: you're the subcontractor who takes the job they can't do." }
+      ]
+    },
+    {
+      "day": 19,
+      "focus": "Work the follow-ups",
+      "tasks": [
+        { "title": "Open Morning Briefing and clear every overdue follow-up", "detail": "By now you have 60 leads in the system. This is the day the dashboard starts earning its keep." },
+        { "title": "Second touch on anyone who didn't answer the first" }
+      ]
+    },
+    {
+      "day": 20,
+      "focus": "Sharpen the packet",
+      "tasks": [
+        { "title": "Update the vendor packet with what you've built", "detail": "Insurance, waste registration, certification path, response time. Every item from weeks one and two is a reason to trust you." },
+        { "title": "Add your COI as an attachment you can send in one click" }
+      ]
+    },
+    {
+      "day": 21,
+      "focus": "Week three review",
+      "tasks": [
+        { "title": "Count it: leads added, touches logged, replies received", "detail": "It's in the Activity tab." },
+        { "title": "Which ICP replied most? Do more of that next week." }
+      ]
+    },
+    {
+      "day": 22,
+      "focus": "Senior living and probate",
+      "tasks": [
+        { "title": "Build a list of 15 assisted living and senior living facilities" },
+        { "title": "Build a list of 15 probate and estate attorneys", "detail": "Estate cleanouts and unattended deaths flow through them." },
+        { "title": "Add both to the dashboard" }
+      ]
+    },
+    {
+      "day": 23,
+      "focus": "Content",
+      "tasks": [
+        { "title": "Post an educational piece, not a gore piece", "detail": "What families should know about who pays for cleanup. That post gets shared by the exact people who refer you." },
+        { "title": "Log it in the Brand Kit tab" }
+      ]
+    },
+    {
+      "day": 24,
+      "focus": "Get in front of someone in person",
+      "tasks": [
+        { "title": "Walk into three funeral homes with packets", "detail": "Ten minutes each, no appointment, ask for the director, leave the packet. In this industry face-to-face beats fifty emails." },
+        { "title": "Log all three as in-person touches" }
+      ]
+    },
+    {
+      "day": 25,
+      "focus": "Insurance and adjusters",
+      "tasks": [
+        { "title": "Write your insurance billing process", "detail": "Homeowners policies often cover biohazard remediation. Knowing how to bill a claim is a selling point to every property manager." },
+        { "title": "Find three local independent adjusters and add them as leads" }
+      ]
+    },
+    {
+      "day": 26,
+      "focus": "Follow-up day",
+      "tasks": [
+        { "title": "Clear the Briefing", "detail": "Every overdue follow-up, closed out." },
+        { "title": "Third touch on the funeral homes from day 15", "detail": "Most partnerships form on touch three to five. Almost everyone quits at one." }
+      ]
+    },
+    {
+      "day": 27,
+      "focus": "Reviews and proof",
+      "tasks": [
+        { "title": "Ask anyone you've worked for to leave a Google review", "detail": "Even one job. Even a friend's rental turnover. A profile with zero reviews loses to a profile with three." },
+        { "title": "Save your best client feedback into Second Brain for use in marketing" }
+      ]
+    },
+    {
+      "day": 28,
+      "focus": "Emergency readiness",
+      "tasks": [
+        { "title": "Time yourself on a full call-to-truck-rolling drill", "detail": "Phone rings at 2am. What do you say, what do you grab, how fast can you be moving? Write the script." },
+        { "title": "Save it as Intake Call Script in Second Brain", "detail": "You will be half asleep when you need it." }
+      ]
+    },
+    {
+      "day": 29,
+      "focus": "Count the month",
+      "tasks": [
+        { "title": "Pull the numbers from the Activity tab", "detail": "Leads added, touches made, replies, meetings, jobs." },
+        { "title": "Which channel produced the replies?", "detail": "That's where month two goes." }
+      ]
+    },
+    {
+      "day": 30,
+      "focus": "Set the next thirty days",
+      "tasks": [
+        { "title": "Confirm every compliance item is closed", "detail": "Insurance bound, waste registration filed, exposure control plan written, fit test done. If any are still open, they're day one of next month." },
+        { "title": "Set your month two target", "detail": "One number. Signed referral partners is the right one at this stage, not revenue." },
+        { "title": "Tell Claude what happened and get the next thirty days built" }
+      ]
+    }
+  ],
+  "ongoing": {
+    "note": "After day 30 the email switches to this weekly rhythm.",
+    "0": { "focus": "Sunday: plan the week", "tasks": [{ "title": "Set this week's outreach target and pick the ICP you're pushing" }] },
+    "1": { "focus": "Monday: new leads", "tasks": [{ "title": "Add 10 new leads to the dashboard, all with follow-up dates" }] },
+    "2": { "focus": "Tuesday: outreach", "tasks": [{ "title": "Clear every overdue follow-up, then send 10 first touches" }] },
+    "3": { "focus": "Wednesday: in person", "tasks": [{ "title": "Three drop-in visits with packets. Log all three." }] },
+    "4": { "focus": "Thursday: content", "tasks": [{ "title": "Post once and log it in Brand Kit" }] },
+    "5": { "focus": "Friday: follow-ups and admin", "tasks": [{ "title": "Clear the Briefing. Check insurance, registrations and renewals." }] },
+    "6": { "focus": "Saturday: light", "tasks": [{ "title": "Clear anything overdue. Otherwise rest — you're on call." }] }
+  }
+}

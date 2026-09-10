@@ -17,6 +17,7 @@
     }
   ],
   "crons": [
-    { "path": "/api/nightly-review", "schedule": "0 11 * * *" }
+    { "path": "/api/daily-brief?slot=morning", "schedule": "0 11 * * *" },
+    { "path": "/api/daily-brief?slot=midday", "schedule": "0 15 * * *" }
   ]
 }
