@@ -294,6 +294,11 @@ ul { list-style: none; }
 .intro .eyebrow { color: var(--red); }
 .intro h2 { font-size: 2rem; color: var(--ink); margin-bottom: 1rem; }
 
+/* ═══ IN ACTION VIDEO ═══ */
+.in-action { background: var(--gray-light); }
+.in-action-frame { max-width: 900px; margin: 2.5rem auto 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); background: #0b2a4a; }
+.in-action-video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+
 /* ═══ SERVICES ═══ */
 .services { background: var(--gray-light); }
 .services-note { background: #fff; border-left: 4px solid var(--blue); padding: 1rem 1.5rem; border-radius: 8px; max-width: 760px; margin: 0 auto 3rem; color: var(--ink); box-shadow: var(--shadow); }
@@ -556,6 +561,21 @@ ul { list-style: none; }
           <a href="tel:+14077580682" class="btn btn-red">Call Now — (407) 758-0682</a>
           <a href="#contact" class="btn btn-outline">Request Cleanup Assistance</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ IN ACTION VIDEO ═══ -->
+  <section class="section in-action">
+    <div class="container">
+      <div class="text-center">
+        <p class="eyebrow">See Us In Action</p>
+        <h2 class="section-title">Real Response, Real Care</h2>
+      </div>
+      <div class="in-action-frame">
+        <video class="in-action-video" muted loop playsinline preload="metadata" poster="assets/photos/technician-portrait-blue2.png">
+          <source src="assets/video/technician-scroll.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   </section>
@@ -969,6 +989,18 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.4 });
 stats.forEach(s => obs.observe(s));
+
+// Play the "In Action" video only while it's in view
+const inActionVideo = document.querySelector('.in-action-video');
+if (inActionVideo) {
+  const videoObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) inActionVideo.play().catch(() => {});
+      else inActionVideo.pause();
+    });
+  }, { threshold: 0.35 });
+  videoObs.observe(inActionVideo);
+}
 
 // Smooth scroll with sticky-header offset
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
