@@ -49,6 +49,27 @@ We're a biohazard and crime scene cleanup company. No other pressure washer in S
 
 End card on every ad (1 to 2s): logo, "Free quote in 60 seconds," phone, "Licensed + Insured · South Florida."
 
+## Static Ad Concepts (1080x1350 feed, 1080x1920 stories)
+
+Static rules: one idea per image, headline readable in under 2 seconds, real job photos only. Text on image stays under about 20% of the frame so delivery isn't throttled.
+
+| # | Name | Image | Headline on image | Primary text (above image) |
+|---|------|-------|-------------------|----------------------------|
+| S1 | The Letter | Photo of a crumpled HOA violation notice on a kitchen counter, keys beside it | "14 days to fix it. We need 1." | Got the HOA letter? We clean roofs, driveways and walls fast enough to beat the deadline. Free quote in 60 seconds. |
+| S2 | Half and Half | Single driveway, left half black, right half clean, hard line down the middle | "Same driveway. Same day." | This is what Florida does to concrete in 3 years. We undo it in an afternoon. |
+| S3 | Crime Scene Flex | Tech in full PPE, arms crossed, in front of a spotless white house | "We clean crime scenes. Your roof is easy." | Licensed biohazard cleaners now doing pressure and soft wash in South Florida. Same standards, way less drama. |
+| S4 | Spot the House | Aerial of a block, one dark roof circled in red | "Your neighbors noticed." | Black streaks are algae, not dirt. They spread. We kill them at the root. |
+| S5 | Fake Receipt | Mock receipt: "Cheap pressure wash $99. Came back in 4 months. Repaint $1,200." Total circled | "Cheap gets expensive." | Blasting a roof removes the stain, not the algae. Soft wash, guaranteed results, fully insured. |
+| S6 | Warning Sign | Yellow wet-floor style sign on a green, slimy pool deck | "Caution: your pool deck." | Mildew makes pavers slick. One cleaning, one day, no more slips. |
+| S7 | Rust | Orange-stained white wall, before/after slider look | "Pressure can't remove rust. Chemistry can." | Well water stains need treatment, not force. We do both. |
+| S8 | Snowbird | Clean house photo, suitcase in driveway, palm shadow | "Welcome home. It's already clean." | Back for the season? Book before you land and come home to this. |
+| S9 | Listing | Phone screen showing a Zillow style listing with a dirty roof photo | "Buyers scroll past this." | Clean exteriors photograph better and sell faster. Pre-listing wash in 48 hours. |
+| S10 | Spanish | Same layout as S1 | "14 días para arreglarlo. Necesitamos 1." | ¿Recibió la carta del HOA? Limpiamos techos, entradas y paredes antes de la fecha límite. Cotización gratis. |
+
+Headlines under the image (Facebook headline field): "Free quote in 60 seconds" or "Fix it before the fine."
+
+Static test: run S1, S2, S3 and S5 alongside the video ads. Statics often win on cost per lead for local service offers because the before/after reads instantly.
+
 ## Testing plan
 
 Launch 4 to start: #1, #2, #3, #5. $15 to $20/day each, 5 to 7 days, Lead Form objective. Kill anything over your target cost per lead after $50 spend. Winner gets the budget; rotate in the rest.
