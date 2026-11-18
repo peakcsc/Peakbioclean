@@ -58,6 +58,9 @@ function esc(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+const TODAY = new Date().toISOString().slice(0, 10);
+const TODAY_LABEL = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', timeZone: 'UTC' });
+
 // ---- Pull the live <style> block straight out of index.html so subpages never drift from the homepage look ----
 const indexHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const styleMatch = indexHtml.match(/<style>([\s\S]*?)<\/style>/);
@@ -93,6 +96,13 @@ const EXTRA_CSS = `
 .blog-post li { position: relative; padding-left: 1.6rem; margin-bottom: 0.55rem; }
 .blog-post li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
 .blog-post a { color: var(--blue); text-decoration: underline; font-weight: 600; }
+.page-updated { color: var(--gray); font-size: 0.85rem; margin: 0.25rem 0 1.25rem; }
+.quick-facts { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 1.5rem; max-width: 560px; }
+.quick-facts h2 { color: #fff; font-size: 1rem; margin-bottom: 0.6rem; }
+.quick-facts ul { margin: 0; }
+.quick-facts li { color: #eaf1fb; font-size: 0.92rem; margin-bottom: 0.4rem; }
+.quick-facts li strong { color: #fff; }
+.quick-facts a { color: #fff; text-decoration: underline; }
 `;
 
 function breadcrumbJsonLd(crumbs) {
@@ -108,9 +118,21 @@ function breadcrumbJsonLd(crumbs) {
   });
 }
 
+function faqJsonLd(qa) {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: qa.map(([q, a]) => ({
+      '@type': 'Question', name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a }
+    }))
+  });
+}
+
 function pageShell({ title, description, canonical, ogImage, bodyHtml, jsonLd, breadcrumb }) {
   ogImage = ogImage || DOMAIN + '/og-image.png';
-  const jsonLdBlocks = [jsonLd, breadcrumb ? breadcrumbJsonLd(breadcrumb) : null]
+  const jsonLdList = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+  const jsonLdBlocks = [...jsonLdList, breadcrumb ? breadcrumbJsonLd(breadcrumb) : null]
     .filter(Boolean)
     .map(j => `<script type="application/ld+json">${j}</script>`)
     .join('\n');
@@ -262,7 +284,7 @@ SERVICES.forEach(([name, slug]) => {
   const title = `${d.title} in Florida | 24/7 Peak Bio-Clean`;
   const description = `${d.sub} Available 24/7 across all of Florida. Licensed, insured, and discreet. Call ${PHONE_DISPLAY} for immediate help.`;
   const canonical = `${DOMAIN}/${slug}/`;
-  const jsonLd = JSON.stringify({
+  const serviceLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     serviceType: d.title,
@@ -270,7 +292,14 @@ SERVICES.forEach(([name, slug]) => {
     description: d.sub,
     provider: { '@type': 'LocalBusiness', name: 'Peak Bio-Clean', telephone: PHONE_TEL, url: DOMAIN },
     areaServed: { '@type': 'State', name: 'Florida' }
-  });
+  };
+  const lower = d.title.toLowerCase();
+  const faqLd = faqJsonLd([
+    [`How much does ${lower} cost in Florida?`, `Cost varies by situation. Most ${lower} is covered by homeowners, renters, or auto insurance, often with little to no out-of-pocket cost. Call ${PHONE_DISPLAY} for a free, honest estimate before any work begins.`],
+    [`Do you offer ${lower} near me?`, `Yes — Peak Bio-Clean provides ${lower} across all of Florida, all 67 counties, available 24/7 including holidays.`],
+    [`Are you licensed and insured for ${lower}?`, `Yes. Peak Bio-Clean is licensed, insured, and bondable in Florida, and our technicians are OSHA trained and EPA compliant.`],
+    [`How fast can you respond?`, `We're available 24/7, and a real person answers every call. Call ${PHONE_DISPLAY} and we'll talk you through what happens next right away.`]
+  ]);
   const otherServices = SERVICES.filter(s => s[1] !== slug).slice(0, 10)
     .map(s => `<a class="svc-pill" href="/${s[1]}/">${esc(s[0])}</a>`).join('');
   const bodyHtml = `
@@ -279,10 +308,22 @@ SERVICES.forEach(([name, slug]) => {
     <p class="breadcrumbs"><a href="/">Home</a> / <a href="/services/">Services</a> / ${esc(d.title)}</p>
     <p class="eyebrow">24/7 Emergency Response</p>
     <h1>${esc(d.title)} in Florida</h1>
-    <p class="lead">${esc(d.sub)}</p>
+    <p class="lead"><strong>Peak Bio-Clean</strong> provides ${lower} across all of Florida, available 24/7. ${esc(d.sub)}</p>
+    <p class="page-updated" style="color:#cfe0f7;">Last updated: ${TODAY_LABEL}</p>
     <div class="hero-cta">
       <a href="tel:${PHONE_TEL}" class="btn btn-red">Call Now — ${PHONE_DISPLAY}</a>
       <a href="/#contact" class="btn btn-outline" style="color:#fff;border-color:#fff;">Request Cleanup Assistance</a>
+    </div>
+    <div class="quick-facts">
+      <h2>Quick Facts</h2>
+      <ul>
+        <li><strong>Company:</strong> Peak Bio-Clean — owned and operated by Parker Peak</li>
+        <li><strong>Service:</strong> ${esc(d.title)}</li>
+        <li><strong>Serving:</strong> All of Florida, 24/7 including holidays</li>
+        <li><strong>Licensed, insured &amp; bondable</strong> · OSHA trained · EPA compliant</li>
+        <li><strong>Cost:</strong> often covered by insurance — <a href="/insurance-and-cost/">see how it works</a></li>
+        <li><strong>Phone:</strong> <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -293,7 +334,14 @@ SERVICES.forEach(([name, slug]) => {
       <h2 style="margin-top:2rem;">What's Included</h2>
       <ul class="sub-list">${d.incl.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
       <h2>Insurance &amp; Cost</h2>
-      <p>Most ${esc(d.title).toLowerCase()} services are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost. We document everything and work directly with your provider.</p>
+      <p>Most ${lower} services are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost. We document everything and work directly with your provider.</p>
+      <h2>Common Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>How much does ${lower} cost in Florida?</summary><p>Cost varies by situation. Most ${lower} is covered by homeowners, renters, or auto insurance, often with little to no out-of-pocket cost. Call ${PHONE_DISPLAY} for a free, honest estimate before any work begins.</p></details>
+        <details class="faq-item"><summary>Do you offer ${lower} near me?</summary><p>Yes — Peak Bio-Clean provides ${lower} across all of Florida, all 67 counties, available 24/7 including holidays.</p></details>
+        <details class="faq-item"><summary>Are you licensed and insured for ${lower}?</summary><p>Yes. Peak Bio-Clean is licensed, insured, and bondable in Florida, and our technicians are OSHA trained and EPA compliant.</p></details>
+        <details class="faq-item"><summary>How fast can you respond?</summary><p>We're available 24/7, and a real person answers every call. Call ${PHONE_DISPLAY} and we'll talk you through what happens next right away.</p></details>
+      </div>
       <h2>We Also Help With</h2>
       <div class="pill-row">${otherServices}</div>
     </div>
@@ -314,10 +362,11 @@ SERVICES.forEach(([name, slug]) => {
 </section>
 `;
   writePage(`/${slug}`, pageShell({
-    title, description, canonical, bodyHtml, jsonLd,
+    title, description, canonical, bodyHtml,
+    jsonLd: [JSON.stringify(serviceLd), faqLd],
     breadcrumb: [['Home', DOMAIN + '/'], ['Services', DOMAIN + '/services/'], [d.title, null]]
   }));
-  addSitemap(`/${slug}/`, '0.8');
+  addSitemap(`/${slug}/`, '0.8', TODAY);
 });
 
 // ============================= ALL SERVICES INDEX =============================
@@ -408,19 +457,37 @@ COUNTIES.forEach(name => {
     url: canonical,
     areaServed: { '@type': 'AdministrativeArea', name: `${name} County, Florida` }
   });
+  const faqLd = faqJsonLd([
+    [`Does Peak Bio-Clean serve all of ${name} County?`, `Yes — Peak Bio-Clean serves every city and town in ${name} County, 24/7 including holidays.`],
+    [`How fast can you respond in ${name} County?`, `We're available around the clock. Call ${PHONE_DISPLAY} and a real person will talk you through what happens next immediately.`],
+    [`Are you licensed and insured in ${name} County?`, `Yes. Peak Bio-Clean is licensed, insured, and bondable in Florida, and our technicians are OSHA trained and EPA compliant.`],
+    [`Will my insurance cover cleanup in ${name} County?`, `Most crime scene, trauma, and biohazard cleanup is covered by homeowners, renters, or auto insurance. We document everything and coordinate directly with your provider.`]
+  ]);
   const otherCounties = COUNTIES.filter(c => c !== name).slice(0, 12)
     .map(c => `<a class="svc-pill" href="/${countySlug(c)}-county/">${esc(c)} County</a>`).join('');
   const coreServiceLinks = CORE_MENU.map(([n, s]) => `<a class="svc-pill" href="/${s}/">${esc(n)}</a>`).join('');
   const bodyHtml = `
 <section class="subhero">
   <div class="container">
-    <p class="breadcrumbs"><a href="/">Home</a> / <a href="/#areas">Service Areas</a> / ${esc(name)} County</p>
+    <p class="breadcrumbs"><a href="/">Home</a> / <a href="/service-areas/">Service Areas</a> / ${esc(name)} County</p>
     <p class="eyebrow">Local 24/7 Response</p>
     <h1>Biohazard &amp; Crime Scene Cleanup in ${esc(name)} County</h1>
-    <p class="lead">Peak Bio-Clean responds quickly across ${esc(name)} County — compassionate, certified, and discreet crime scene, trauma, and biohazard cleanup, available any hour of the day.</p>
+    <p class="lead"><strong>Peak Bio-Clean</strong> provides crime scene, trauma, and biohazard cleanup in ${esc(name)} County, Florida, available 24/7. We respond quickly, work discreetly with unmarked vehicles, and handle the entire remediation so you don't have to face it alone.</p>
+    <p class="page-updated" style="color:#cfe0f7;">Last updated: ${TODAY_LABEL}</p>
     <div class="hero-cta">
       <a href="tel:${PHONE_TEL}" class="btn btn-red">Call Now — ${PHONE_DISPLAY}</a>
       <a href="/#contact" class="btn btn-outline" style="color:#fff;border-color:#fff;">Request Cleanup Assistance</a>
+    </div>
+    <div class="quick-facts">
+      <h2>Quick Facts</h2>
+      <ul>
+        <li><strong>Company:</strong> Peak Bio-Clean — owned and operated by Parker Peak</li>
+        <li><strong>Serving:</strong> All of ${esc(name)} County, 24/7 including holidays</li>
+        <li><strong>Services:</strong> Crime scene, trauma, biohazard, unattended death, hoarding cleanup &amp; more</li>
+        <li><strong>Licensed, insured &amp; bondable</strong> · OSHA trained · EPA compliant</li>
+        <li><strong>Cost:</strong> often covered by insurance — <a href="/insurance-and-cost/">see how it works</a></li>
+        <li><strong>Phone:</strong> <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -441,6 +508,13 @@ COUNTIES.forEach(name => {
       </ul>
       <h2>Insurance &amp; Cost</h2>
       <p>Most cleanup in ${esc(name)} County is covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost to you. We document everything and work directly with your provider.</p>
+      <h2>Common Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Does Peak Bio-Clean serve all of ${esc(name)} County?</summary><p>Yes — Peak Bio-Clean serves every city and town in ${esc(name)} County, 24/7 including holidays.</p></details>
+        <details class="faq-item"><summary>How fast can you respond in ${esc(name)} County?</summary><p>We're available around the clock. Call ${PHONE_DISPLAY} and a real person will talk you through what happens next immediately.</p></details>
+        <details class="faq-item"><summary>Are you licensed and insured in ${esc(name)} County?</summary><p>Yes. Peak Bio-Clean is licensed, insured, and bondable in Florida, and our technicians are OSHA trained and EPA compliant.</p></details>
+        <details class="faq-item"><summary>Will my insurance cover cleanup in ${esc(name)} County?</summary><p>Most crime scene, trauma, and biohazard cleanup is covered by homeowners, renters, or auto insurance. We document everything and coordinate directly with your provider.</p></details>
+      </div>
       <h2>We Also Serve</h2>
       <div class="pill-row">${otherCounties}</div>
     </div>
@@ -456,10 +530,11 @@ COUNTIES.forEach(name => {
 </section>
 `;
   writePage(`/${slug}-county`, pageShell({
-    title, description, canonical, bodyHtml, jsonLd,
+    title, description, canonical, bodyHtml,
+    jsonLd: [jsonLd, faqLd],
     breadcrumb: [['Home', DOMAIN + '/'], ['Service Areas', DOMAIN + '/service-areas/'], [`${name} County`, null]]
   }));
-  addSitemap(`/${slug}-county/`, '0.7');
+  addSitemap(`/${slug}-county/`, '0.7', TODAY);
 });
 
 // ============================= CITY + SERVICE PAGES =============================
@@ -480,6 +555,13 @@ CITIES.forEach(city => {
       provider: { '@type': 'LocalBusiness', name: 'Peak Bio-Clean', telephone: PHONE_TEL, url: DOMAIN },
       areaServed: { '@type': 'City', name: city.name }
     });
+    const lower = d.title.toLowerCase();
+    const faqLd = faqJsonLd([
+      [`Does Peak Bio-Clean serve ${city.name}?`, `Yes — Peak Bio-Clean serves all of ${city.name} and the rest of ${city.county} County, 24/7 including holidays.`],
+      [`How fast can you respond in ${city.name}?`, `We're available around the clock. Call ${PHONE_DISPLAY} and a real person will talk you through what happens next immediately.`],
+      [`How much does ${lower} cost in ${city.name}?`, `Cost varies by situation. Most ${lower} is covered by homeowners, renters, or auto insurance, often with little to no out-of-pocket cost. Call for a free, honest estimate.`],
+      [`Are you licensed and insured in ${city.name}?`, `Yes. Peak Bio-Clean is licensed, insured, and bondable in Florida, and our technicians are OSHA trained and EPA compliant.`]
+    ]);
     const otherCityServices = CITY_SERVICE_SLUGS.filter(s => s !== slug)
       .map(s => `<a class="svc-pill" href="/${s}-${city.slug}/">${esc(SVC[s].title)}</a>`).join('');
     const nearbyCities = CITIES.filter(c => c.slug !== city.slug && c.county === city.county).slice(0, 6)
@@ -490,10 +572,22 @@ CITIES.forEach(city => {
     <p class="breadcrumbs"><a href="/">Home</a> / <a href="/${slug}/">${esc(d.title)}</a> / ${esc(city.name)}</p>
     <p class="eyebrow">${esc(city.name)}, ${esc(city.county)} County</p>
     <h1>${esc(d.title)} in ${esc(city.name)}, FL</h1>
-    <p class="lead">${esc(d.sub)} Serving ${esc(city.name)} and all of ${esc(city.county)} County, 24/7.</p>
+    <p class="lead"><strong>Peak Bio-Clean</strong> provides ${lower} in ${esc(city.name)} and all of ${esc(city.county)} County, 24/7. ${esc(d.sub)}</p>
+    <p class="page-updated" style="color:#cfe0f7;">Last updated: ${TODAY_LABEL}</p>
     <div class="hero-cta">
       <a href="tel:${PHONE_TEL}" class="btn btn-red">Call Now — ${PHONE_DISPLAY}</a>
       <a href="/#contact" class="btn btn-outline" style="color:#fff;border-color:#fff;">Request Cleanup Assistance</a>
+    </div>
+    <div class="quick-facts">
+      <h2>Quick Facts</h2>
+      <ul>
+        <li><strong>Company:</strong> Peak Bio-Clean — owned and operated by Parker Peak</li>
+        <li><strong>Service:</strong> ${esc(d.title)}</li>
+        <li><strong>Serving:</strong> ${esc(city.name)}, ${esc(city.county)} County, 24/7</li>
+        <li><strong>Licensed, insured &amp; bondable</strong> · OSHA trained · EPA compliant</li>
+        <li><strong>Cost:</strong> often covered by insurance — <a href="/insurance-and-cost/">see how it works</a></li>
+        <li><strong>Phone:</strong> <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -504,7 +598,14 @@ CITIES.forEach(city => {
       <h2 style="margin-top:2rem;">What's Included</h2>
       <ul class="sub-list">${d.incl.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
       <h2>Insurance &amp; Cost</h2>
-      <p>Most ${esc(d.title).toLowerCase()} calls in ${esc(city.name)} are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost. We document everything and work directly with your provider.</p>
+      <p>Most ${lower} calls in ${esc(city.name)} are covered by homeowners, renters, or auto insurance — often with little to no out-of-pocket cost. We document everything and work directly with your provider.</p>
+      <h2>Common Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Does Peak Bio-Clean serve ${esc(city.name)}?</summary><p>Yes — Peak Bio-Clean serves all of ${esc(city.name)} and the rest of ${esc(city.county)} County, 24/7 including holidays.</p></details>
+        <details class="faq-item"><summary>How fast can you respond in ${esc(city.name)}?</summary><p>We're available around the clock. Call ${PHONE_DISPLAY} and a real person will talk you through what happens next immediately.</p></details>
+        <details class="faq-item"><summary>How much does ${lower} cost in ${esc(city.name)}?</summary><p>Cost varies by situation. Most ${lower} is covered by homeowners, renters, or auto insurance, often with little to no out-of-pocket cost. Call for a free, honest estimate.</p></details>
+        <details class="faq-item"><summary>Are you licensed and insured in ${esc(city.name)}?</summary><p>Yes. Peak Bio-Clean is licensed, insured, and bondable in Florida, and our technicians are OSHA trained and EPA compliant.</p></details>
+      </div>
       <h2>Other Services in ${esc(city.name)}</h2>
       <div class="pill-row">${otherCityServices}</div>
       ${nearbyCities ? `<h2>Nearby Areas</h2><div class="pill-row">${nearbyCities}</div>` : ''}
@@ -526,10 +627,11 @@ CITIES.forEach(city => {
 </section>
 `;
     writePage(`/${pagePath}`, pageShell({
-      title, description, canonical, bodyHtml, jsonLd,
+      title, description, canonical, bodyHtml,
+      jsonLd: [jsonLd, faqLd],
       breadcrumb: [['Home', DOMAIN + '/'], [d.title, DOMAIN + `/${slug}/`], [city.name, null]]
     }));
-    addSitemap(`/${pagePath}/`, '0.65');
+    addSitemap(`/${pagePath}/`, '0.65', TODAY);
   });
 });
 
@@ -772,7 +874,6 @@ PARTNERS.forEach(p => {
 }
 
 // ============================= SITEMAP =============================
-const TODAY = new Date().toISOString().slice(0, 10);
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls.map(u => `  <url>
